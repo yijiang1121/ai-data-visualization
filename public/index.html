@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grading Accuracy Dashboard</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f5f5f9;
+        --card-bg: #ffffffcc;
+        --card-shadow: rgba(15, 23, 42, 0.12);
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --accent: #2563eb;
+        --accent-soft: rgba(37, 99, 235, 0.12);
+        --success: #059669;
+        --warning: #d97706;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(160deg, var(--bg) 0%, #e2e8f0 100%);
+        color: var(--text-primary);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        padding: 3rem 1.5rem 2rem;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0 0 0.5rem;
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        letter-spacing: -0.02em;
+      }
+
+      header p {
+        margin: 0 auto;
+        max-width: 48rem;
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      main {
+        flex: 1;
+        padding: 0 1.5rem 3rem;
+        max-width: 1100px;
+        width: 100%;
+        margin: 0 auto 3rem;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .metric-card {
+        background: var(--card-bg);
+        border-radius: 1.25rem;
+        box-shadow: 0 24px 48px -32px var(--card-shadow);
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .metric-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, var(--accent-soft), transparent 55%);
+        pointer-events: none;
+      }
+
+      .metric-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        letter-spacing: 0.08em;
+        margin-bottom: 0.75rem;
+      }
+
+      .metric-value {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .metric-delta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-top: 1rem;
+        font-size: 0.95rem;
+        border-radius: 999px;
+        padding: 0.35rem 0.9rem;
+        font-weight: 600;
+      }
+
+      .metric-delta.positive {
+        background: rgba(5, 150, 105, 0.12);
+        color: var(--success);
+      }
+
+      .metric-delta.negative {
+        background: rgba(217, 119, 6, 0.12);
+        color: var(--warning);
+      }
+
+      .metric-subtitle {
+        margin-top: 1.2rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
+
+      section {
+        margin-bottom: 2.5rem;
+      }
+
+      .section-heading {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .section-subtitle {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .table-wrapper {
+        background: var(--card-bg);
+        border-radius: 1rem;
+        box-shadow: 0 18px 36px -28px var(--card-shadow);
+        overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 420px;
+      }
+
+      thead {
+        background: rgba(37, 99, 235, 0.04);
+      }
+
+      th,
+      td {
+        padding: 1rem 1.25rem;
+        text-align: left;
+      }
+
+      th {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        letter-spacing: 0.08em;
+        font-weight: 600;
+      }
+
+      tbody tr {
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+      }
+
+      tbody tr:nth-child(odd) {
+        background: rgba(148, 163, 184, 0.08);
+      }
+
+      .muted {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        background: rgba(15, 23, 42, 0.08);
+        color: var(--text-secondary);
+      }
+
+      .error-message {
+        background: rgba(248, 113, 113, 0.2);
+        color: #b91c1c;
+        padding: 1rem 1.25rem;
+        border-radius: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem 1.5rem 3rem;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+      }
+
+      @media (max-width: 640px) {
+        header {
+          padding: 2.5rem 1rem 1.5rem;
+        }
+
+        main {
+          padding: 0 1rem 2.5rem;
+        }
+
+        .metric-card {
+          padding: 1.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Grading Accuracy Dashboard</h1>
+      <p>
+        Compare how closely the automated grading system and human reviewers align
+        with the ground-truth labels. The metrics update automatically whenever
+        the dataset is recomputed.
+      </p>
+    </header>
+
+    <main>
+      <section class="summary-grid" aria-live="polite">
+        <article class="metric-card" id="autograder-card">
+          <div class="metric-title">Autograder Accuracy</div>
+          <p class="metric-value" id="autograder-accuracy">--</p>
+          <div class="metric-subtitle">Exact-match accuracy vs. ground truth</div>
+        </article>
+
+        <article class="metric-card" id="human-card">
+          <div class="metric-title">Human Accuracy</div>
+          <p class="metric-value" id="human-accuracy">--</p>
+          <div class="metric-subtitle">Exact-match accuracy vs. ground truth</div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-title">Dataset Coverage</div>
+          <p class="metric-value" id="total-records">--</p>
+          <div class="metric-subtitle">
+            Number of graded responses in the latest computation
+          </div>
+        </article>
+      </section>
+
+      <section>
+        <h2 class="section-heading">Prompt-level breakdown</h2>
+        <p class="section-subtitle">
+          Identify where the autograder excels or needs calibration compared with
+          human reviewers.
+        </p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Prompt</th>
+                <th scope="col">Responses</th>
+                <th scope="col">Autograder</th>
+                <th scope="col">Human</th>
+                <th scope="col">Delta</th>
+              </tr>
+            </thead>
+            <tbody id="prompt-table-body">
+              <tr>
+                <td colspan="5" class="muted">Loading metrics…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="prompt-empty" class="muted" hidden>
+          No prompt-level breakdown is available for this dataset.
+        </div>
+        <div id="error" class="error-message" hidden></div>
+      </section>
+    </main>
+
+    <footer>
+      Accuracy is computed by the Python metrics pipeline. Refresh this page after
+      regenerating <code>accuracy.json</code> to see the latest numbers.
+    </footer>
+
+    <script>
+      const autograderAccuracyEl = document.getElementById("autograder-accuracy");
+      const humanAccuracyEl = document.getElementById("human-accuracy");
+      const totalRecordsEl = document.getElementById("total-records");
+      const promptTableBody = document.getElementById("prompt-table-body");
+      const promptEmpty = document.getElementById("prompt-empty");
+      const errorEl = document.getElementById("error");
+
+      function formatPercent(value) {
+        if (value === null || value === undefined) {
+          return "--";
+        }
+        return `${(value * 100).toFixed(1)}%`;
+      }
+
+      function formatCount(count) {
+        if (!Number.isFinite(count)) {
+          return "--";
+        }
+        return count.toLocaleString();
+      }
+
+      function renderDelta(autograder, human) {
+        const container = document.createElement("span");
+        container.classList.add("metric-delta");
+        const diff = autograder - human;
+        const formatted = `${diff > 0 ? "+" : ""}${(diff * 100).toFixed(1)}%`;
+        container.textContent = `Δ ${formatted}`;
+        if (diff >= 0) {
+          container.classList.add("positive");
+          container.setAttribute("aria-label", "Autograder higher");
+        } else {
+          container.classList.add("negative");
+          container.setAttribute("aria-label", "Human higher");
+        }
+        return container;
+      }
+
+      function updateCards(summary) {
+        autograderAccuracyEl.textContent = formatPercent(summary.autograder_accuracy);
+        humanAccuracyEl.textContent = formatPercent(summary.human_accuracy);
+        totalRecordsEl.textContent = formatCount(summary.total_records);
+
+        const autograderCard = document.getElementById("autograder-card");
+        const humanCard = document.getElementById("human-card");
+
+        const existingHumanDelta = humanCard.querySelector(".metric-delta");
+        if (existingHumanDelta) {
+          existingHumanDelta.remove();
+        }
+
+        const existingAutograderDelta = autograderCard.querySelector(".metric-delta");
+        if (existingAutograderDelta) {
+          existingAutograderDelta.remove();
+        }
+
+        if (
+          summary.autograder_accuracy !== null &&
+          summary.autograder_accuracy !== undefined &&
+          summary.human_accuracy !== null &&
+          summary.human_accuracy !== undefined
+        ) {
+          humanCard.appendChild(
+            renderDelta(summary.human_accuracy, summary.autograder_accuracy)
+          );
+          autograderCard.appendChild(
+            renderDelta(summary.autograder_accuracy, summary.human_accuracy)
+          );
+        }
+      }
+
+      function updatePromptTable(entries) {
+        promptTableBody.innerHTML = "";
+
+        if (!entries || entries.length === 0) {
+          promptEmpty.hidden = false;
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.colSpan = 5;
+          cell.className = "muted";
+          cell.textContent = "No prompt data";
+          row.appendChild(cell);
+          promptTableBody.appendChild(row);
+          return;
+        }
+
+        promptEmpty.hidden = true;
+
+        entries
+          .slice()
+          .sort((a, b) => a.prompt_id.localeCompare(b.prompt_id))
+          .forEach((entry) => {
+            const row = document.createElement("tr");
+
+            const promptCell = document.createElement("td");
+            promptCell.textContent = entry.prompt_id;
+            row.appendChild(promptCell);
+
+            const countCell = document.createElement("td");
+            countCell.textContent = formatCount(entry.count);
+            row.appendChild(countCell);
+
+            const autoCell = document.createElement("td");
+            autoCell.textContent = formatPercent(entry.autograder_accuracy);
+            row.appendChild(autoCell);
+
+            const humanCell = document.createElement("td");
+            humanCell.textContent = formatPercent(entry.human_accuracy);
+            row.appendChild(humanCell);
+
+            const deltaCell = document.createElement("td");
+            if (
+              entry.autograder_accuracy !== null &&
+              entry.autograder_accuracy !== undefined &&
+              entry.human_accuracy !== null &&
+              entry.human_accuracy !== undefined
+            ) {
+              const badge = document.createElement("span");
+              badge.classList.add("pill");
+              const diff = entry.autograder_accuracy - entry.human_accuracy;
+              badge.textContent = `${diff > 0 ? "+" : ""}${(diff * 100).toFixed(1)}%`;
+              deltaCell.appendChild(badge);
+            } else {
+              deltaCell.textContent = "--";
+            }
+            row.appendChild(deltaCell);
+
+            promptTableBody.appendChild(row);
+          });
+      }
+
+      async function loadMetrics() {
+        try {
+          const response = await fetch("accuracy.json", { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error(`Failed to load accuracy.json (${response.status})`);
+          }
+          const data = await response.json();
+          updateCards(data.summary || {});
+          updatePromptTable(data.per_prompt || []);
+        } catch (error) {
+          console.error(error);
+          errorEl.hidden = false;
+          errorEl.textContent =
+            "We were unable to load the latest accuracy metrics. Confirm that accuracy.json has been generated.";
+          promptTableBody.innerHTML = "";
+        }
+      }
+
+      loadMetrics();
+    </script>
+  </body>
+</html>

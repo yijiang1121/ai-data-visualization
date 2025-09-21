@@ -1,0 +1,6009 @@
+{
+  "summary": {
+    "total_records": 3000,
+    "autograder_accuracy": 0.75,
+    "human_accuracy": 0.76
+  },
+  "per_prompt": [
+    {
+      "prompt_id": "PROMPT_0001",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0002",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0003",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0004",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0005",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0006",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0007",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0008",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0009",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0010",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0011",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0012",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0013",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0014",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0015",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0016",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0017",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0018",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0019",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0020",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0021",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0022",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0023",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0024",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0025",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0026",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0027",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0028",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0029",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0030",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0031",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0032",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0033",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0034",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0035",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0036",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0037",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0038",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0039",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0040",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0041",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0042",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0043",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0044",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0045",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0046",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0047",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0048",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0049",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0050",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0051",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0052",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0053",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0054",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0055",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0056",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0057",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0058",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0059",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0060",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0061",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0062",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0063",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0064",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0065",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0066",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0067",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0068",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0069",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0070",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0071",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0072",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0073",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0074",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0075",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0076",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0077",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0078",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0079",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0080",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0081",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0082",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0083",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0084",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0085",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0086",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0087",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0088",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0089",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0090",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0091",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0092",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0093",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0094",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0095",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0096",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0097",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0098",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0099",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0100",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0101",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0102",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0103",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0104",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0105",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0106",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0107",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0108",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0109",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0110",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0111",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0112",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0113",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0114",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0115",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0116",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0117",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0118",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0119",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0120",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0121",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0122",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0123",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0124",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0125",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0126",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0127",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0128",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0129",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0130",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0131",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0132",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0133",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0134",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0135",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0136",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0137",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0138",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0139",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0140",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0141",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0142",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0143",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0144",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0145",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0146",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0147",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0148",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0149",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0150",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0151",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0152",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0153",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0154",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0155",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0156",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0157",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0158",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0159",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0160",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0161",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0162",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0163",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0164",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0165",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0166",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0167",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0168",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0169",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0170",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0171",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0172",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0173",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0174",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0175",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0176",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0177",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0178",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0179",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0180",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0181",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0182",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0183",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0184",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0185",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0186",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0187",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0188",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0189",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0190",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0191",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0192",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0193",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0194",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0195",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0196",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0197",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0198",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0199",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0200",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0201",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0202",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0203",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0204",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0205",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0206",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0207",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0208",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0209",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0210",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0211",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0212",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0213",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0214",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0215",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0216",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0217",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0218",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0219",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0220",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0221",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0222",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0223",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0224",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0225",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0226",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0227",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0228",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0229",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0230",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0231",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0232",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0233",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0234",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0235",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0236",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0237",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0238",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0239",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0240",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0241",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0242",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0243",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0244",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0245",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0246",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0247",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0248",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0249",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0250",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0251",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0252",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0253",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0254",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0255",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0256",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0257",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0258",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0259",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0260",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0261",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0262",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0263",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0264",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0265",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0266",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0267",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0268",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0269",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0270",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0271",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0272",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0273",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0274",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0275",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0276",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0277",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0278",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0279",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0280",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0281",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0282",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0283",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0284",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0285",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0286",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0287",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0288",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0289",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0290",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0291",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0292",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0293",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0294",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0295",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0296",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0297",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0298",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0299",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0300",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0301",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0302",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0303",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0304",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0305",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0306",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0307",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0308",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0309",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0310",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0311",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0312",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0313",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0314",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0315",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0316",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0317",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0318",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0319",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0320",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0321",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0322",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0323",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0324",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0325",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0326",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0327",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0328",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0329",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0330",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0331",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0332",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0333",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0334",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0335",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0336",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0337",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0338",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0339",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0340",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0341",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0342",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0343",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0344",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0345",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0346",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0347",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0348",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0349",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0350",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0351",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0352",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0353",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0354",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0355",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0356",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0357",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0358",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0359",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0360",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0361",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0362",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0363",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0364",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0365",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0366",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0367",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0368",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0369",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0370",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0371",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0372",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0373",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0374",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0375",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0376",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0377",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0378",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0379",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0380",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0381",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0382",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0383",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0384",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0385",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0386",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0387",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0388",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0389",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0390",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0391",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0392",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0393",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0394",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0395",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0396",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0397",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0398",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0399",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0400",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0401",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0402",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0403",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0404",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0405",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0406",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0407",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0408",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0409",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0410",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0411",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0412",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0413",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0414",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0415",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0416",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0417",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0418",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0419",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0420",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0421",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0422",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0423",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0424",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0425",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0426",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0427",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0428",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0429",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0430",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0431",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0432",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0433",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0434",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0435",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0436",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0437",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0438",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0439",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0440",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0441",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0442",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0443",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0444",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0445",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0446",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0447",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0448",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0449",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0450",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0451",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0452",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0453",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0454",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0455",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0456",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0457",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0458",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0459",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0460",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0461",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0462",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0463",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0464",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0465",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0466",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0467",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0468",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0469",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0470",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0471",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0472",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0473",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0474",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0475",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0476",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0477",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0478",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0479",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0480",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0481",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0482",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0483",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0484",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0485",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0486",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0487",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0488",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0489",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0490",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0491",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0492",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0493",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0494",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0495",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0496",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0497",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0498",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0499",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0500",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0501",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0502",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0503",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0504",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0505",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0506",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0507",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0508",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0509",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0510",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0511",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0512",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0513",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0514",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0515",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0516",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0517",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0518",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0519",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0520",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0521",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0522",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0523",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0524",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0525",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0526",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0527",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0528",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0529",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0530",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0531",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0532",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0533",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0534",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0535",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0536",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0537",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0538",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0539",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0540",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0541",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0542",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0543",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0544",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0545",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0546",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0547",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0548",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0549",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0550",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0551",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0552",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0553",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0554",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0555",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0556",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0557",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0558",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0559",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0560",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0561",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0562",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0563",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0564",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0565",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0566",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0567",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0568",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0569",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0570",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0571",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0572",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0573",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0574",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0575",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0576",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0577",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0578",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0579",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0580",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0581",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0582",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0583",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0584",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0585",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0586",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0587",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0588",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0589",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0590",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0591",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0592",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0593",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0594",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0595",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0596",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0597",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0598",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0599",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0600",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0601",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0602",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0603",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0604",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0605",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0606",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0607",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0608",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0609",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0610",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0611",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0612",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0613",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0614",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0615",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0616",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0617",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0618",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0619",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0620",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0621",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0622",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0623",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0624",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0625",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0626",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0627",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0628",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0629",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0630",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0631",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0632",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0633",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0634",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0635",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0636",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0637",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0638",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0639",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0640",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0641",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0642",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0643",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0644",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0645",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0646",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0647",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0648",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0649",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0650",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0651",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0652",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0653",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0654",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0655",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0656",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0657",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0658",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0659",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0660",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0661",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0662",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0663",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0664",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0665",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0666",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0667",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0668",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0669",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0670",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0671",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0672",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0673",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0674",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0675",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0676",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0677",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0678",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0679",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0680",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0681",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0682",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0683",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0684",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0685",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0686",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0687",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0688",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0689",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0690",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0691",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0692",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0693",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0694",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0695",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0696",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0697",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0698",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0699",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0700",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0701",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0702",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0703",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0704",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0705",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0706",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0707",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.0
+    },
+    {
+      "prompt_id": "PROMPT_0708",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0709",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0710",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0711",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0712",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0713",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0714",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0715",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0716",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0717",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0718",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0719",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0720",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0721",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0722",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0723",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0724",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0725",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0726",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0727",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0728",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0729",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0730",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0731",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0732",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0733",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0734",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0735",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0736",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0737",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0738",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0739",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0740",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0741",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0742",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0743",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0744",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0745",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0746",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0747",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0748",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0749",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0750",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0751",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0752",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0753",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0754",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0755",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0756",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0757",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0758",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0759",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0760",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0761",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0762",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0763",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0764",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0765",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0766",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0767",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0768",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0769",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0770",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0771",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0772",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0773",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0774",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0775",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0776",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0777",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0778",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0779",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0780",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0781",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0782",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0783",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0784",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0785",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0786",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0787",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0788",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0789",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0790",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0791",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0792",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0793",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0794",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0795",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0796",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0797",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0798",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0799",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0800",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0801",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0802",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0803",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0804",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0805",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0806",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0807",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0808",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0809",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0810",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0811",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0812",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0813",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0814",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0815",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0816",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0817",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0818",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0819",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0820",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0821",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0822",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0823",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0824",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0825",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0826",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0827",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0828",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0829",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0830",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0831",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0832",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0833",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0834",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0835",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0836",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0837",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0838",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0839",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0840",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0841",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0842",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0843",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0844",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0845",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0846",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0847",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0848",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0849",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0850",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0851",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0852",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0853",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0854",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0855",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0856",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0857",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0858",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0859",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0860",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0861",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0862",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0863",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0864",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0865",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0866",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0867",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0868",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0869",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0870",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0871",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0872",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0873",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0874",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0875",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0876",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0877",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0878",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0879",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0880",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0881",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0882",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0883",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0884",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0885",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0886",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0887",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0888",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0889",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0890",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0891",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0892",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0893",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0894",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0895",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0896",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0897",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0898",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0899",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0900",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0901",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0902",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0903",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0904",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0905",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0906",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0907",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0908",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0909",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0910",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0911",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0912",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0913",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0914",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0915",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0916",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0917",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0918",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0919",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0920",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0921",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0922",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0923",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0924",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0925",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0926",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0927",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0928",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0929",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0930",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0931",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0932",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0933",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0934",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0935",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0936",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0937",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0938",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0939",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0940",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0941",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0942",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0943",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0944",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0945",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0946",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0947",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0948",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0949",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0950",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0951",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0952",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0953",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0954",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0955",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0956",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0957",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0958",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0959",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0960",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0961",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0962",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0963",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0964",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0965",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0966",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0967",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0968",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0969",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0970",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0971",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0972",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0973",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0974",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0975",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0976",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0977",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0978",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0979",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0980",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0981",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0982",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0983",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0984",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0985",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0986",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0987",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0988",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0989",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0990",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0991",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0992",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0993",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0994",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0995",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.3333
+    },
+    {
+      "prompt_id": "PROMPT_0996",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0997",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 1.0
+    },
+    {
+      "prompt_id": "PROMPT_0998",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_0999",
+      "count": 3,
+      "autograder_accuracy": 0.0,
+      "human_accuracy": 0.6667
+    },
+    {
+      "prompt_id": "PROMPT_1000",
+      "count": 3,
+      "autograder_accuracy": 1.0,
+      "human_accuracy": 0.6667
+    }
+  ]
+}
