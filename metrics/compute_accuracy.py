@@ -4,7 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 import pandas as pd
 
@@ -69,8 +69,8 @@ def _build_display_map(df: pd.DataFrame) -> Dict[str, str]:
     return map_df["display"].to_dict()
 
 
-def compute_accuracy_metrics(df: pd.DataFrame) -> Dict[str, object]:
-    """Compute overall accuracy metrics plus revision insights."""
+def compute_metrics(df: pd.DataFrame) -> Tuple[Dict[str, object], Dict[str, object]]:
+    """Compute accuracy and revision-focused metrics."""
 
     normalized = df.copy()
     label_display_map = _build_display_map(normalized)
@@ -125,39 +125,135 @@ def compute_accuracy_metrics(df: pd.DataFrame) -> Dict[str, object]:
                 }
             )
 
+    revision = compute_revision_metrics(
+        normalized=normalized,
+        label_display_map=label_display_map,
+        autograder_matches=autograder_matches,
+        human_matches=human_matches,
+        revisions=revisions,
+    )
+
+    return {"summary": summary, "per_prompt": per_prompt}, revision
+
+
+def compute_revision_metrics(
+    *,
+    normalized: pd.DataFrame,
+    label_display_map: Dict[str, str],
+    autograder_matches: pd.Series,
+    human_matches: pd.Series,
+    revisions: pd.Series,
+) -> Dict[str, object]:
+    """Compute revision-focused metrics including precision and recall."""
+
+    total_evaluations = int(len(normalized))
+    autograder_wrong_mask = ~autograder_matches
+
     case_masks = {
-        "autograder_wrong_human_correct": (~autograder_matches) & human_matches & revisions,
+        "autograder_wrong_human_correct": autograder_wrong_mask & human_matches & revisions,
         "autograder_correct_human_wrong": autograder_matches & (~human_matches) & revisions,
-        "both_wrong": (~autograder_matches) & (~human_matches) & revisions,
+        "both_wrong": autograder_wrong_mask & (~human_matches) & revisions,
     }
 
-    case_counts = {case: int(case_masks[case].sum()) for case in CASE_KEYS}
+    case_counts = {case: int(mask.sum()) for case, mask in case_masks.items()}
     revision_count = int(revisions.sum())
+    autograder_wrong_total = int(autograder_wrong_mask.sum())
+    corrected_revision_count = case_counts["autograder_wrong_human_correct"]
+    both_wrong_count = case_counts["both_wrong"]
+    autograder_wrong_revised = corrected_revision_count + both_wrong_count
+    autograder_wrong_unrevised = max(0, autograder_wrong_total - autograder_wrong_revised)
+
+    def _case_entry(count: int, *, include_autograder_share: bool) -> Dict[str, object]:
+        entry = {
+            "count": count,
+            "share_of_revisions": _format_rate(count, revision_count),
+            "share_of_total": _format_rate(count, total_evaluations),
+        }
+        if include_autograder_share:
+            entry["share_of_autograder_wrong"] = _format_rate(count, autograder_wrong_total)
+        else:
+            entry["share_of_autograder_wrong"] = None
+        return entry
+
+    def _breakdown_entry(count: int) -> Dict[str, object]:
+        return {
+            "count": count,
+            "share_of_autograder_wrong": _format_rate(count, autograder_wrong_total),
+            "share_of_total": _format_rate(count, total_evaluations),
+        }
+
     revision = {
         "overall": {
             "total_evaluations": total_evaluations,
             "revision_count": revision_count,
             "revision_rate": _format_rate(revision_count, total_evaluations),
+            "correct_revision_count": corrected_revision_count,
+            "correct_revision_precision": _format_rate(
+                corrected_revision_count, revision_count
+            ),
+            "autograder_wrong_total": autograder_wrong_total,
+            "corrected_autograder_wrong": corrected_revision_count,
+            "autograder_wrong_recall": _format_rate(
+                corrected_revision_count, autograder_wrong_total
+            ),
         },
         "cases": {
-            case: {
-                "count": case_counts[case],
-                "share_of_revisions": _format_rate(case_counts[case], revision_count),
-                "share_of_total": _format_rate(case_counts[case], total_evaluations),
-            }
-            for case in CASE_KEYS
+            "autograder_wrong_human_correct": _case_entry(
+                case_counts["autograder_wrong_human_correct"], include_autograder_share=True
+            ),
+            "autograder_correct_human_wrong": _case_entry(
+                case_counts["autograder_correct_human_wrong"], include_autograder_share=False
+            ),
+            "both_wrong": _case_entry(case_counts["both_wrong"], include_autograder_share=True),
+        },
+        "autograder_wrong_breakdown": {
+            "corrected": _breakdown_entry(corrected_revision_count),
+            "not_revised": _breakdown_entry(autograder_wrong_unrevised),
+            "revised_but_wrong": _breakdown_entry(both_wrong_count),
         },
         "by_ground_truth": [],
     }
 
     if "Ground_Truth" in normalized.columns:
-        for label, group in normalized.groupby("Ground_Truth", sort=True):
+        for label, _group in normalized.groupby("Ground_Truth", sort=True):
             label_mask = normalized["Ground_Truth"] == label
             label_total = int(label_mask.sum())
             label_revision_count = int(revisions[label_mask].sum())
             label_case_counts = {
                 case: int(mask[label_mask].sum()) for case, mask in case_masks.items()
             }
+            label_autograder_wrong_total = int((autograder_wrong_mask & label_mask).sum())
+            label_corrected = label_case_counts["autograder_wrong_human_correct"]
+            label_both_wrong = label_case_counts["both_wrong"]
+            label_autograder_wrong_revised = label_corrected + label_both_wrong
+            label_autograder_wrong_unrevised = max(
+                0, label_autograder_wrong_total - label_autograder_wrong_revised
+            )
+
+            def _label_case_entry(case_key: str, *, include_autograder_share: bool) -> Dict[str, object]:
+                count_value = label_case_counts[case_key]
+                entry = {
+                    "count": count_value,
+                    "share_of_revisions": _format_rate(count_value, label_revision_count),
+                    "share_of_total": _format_rate(count_value, label_total),
+                }
+                if include_autograder_share:
+                    entry["share_of_autograder_wrong"] = _format_rate(
+                        count_value, label_autograder_wrong_total
+                    )
+                else:
+                    entry["share_of_autograder_wrong"] = None
+                return entry
+
+            def _label_breakdown_entry(count_value: int) -> Dict[str, object]:
+                return {
+                    "count": count_value,
+                    "share_of_autograder_wrong": _format_rate(
+                        count_value, label_autograder_wrong_total
+                    ),
+                    "share_of_total": _format_rate(count_value, label_total),
+                }
+
             revision["by_ground_truth"].append(
                 {
                     "ground_truth": label,
@@ -165,22 +261,37 @@ def compute_accuracy_metrics(df: pd.DataFrame) -> Dict[str, object]:
                     "total_evaluations": label_total,
                     "revision_count": label_revision_count,
                     "revision_rate": _format_rate(label_revision_count, label_total),
+                    "correct_revision_count": label_corrected,
+                    "correct_revision_precision": _format_rate(
+                        label_corrected, label_revision_count
+                    ),
+                    "autograder_wrong_total": label_autograder_wrong_total,
+                    "corrected_autograder_wrong": label_corrected,
+                    "autograder_wrong_recall": _format_rate(
+                        label_corrected, label_autograder_wrong_total
+                    ),
                     "cases": {
-                        case: {
-                            "count": label_case_counts[case],
-                            "share_of_revisions": _format_rate(
-                                label_case_counts[case], label_revision_count
-                            ),
-                            "share_of_total": _format_rate(
-                                label_case_counts[case], label_total
-                            ),
-                        }
-                        for case in CASE_KEYS
+                        "autograder_wrong_human_correct": _label_case_entry(
+                            "autograder_wrong_human_correct", include_autograder_share=True
+                        ),
+                        "autograder_correct_human_wrong": _label_case_entry(
+                            "autograder_correct_human_wrong", include_autograder_share=False
+                        ),
+                        "both_wrong": _label_case_entry(
+                            "both_wrong", include_autograder_share=True
+                        ),
+                    },
+                    "autograder_wrong_breakdown": {
+                        "corrected": _label_breakdown_entry(label_corrected),
+                        "not_revised": _label_breakdown_entry(
+                            label_autograder_wrong_unrevised
+                        ),
+                        "revised_but_wrong": _label_breakdown_entry(label_both_wrong),
                     },
                 }
             )
 
-    return {"summary": summary, "per_prompt": per_prompt, "revision": revision}
+    return revision
 
 
 def write_metrics(metrics: Dict[str, object], output_path: Path) -> None:
@@ -199,15 +310,26 @@ def parse_args() -> argparse.Namespace:
         required=True,
         help="Path where the accuracy metrics JSON will be written",
     )
+    parser.add_argument(
+        "--revision-output",
+        type=Path,
+        help=(
+            "Path where revision metrics will be written. "
+            "Defaults to 'revision.json' alongside the main output."
+        ),
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
     df = load_dataset(args.input)
-    metrics = compute_accuracy_metrics(df)
-    write_metrics(metrics, args.output)
-    print(f"Wrote metrics to {args.output}")
+    accuracy_metrics, revision_metrics = compute_metrics(df)
+    write_metrics(accuracy_metrics, args.output)
+    revision_output = args.revision_output or args.output.with_name("revision.json")
+    write_metrics(revision_metrics, revision_output)
+    print(f"Wrote accuracy metrics to {args.output}")
+    print(f"Wrote revision metrics to {revision_output}")
 
 
 if __name__ == "__main__":
