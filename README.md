@@ -32,11 +32,12 @@ results to JSON:
 ```bash
 python metrics/compute_accuracy.py \
   --input data/toy_grading_dataset.csv \
-  --output public/accuracy.json
+  --output public/accuracy.json \
+  --revision-output public/revision.json
 ```
 
 The script validates the dataset columns, normalizes label text, and reports
-both overall and per-prompt accuracy. The JSON output looks similar to:
+both overall and per-prompt accuracy. `accuracy.json` looks similar to:
 
 ```json
 {
@@ -56,14 +57,36 @@ both overall and per-prompt accuracy. The JSON output looks similar to:
 }
 ```
 
-Re-run the command whenever the dataset changes to keep the dashboard current.
+Revision-specific metrics are written to a sibling `revision.json`, which adds
+precision and recall perspectives to the revision mix:
+
+```json
+{
+  "overall": {
+    "revision_count": 1217,
+    "revision_rate": 0.4057,
+    "correct_revision_precision": 0.4618,
+    "autograder_wrong_recall": 0.7493
+  },
+  "cases": {
+    "autograder_wrong_human_correct": {
+      "count": 562,
+      "share_of_revisions": 0.4618,
+      "share_of_autograder_wrong": 0.7493
+    }
+  }
+}
+```
+
+Re-run the command whenever the dataset changes to keep both JSON files current.
 
 ## 3. View the dashboard
 
-Open `public/index.html` in a browser. The page fetches `accuracy.json` from the
-same directory and renders headline metrics plus a prompt-level table. No build
-step or framework is required—host the `public/` directory anywhere that serves
-static files.
+Open `public/index.html` in a browser. The page fetches `accuracy.json` and
+`revision.json` from the same directory, then renders the headline metrics,
+revision precision/recall insights, and the prompt-level table. No build step or
+framework is required—host the `public/` directory anywhere that serves static
+files.
 
 ## Repository layout
 

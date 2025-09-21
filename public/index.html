@@ -226,6 +226,22 @@
         color: var(--warning);
       }
 
+      .case-pill.secondary {
+        background: rgba(148, 163, 184, 0.18);
+        color: var(--text-secondary);
+      }
+
+      .case-pill + .case-pill {
+        margin-top: 0.35rem;
+      }
+
+      .case-pill-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        align-items: flex-start;
+      }
+
       .table-strong {
         font-weight: 600;
         font-size: 1rem;
@@ -390,7 +406,7 @@
 
         <div class="insight-grid">
           <article class="metric-card" id="revision-overview-card">
-            <div class="metric-title">Revision Rate</div>
+            <div class="metric-title">Revision rate</div>
             <p class="metric-value" id="revision-rate">--</p>
             <div class="metric-subtitle">
               <span id="revision-volume">--</span>
@@ -398,21 +414,47 @@
             </div>
           </article>
 
-          <article class="metric-card" id="revision-case-card">
-            <div class="metric-title">Revision outcomes</div>
+          <article class="metric-card" id="revision-precision-card">
+            <div class="metric-title">Correct revision precision</div>
+            <p class="metric-value" id="revision-precision">--</p>
+            <div class="metric-subtitle">
+              <span id="revision-precision-detail">--</span>
+              <span class="metric-footnote" id="revision-precision-footnote">--</span>
+            </div>
+          </article>
+
+          <article class="metric-card" id="autograder-recall-card">
+            <div class="metric-title">Autograder mistake recall</div>
+            <p class="metric-value" id="autograder-recall">--</p>
+            <div class="metric-subtitle">
+              <span id="autograder-recall-detail">--</span>
+              <span class="metric-footnote" id="autograder-recall-footnote">--</span>
+            </div>
             <div
-              id="revision-case-chart"
+              id="autograder-recall-chart"
               class="bar-chart"
               role="list"
-              aria-label="Revision outcome breakdown"
+              aria-label="Autograder mistake breakdown"
             >
               <div class="muted">Awaiting data…</div>
             </div>
-            <div class="metric-subtitle">
-              <span>Share of revisions by outcome vs. ground truth</span>
-            </div>
           </article>
         </div>
+
+        <article class="metric-card" id="revision-case-card">
+          <div class="metric-title">Revision outcomes</div>
+          <div
+            id="revision-case-chart"
+            class="bar-chart"
+            role="list"
+            aria-label="Revision outcome breakdown"
+          >
+            <div class="muted">Awaiting data…</div>
+          </div>
+          <div class="metric-subtitle">
+            <span>Share of revisions by outcome vs. ground truth</span>
+          </div>
+        </article>
 
         <div class="table-wrapper">
           <table>
@@ -421,6 +463,8 @@
                 <th scope="col">Ground truth</th>
                 <th scope="col">Revision rate</th>
                 <th scope="col">Revisions</th>
+                <th scope="col">Correct revision precision</th>
+                <th scope="col">Autograder mistake recall</th>
                 <th scope="col">Auto wrong → Human correct</th>
                 <th scope="col">Auto correct → Human wrong</th>
                 <th scope="col">Both wrong</th>
@@ -428,7 +472,7 @@
             </thead>
             <tbody id="revision-table-body">
               <tr>
-                <td colspan="6" class="muted">Loading revision insights…</td>
+                <td colspan="8" class="muted">Loading revision insights…</td>
               </tr>
             </tbody>
           </table>
@@ -488,6 +532,23 @@
       const revisionRateEl = document.getElementById("revision-rate");
       const revisionVolumeEl = document.getElementById("revision-volume");
       const revisionTotalEl = document.getElementById("revision-total");
+      const revisionPrecisionEl = document.getElementById("revision-precision");
+      const revisionPrecisionDetailEl = document.getElementById(
+        "revision-precision-detail"
+      );
+      const revisionPrecisionFootnoteEl = document.getElementById(
+        "revision-precision-footnote"
+      );
+      const autograderRecallEl = document.getElementById("autograder-recall");
+      const autograderRecallDetailEl = document.getElementById(
+        "autograder-recall-detail"
+      );
+      const autograderRecallFootnoteEl = document.getElementById(
+        "autograder-recall-footnote"
+      );
+      const autograderRecallChartEl = document.getElementById(
+        "autograder-recall-chart"
+      );
       const revisionCaseChartEl = document.getElementById("revision-case-chart");
       const revisionTableBody = document.getElementById("revision-table-body");
       const revisionEmpty = document.getElementById("revision-empty");
@@ -508,6 +569,27 @@
         ["autograder_wrong_human_correct", "success"],
         ["autograder_correct_human_wrong", "info"],
         ["both_wrong", "warning"],
+      ];
+
+      const AUTOGRADER_BREAKDOWN_META = {
+        corrected: {
+          label: "Corrected by human revision",
+          variant: "success",
+        },
+        not_revised: {
+          label: "No revision applied",
+          variant: "info",
+        },
+        revised_but_wrong: {
+          label: "Revised but still wrong",
+          variant: "warning",
+        },
+      };
+
+      const AUTOGRADER_BREAKDOWN_ORDER = [
+        "corrected",
+        "not_revised",
+        "revised_but_wrong",
       ];
 
       function formatPercent(value) {
@@ -651,6 +733,9 @@
       }
 
       function renderRevisionCases(cases = {}, totalRevisions = 0) {
+        if (!revisionCaseChartEl) {
+          return;
+        }
         revisionCaseChartEl.innerHTML = "";
         const hasRevisions = totalRevisions > 0;
         const entries = Object.keys(CASE_LABELS).map((key) => {
@@ -715,6 +800,71 @@
         });
       }
 
+      function renderAutograderRecallBreakdown(breakdown = {}, totalMistakes = 0) {
+        if (!autograderRecallChartEl) {
+          return;
+        }
+        autograderRecallChartEl.innerHTML = "";
+        const hasMistakes = Number.isFinite(totalMistakes) && totalMistakes > 0;
+
+        if (!hasMistakes) {
+          const message = document.createElement("div");
+          message.className = "muted";
+          message.textContent = "No autograder mistakes recorded.";
+          autograderRecallChartEl.appendChild(message);
+          return;
+        }
+
+        AUTOGRADER_BREAKDOWN_ORDER.forEach((key) => {
+          const entryMeta = AUTOGRADER_BREAKDOWN_META[key] || {
+            label: key,
+            variant: "",
+          };
+          const data = breakdown?.[key] || {};
+          const count = Number.isFinite(data.count) ? data.count : 0;
+          const shareValue = Number.isFinite(data.share_of_autograder_wrong)
+            ? data.share_of_autograder_wrong
+            : count / totalMistakes;
+          const share = Math.max(0, Math.min(shareValue, 1));
+
+          const row = document.createElement("div");
+          row.className = "bar-row";
+          row.setAttribute("role", "listitem");
+
+          const header = document.createElement("div");
+          header.className = "bar-row-header";
+
+          const labelEl = document.createElement("span");
+          labelEl.className = "bar-label";
+          labelEl.textContent = entryMeta.label;
+          header.appendChild(labelEl);
+
+          const percentText = `${(share * 100).toFixed(1)}%`;
+          const valueEl = document.createElement("span");
+          valueEl.className = "bar-value";
+          valueEl.textContent = `${formatCount(count)} · ${percentText}`;
+          header.appendChild(valueEl);
+
+          row.appendChild(header);
+
+          const track = document.createElement("div");
+          track.className = "bar-track";
+
+          const fill = document.createElement("div");
+          const variantClass = entryMeta.variant ? ` ${entryMeta.variant}` : "";
+          fill.className = `bar-fill${variantClass}`;
+          fill.style.width = `${(share * 100).toFixed(1)}%`;
+          fill.setAttribute(
+            "aria-label",
+            `${entryMeta.label}: ${percentText} of autograder mistakes`
+          );
+          track.appendChild(fill);
+
+          row.appendChild(track);
+          autograderRecallChartEl.appendChild(row);
+        });
+      }
+
       function createCaseCell(entry, caseKey, variant) {
         const cell = document.createElement("td");
         const caseData = entry?.cases?.[caseKey] || {};
@@ -727,16 +877,35 @@
           : revisionCount
           ? count / revisionCount
           : 0;
+        const shareOfAutoWrong = Number.isFinite(
+          caseData.share_of_autograder_wrong
+        )
+          ? caseData.share_of_autograder_wrong
+          : null;
 
         const countEl = document.createElement("div");
         countEl.className = "table-strong";
         countEl.textContent = formatCount(count);
         cell.appendChild(countEl);
 
+        const pillWrapper = document.createElement("div");
+        pillWrapper.className = "case-pill-wrapper";
+
         const shareEl = document.createElement("span");
         shareEl.className = `case-pill ${variant}`.trim();
         shareEl.textContent = `${(shareValue * 100).toFixed(1)}% of revisions`;
-        cell.appendChild(shareEl);
+        pillWrapper.appendChild(shareEl);
+
+        if (shareOfAutoWrong !== null) {
+          const recallPill = document.createElement("span");
+          recallPill.className = "case-pill secondary";
+          recallPill.textContent = `${(shareOfAutoWrong * 100).toFixed(
+            1
+          )}% of auto mistakes`;
+          pillWrapper.appendChild(recallPill);
+        }
+
+        cell.appendChild(pillWrapper);
 
         return cell;
       }
@@ -748,7 +917,7 @@
           revisionEmpty.hidden = false;
           const row = document.createElement("tr");
           const cell = document.createElement("td");
-          cell.colSpan = 6;
+          cell.colSpan = 8;
           cell.className = "muted";
           cell.textContent = "No revision data available.";
           row.appendChild(cell);
@@ -785,6 +954,60 @@
             revisionsCell.appendChild(subtitle);
             row.appendChild(revisionsCell);
 
+            const precisionCell = document.createElement("td");
+            const precisionValue = document.createElement("div");
+            precisionValue.className = "table-strong";
+            precisionValue.textContent = formatPercent(
+              entry.correct_revision_precision
+            );
+            precisionCell.appendChild(precisionValue);
+            const precisionDetail = document.createElement("div");
+            precisionDetail.className = "muted";
+            const correctRevisionCount = Number.isFinite(entry.correct_revision_count)
+              ? entry.correct_revision_count
+              : 0;
+            const revisionCount = Number.isFinite(entry.revision_count)
+              ? entry.revision_count
+              : 0;
+            if (revisionCount) {
+              precisionDetail.textContent = `${formatCount(
+                correctRevisionCount
+              )} of ${formatCount(revisionCount)} revisions`;
+            } else {
+              precisionDetail.textContent = `${formatCount(
+                correctRevisionCount
+              )} correct revisions`;
+            }
+            precisionCell.appendChild(precisionDetail);
+            row.appendChild(precisionCell);
+
+            const recallCell = document.createElement("td");
+            const recallValue = document.createElement("div");
+            recallValue.className = "table-strong";
+            recallValue.textContent = formatPercent(entry.autograder_wrong_recall);
+            recallCell.appendChild(recallValue);
+            const recallDetail = document.createElement("div");
+            recallDetail.className = "muted";
+            const correctedMistakes = Number.isFinite(
+              entry.corrected_autograder_wrong
+            )
+              ? entry.corrected_autograder_wrong
+              : 0;
+            const totalMistakes = Number.isFinite(entry.autograder_wrong_total)
+              ? entry.autograder_wrong_total
+              : 0;
+            if (totalMistakes) {
+              recallDetail.textContent = `${formatCount(
+                correctedMistakes
+              )} of ${formatCount(totalMistakes)} mistakes`;
+            } else {
+              recallDetail.textContent = `${formatCount(
+                correctedMistakes
+              )} mistakes corrected`;
+            }
+            recallCell.appendChild(recallDetail);
+            row.appendChild(recallCell);
+
             CASE_ORDER.forEach(([caseKey, variant]) => {
               row.appendChild(createCaseCell(entry, caseKey, variant));
             });
@@ -812,6 +1035,19 @@
         const totalEvaluations = Number.isFinite(overall.total_evaluations)
           ? overall.total_evaluations
           : null;
+        const correctRevisionCount = Number.isFinite(overall.correct_revision_count)
+          ? overall.correct_revision_count
+          : 0;
+        const autograderMistakeTotal = Number.isFinite(
+          overall.autograder_wrong_total
+        )
+          ? overall.autograder_wrong_total
+          : 0;
+        const correctedMistakes = Number.isFinite(
+          overall.corrected_autograder_wrong
+        )
+          ? overall.corrected_autograder_wrong
+          : 0;
 
         revisionRateEl.textContent = formatPercent(overall.revision_rate);
         revisionVolumeEl.textContent = `${formatCount(revisionCount)} revisions`;
@@ -822,7 +1058,56 @@
           revisionTotalEl.textContent = "Total human reviews unavailable.";
         }
 
+        if (revisionPrecisionEl) {
+          revisionPrecisionEl.textContent = formatPercent(
+            overall.correct_revision_precision
+          );
+        }
+        if (revisionPrecisionDetailEl) {
+          revisionPrecisionDetailEl.textContent = `${formatCount(
+            correctRevisionCount
+          )} correct revisions`;
+        }
+        if (revisionPrecisionFootnoteEl) {
+          if (revisionCount) {
+            revisionPrecisionFootnoteEl.textContent = `Out of ${formatCount(
+              revisionCount
+            )} total revisions.`;
+          } else {
+            revisionPrecisionFootnoteEl.textContent = "No revisions recorded.";
+          }
+        }
+
+        if (autograderRecallEl) {
+          autograderRecallEl.textContent = formatPercent(
+            overall.autograder_wrong_recall
+          );
+        }
+        if (autograderRecallDetailEl) {
+          autograderRecallDetailEl.textContent = `${formatCount(
+            correctedMistakes
+          )} mistakes corrected`;
+        }
+        if (autograderRecallFootnoteEl) {
+          if (autograderMistakeTotal) {
+            const noun =
+              autograderMistakeTotal === 1
+                ? "autograder mistake"
+                : "autograder mistakes";
+            autograderRecallFootnoteEl.textContent = `Out of ${formatCount(
+              autograderMistakeTotal
+            )} ${noun}.`;
+          } else {
+            autograderRecallFootnoteEl.textContent =
+              "No autograder mistakes detected.";
+          }
+        }
+
         renderRevisionCases(revision.cases, revisionCount);
+        renderAutograderRecallBreakdown(
+          revision.autograder_wrong_breakdown,
+          autograderMistakeTotal
+        );
         updateRevisionTable(revision.by_ground_truth || []);
       }
 
@@ -891,25 +1176,41 @@
           });
       }
 
+      async function fetchJson(path) {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`Failed to load ${path} (${response.status})`);
+        }
+        return response.json();
+      }
+
       async function loadMetrics() {
         try {
-          const response = await fetch("accuracy.json", { cache: "no-store" });
-          if (!response.ok) {
-            throw new Error(`Failed to load accuracy.json (${response.status})`);
-          }
-          const data = await response.json();
+          const data = await fetchJson("accuracy.json");
           updateCards(data.summary || {});
-          updateRevisionInsights(data.revision);
           updatePromptTable(data.per_prompt || []);
+          if (errorEl) {
+            errorEl.hidden = true;
+            errorEl.textContent = "";
+          }
         } catch (error) {
           console.error(error);
-          errorEl.hidden = false;
-          errorEl.textContent =
-            "We were unable to load the latest accuracy metrics. Confirm that accuracy.json has been generated.";
-          promptTableBody.innerHTML = "";
-          if (revisionSection) {
-            revisionSection.hidden = true;
+          if (errorEl) {
+            errorEl.hidden = false;
+            errorEl.textContent =
+              "We were unable to load the latest accuracy metrics. Confirm that accuracy.json has been generated.";
           }
+          promptTableBody.innerHTML = "";
+          updateRevisionInsights(null);
+          return;
+        }
+
+        try {
+          const revisionData = await fetchJson("revision.json");
+          updateRevisionInsights(revisionData);
+        } catch (error) {
+          console.error(error);
+          updateRevisionInsights(null);
         }
       }
 
