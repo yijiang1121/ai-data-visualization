@@ -1,8 +1,11 @@
 {
   "summary": {
-    "total_records": 3000,
+    "total_evaluations": 3000,
+    "unique_prompts": 1000,
     "autograder_accuracy": 0.75,
-    "human_accuracy": 0.76
+    "autograder_evaluations": 1000,
+    "human_accuracy": 0.76,
+    "human_evaluations": 3000
   },
   "per_prompt": [
     {
@@ -6005,5 +6008,127 @@
       "autograder_accuracy": 1.0,
       "human_accuracy": 0.6667
     }
-  ]
+  ],
+  "revision": {
+    "overall": {
+      "total_evaluations": 3000,
+      "revision_count": 1217,
+      "revision_rate": 0.4057
+    },
+    "cases": {
+      "autograder_wrong_human_correct": {
+        "count": 562,
+        "share_of_revisions": 0.4618,
+        "share_of_total": 0.1873
+      },
+      "autograder_correct_human_wrong": {
+        "count": 532,
+        "share_of_revisions": 0.4371,
+        "share_of_total": 0.1773
+      },
+      "both_wrong": {
+        "count": 123,
+        "share_of_revisions": 0.1011,
+        "share_of_total": 0.041
+      }
+    },
+    "by_ground_truth": [
+      {
+        "ground_truth": "highly satisfying",
+        "ground_truth_display": "highly satisfying",
+        "total_evaluations": 750,
+        "revision_count": 281,
+        "revision_rate": 0.3747,
+        "cases": {
+          "autograder_wrong_human_correct": {
+            "count": 115,
+            "share_of_revisions": 0.4093,
+            "share_of_total": 0.1533
+          },
+          "autograder_correct_human_wrong": {
+            "count": 145,
+            "share_of_revisions": 0.516,
+            "share_of_total": 0.1933
+          },
+          "both_wrong": {
+            "count": 21,
+            "share_of_revisions": 0.0747,
+            "share_of_total": 0.028
+          }
+        }
+      },
+      {
+        "ground_truth": "highly unsatisfying",
+        "ground_truth_display": "highly unsatisfying",
+        "total_evaluations": 750,
+        "revision_count": 311,
+        "revision_rate": 0.4147,
+        "cases": {
+          "autograder_wrong_human_correct": {
+            "count": 157,
+            "share_of_revisions": 0.5048,
+            "share_of_total": 0.2093
+          },
+          "autograder_correct_human_wrong": {
+            "count": 120,
+            "share_of_revisions": 0.3859,
+            "share_of_total": 0.16
+          },
+          "both_wrong": {
+            "count": 34,
+            "share_of_revisions": 0.1093,
+            "share_of_total": 0.0453
+          }
+        }
+      },
+      {
+        "ground_truth": "slightly satisfying",
+        "ground_truth_display": "slightly satisfying",
+        "total_evaluations": 750,
+        "revision_count": 308,
+        "revision_rate": 0.4107,
+        "cases": {
+          "autograder_wrong_human_correct": {
+            "count": 137,
+            "share_of_revisions": 0.4448,
+            "share_of_total": 0.1827
+          },
+          "autograder_correct_human_wrong": {
+            "count": 145,
+            "share_of_revisions": 0.4708,
+            "share_of_total": 0.1933
+          },
+          "both_wrong": {
+            "count": 26,
+            "share_of_revisions": 0.0844,
+            "share_of_total": 0.0347
+          }
+        }
+      },
+      {
+        "ground_truth": "slightly unsatisfying",
+        "ground_truth_display": "slightly unsatisfying",
+        "total_evaluations": 750,
+        "revision_count": 317,
+        "revision_rate": 0.4227,
+        "cases": {
+          "autograder_wrong_human_correct": {
+            "count": 153,
+            "share_of_revisions": 0.4826,
+            "share_of_total": 0.204
+          },
+          "autograder_correct_human_wrong": {
+            "count": 122,
+            "share_of_revisions": 0.3849,
+            "share_of_total": 0.1627
+          },
+          "both_wrong": {
+            "count": 42,
+            "share_of_revisions": 0.1325,
+            "share_of_total": 0.056
+          }
+        }
+      }
+    ]
+  }
 }
