@@ -123,6 +123,13 @@
         margin-top: 1.2rem;
         color: var(--text-secondary);
         font-size: 0.95rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .metric-footnote {
+        font-size: 0.85rem;
       }
 
       section {
@@ -191,6 +198,105 @@
         font-weight: 600;
         background: rgba(15, 23, 42, 0.08);
         color: var(--text-secondary);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .case-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .case-pill.success {
+        background: rgba(5, 150, 105, 0.15);
+        color: var(--success);
+      }
+
+      .case-pill.info {
+        background: rgba(37, 99, 235, 0.15);
+        color: var(--accent);
+      }
+
+      .case-pill.warning {
+        background: rgba(217, 119, 6, 0.15);
+        color: var(--warning);
+      }
+
+      .table-strong {
+        font-weight: 600;
+        font-size: 1rem;
+        font-variant-numeric: tabular-nums;
+        margin-bottom: 0.35rem;
+      }
+
+      .insight-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .bar-chart {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+        margin-top: 1.25rem;
+      }
+
+      .bar-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .bar-row-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .bar-label {
+        flex: 1;
+      }
+
+      .bar-value {
+        font-variant-numeric: tabular-nums;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        white-space: nowrap;
+      }
+
+      .bar-track {
+        height: 0.6rem;
+        border-radius: 999px;
+        background: rgba(148, 163, 184, 0.25);
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        height: 100%;
+        border-radius: inherit;
+        background: var(--accent);
+        transition: width 0.4s ease;
+      }
+
+      .bar-fill.success {
+        background: rgba(5, 150, 105, 0.75);
+      }
+
+      .bar-fill.info {
+        background: rgba(37, 99, 235, 0.75);
+      }
+
+      .bar-fill.warning {
+        background: rgba(217, 119, 6, 0.75);
       }
 
       .error-message {
@@ -220,6 +326,12 @@
         .metric-card {
           padding: 1.75rem;
         }
+
+        .bar-row-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.35rem;
+        }
       }
     </style>
   </head>
@@ -238,22 +350,92 @@
         <article class="metric-card" id="autograder-card">
           <div class="metric-title">Autograder Accuracy</div>
           <p class="metric-value" id="autograder-accuracy">--</p>
-          <div class="metric-subtitle">Exact-match accuracy vs. ground truth</div>
+          <div class="metric-subtitle">
+            <span>Exact-match accuracy vs. ground truth</span>
+            <span class="metric-footnote" id="autograder-sample">
+              Based on -- automated evaluations.
+            </span>
+          </div>
         </article>
 
         <article class="metric-card" id="human-card">
           <div class="metric-title">Human Accuracy</div>
           <p class="metric-value" id="human-accuracy">--</p>
-          <div class="metric-subtitle">Exact-match accuracy vs. ground truth</div>
-        </article>
-
-        <article class="metric-card">
-          <div class="metric-title">Dataset Coverage</div>
-          <p class="metric-value" id="total-records">--</p>
           <div class="metric-subtitle">
-            Number of graded responses in the latest computation
+            <span>Exact-match accuracy vs. ground truth</span>
+            <span class="metric-footnote" id="human-sample">
+              Based on -- human reviews.
+            </span>
           </div>
         </article>
+
+        <article class="metric-card" id="dataset-card">
+          <div class="metric-title">Evaluation Coverage</div>
+          <p class="metric-value" id="total-evaluations">--</p>
+          <div class="metric-subtitle">
+            <span>Total human evaluations included in this refresh</span>
+            <span class="metric-footnote" id="dataset-footnote">
+              Across -- unique prompts.
+            </span>
+          </div>
+        </article>
+      </section>
+
+      <section id="revision-section">
+        <h2 class="section-heading">Revision insights</h2>
+        <p class="section-subtitle">
+          How often human reviewers revise the autograder and how those
+          disagreements resolve against the ground truth.
+        </p>
+
+        <div class="insight-grid">
+          <article class="metric-card" id="revision-overview-card">
+            <div class="metric-title">Revision Rate</div>
+            <p class="metric-value" id="revision-rate">--</p>
+            <div class="metric-subtitle">
+              <span id="revision-volume">--</span>
+              <span class="metric-footnote" id="revision-total">--</span>
+            </div>
+          </article>
+
+          <article class="metric-card" id="revision-case-card">
+            <div class="metric-title">Revision outcomes</div>
+            <div
+              id="revision-case-chart"
+              class="bar-chart"
+              role="list"
+              aria-label="Revision outcome breakdown"
+            >
+              <div class="muted">Awaiting data…</div>
+            </div>
+            <div class="metric-subtitle">
+              <span>Share of revisions by outcome vs. ground truth</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Ground truth</th>
+                <th scope="col">Revision rate</th>
+                <th scope="col">Revisions</th>
+                <th scope="col">Auto wrong → Human correct</th>
+                <th scope="col">Auto correct → Human wrong</th>
+                <th scope="col">Both wrong</th>
+              </tr>
+            </thead>
+            <tbody id="revision-table-body">
+              <tr>
+                <td colspan="6" class="muted">Loading revision insights…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="revision-empty" class="muted" hidden>
+          No revision data available for this dataset.
+        </div>
       </section>
 
       <section>
@@ -270,7 +452,7 @@
                 <th scope="col">Responses</th>
                 <th scope="col">Autograder</th>
                 <th scope="col">Human</th>
-                <th scope="col">Delta</th>
+                <th scope="col">Δ (Auto − Human)</th>
               </tr>
             </thead>
             <tbody id="prompt-table-body">
@@ -295,10 +477,38 @@
     <script>
       const autograderAccuracyEl = document.getElementById("autograder-accuracy");
       const humanAccuracyEl = document.getElementById("human-accuracy");
-      const totalRecordsEl = document.getElementById("total-records");
+      const totalEvaluationsEl = document.getElementById("total-evaluations");
+      const autograderSampleEl = document.getElementById("autograder-sample");
+      const humanSampleEl = document.getElementById("human-sample");
+      const datasetFootnoteEl = document.getElementById("dataset-footnote");
       const promptTableBody = document.getElementById("prompt-table-body");
       const promptEmpty = document.getElementById("prompt-empty");
       const errorEl = document.getElementById("error");
+      const revisionSection = document.getElementById("revision-section");
+      const revisionRateEl = document.getElementById("revision-rate");
+      const revisionVolumeEl = document.getElementById("revision-volume");
+      const revisionTotalEl = document.getElementById("revision-total");
+      const revisionCaseChartEl = document.getElementById("revision-case-chart");
+      const revisionTableBody = document.getElementById("revision-table-body");
+      const revisionEmpty = document.getElementById("revision-empty");
+
+      const CASE_LABELS = {
+        autograder_wrong_human_correct: "Autograder wrong → human corrected",
+        autograder_correct_human_wrong: "Autograder correct → human wrong",
+        both_wrong: "Both graders wrong",
+      };
+
+      const CASE_CLASS_MAP = {
+        autograder_wrong_human_correct: "success",
+        autograder_correct_human_wrong: "info",
+        both_wrong: "warning",
+      };
+
+      const CASE_ORDER = [
+        ["autograder_wrong_human_correct", "success"],
+        ["autograder_correct_human_wrong", "info"],
+        ["both_wrong", "warning"],
+      ];
 
       function formatPercent(value) {
         if (value === null || value === undefined) {
@@ -314,39 +524,106 @@
         return count.toLocaleString();
       }
 
-      function renderDelta(autograder, human) {
+      function formatEvaluationSource(count, descriptor) {
+        if (!Number.isFinite(count)) {
+          return "Evaluation count unavailable.";
+        }
+        const [singular, plural] = Array.isArray(descriptor)
+          ? descriptor
+          : [descriptor, descriptor];
+        const noun = count === 1 ? singular : plural;
+        return `Based on ${formatCount(count)} ${noun}.`;
+      }
+
+      function formatPromptSummary(totalEvaluations, uniquePrompts) {
+        if (!Number.isFinite(uniquePrompts) || uniquePrompts <= 0) {
+          return "Unique prompt count unavailable.";
+        }
+        const promptLabel = uniquePrompts === 1 ? "unique prompt" : "unique prompts";
+        const parts = [`Across ${formatCount(uniquePrompts)} ${promptLabel}`];
+        if (Number.isFinite(totalEvaluations) && totalEvaluations > 0) {
+          const average = totalEvaluations / uniquePrompts;
+          if (Number.isFinite(average)) {
+            parts.push(`≈${average.toFixed(1)} reviews per prompt`);
+          }
+        }
+        return parts.join(" · ");
+      }
+
+      function formatLabel(label) {
+        if (label === null || label === undefined) {
+          return "—";
+        }
+        const text = String(label).trim();
+        if (!text) {
+          return "—";
+        }
+        if (/[A-Z]/.test(text)) {
+          return text;
+        }
+        return text
+          .split(/\s+/)
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+      }
+
+      function renderDelta(subject, comparison, subjectLabel, comparisonLabel) {
         const container = document.createElement("span");
         container.classList.add("metric-delta");
-        const diff = autograder - human;
+        const diff = subject - comparison;
         const formatted = `${diff > 0 ? "+" : ""}${(diff * 100).toFixed(1)}%`;
-        container.textContent = `Δ ${formatted}`;
+        container.textContent = `Δ vs. ${comparisonLabel}: ${formatted}`;
+        container.title = `${subjectLabel} accuracy minus ${comparisonLabel.toLowerCase()} accuracy`;
+        container.setAttribute(
+          "aria-label",
+          `${subjectLabel} accuracy compared with ${comparisonLabel.toLowerCase()} accuracy`
+        );
         if (diff >= 0) {
           container.classList.add("positive");
-          container.setAttribute("aria-label", "Autograder higher");
         } else {
           container.classList.add("negative");
-          container.setAttribute("aria-label", "Human higher");
         }
         return container;
       }
 
-      function updateCards(summary) {
+      function updateCards(summary = {}) {
         autograderAccuracyEl.textContent = formatPercent(summary.autograder_accuracy);
         humanAccuracyEl.textContent = formatPercent(summary.human_accuracy);
-        totalRecordsEl.textContent = formatCount(summary.total_records);
+        totalEvaluationsEl.textContent = formatCount(summary.total_evaluations);
+
+        if (autograderSampleEl) {
+          autograderSampleEl.textContent = formatEvaluationSource(
+            summary.autograder_evaluations,
+            ["automated prompt evaluation", "automated prompt evaluations"]
+          );
+        }
+
+        if (humanSampleEl) {
+          humanSampleEl.textContent = formatEvaluationSource(
+            summary.human_evaluations,
+            ["human review", "human reviews"]
+          );
+        }
+
+        if (datasetFootnoteEl) {
+          datasetFootnoteEl.textContent = formatPromptSummary(
+            summary.total_evaluations,
+            summary.unique_prompts
+          );
+        }
 
         const autograderCard = document.getElementById("autograder-card");
         const humanCard = document.getElementById("human-card");
 
-        const existingHumanDelta = humanCard.querySelector(".metric-delta");
-        if (existingHumanDelta) {
-          existingHumanDelta.remove();
-        }
-
-        const existingAutograderDelta = autograderCard.querySelector(".metric-delta");
-        if (existingAutograderDelta) {
-          existingAutograderDelta.remove();
-        }
+        [autograderCard, humanCard].forEach((card) => {
+          if (!card) {
+            return;
+          }
+          const existingDelta = card.querySelector(".metric-delta");
+          if (existingDelta) {
+            existingDelta.remove();
+          }
+        });
 
         if (
           summary.autograder_accuracy !== null &&
@@ -355,12 +632,198 @@
           summary.human_accuracy !== undefined
         ) {
           humanCard.appendChild(
-            renderDelta(summary.human_accuracy, summary.autograder_accuracy)
+            renderDelta(
+              summary.human_accuracy,
+              summary.autograder_accuracy,
+              "Human",
+              "Autograder"
+            )
           );
           autograderCard.appendChild(
-            renderDelta(summary.autograder_accuracy, summary.human_accuracy)
+            renderDelta(
+              summary.autograder_accuracy,
+              summary.human_accuracy,
+              "Autograder",
+              "Human"
+            )
           );
         }
+      }
+
+      function renderRevisionCases(cases = {}, totalRevisions = 0) {
+        revisionCaseChartEl.innerHTML = "";
+        const hasRevisions = totalRevisions > 0;
+        const entries = Object.keys(CASE_LABELS).map((key) => {
+          const caseData = cases?.[key] || {};
+          const count = Number.isFinite(caseData.count) ? caseData.count : 0;
+          const shareValue = Number.isFinite(caseData.share_of_revisions)
+            ? caseData.share_of_revisions
+            : hasRevisions
+            ? count / totalRevisions
+            : 0;
+          return {
+            key,
+            label: CASE_LABELS[key],
+            count,
+            share: Math.max(0, Math.min(shareValue, 1)),
+          };
+        });
+
+        if (!hasRevisions) {
+          const message = document.createElement("div");
+          message.className = "muted";
+          message.textContent = "No revisions recorded in this dataset.";
+          revisionCaseChartEl.appendChild(message);
+          return;
+        }
+
+        entries.forEach((entry) => {
+          const row = document.createElement("div");
+          row.className = "bar-row";
+          row.setAttribute("role", "listitem");
+
+          const header = document.createElement("div");
+          header.className = "bar-row-header";
+
+          const labelEl = document.createElement("span");
+          labelEl.className = "bar-label";
+          labelEl.textContent = entry.label;
+          header.appendChild(labelEl);
+
+          const percentText = `${(entry.share * 100).toFixed(1)}%`;
+          const valueEl = document.createElement("span");
+          valueEl.className = "bar-value";
+          valueEl.textContent = `${formatCount(entry.count)} · ${percentText}`;
+          header.appendChild(valueEl);
+
+          row.appendChild(header);
+
+          const track = document.createElement("div");
+          track.className = "bar-track";
+
+          const fill = document.createElement("div");
+          fill.className = `bar-fill ${CASE_CLASS_MAP[entry.key] || ""}`.trim();
+          fill.style.width = `${(entry.share * 100).toFixed(1)}%`;
+          fill.setAttribute(
+            "aria-label",
+            `${entry.label}: ${percentText} of revisions`
+          );
+          track.appendChild(fill);
+
+          row.appendChild(track);
+          revisionCaseChartEl.appendChild(row);
+        });
+      }
+
+      function createCaseCell(entry, caseKey, variant) {
+        const cell = document.createElement("td");
+        const caseData = entry?.cases?.[caseKey] || {};
+        const count = Number.isFinite(caseData.count) ? caseData.count : 0;
+        const revisionCount = Number.isFinite(entry.revision_count)
+          ? entry.revision_count
+          : 0;
+        const shareValue = Number.isFinite(caseData.share_of_revisions)
+          ? caseData.share_of_revisions
+          : revisionCount
+          ? count / revisionCount
+          : 0;
+
+        const countEl = document.createElement("div");
+        countEl.className = "table-strong";
+        countEl.textContent = formatCount(count);
+        cell.appendChild(countEl);
+
+        const shareEl = document.createElement("span");
+        shareEl.className = `case-pill ${variant}`.trim();
+        shareEl.textContent = `${(shareValue * 100).toFixed(1)}% of revisions`;
+        cell.appendChild(shareEl);
+
+        return cell;
+      }
+
+      function updateRevisionTable(entries) {
+        revisionTableBody.innerHTML = "";
+
+        if (!entries || entries.length === 0) {
+          revisionEmpty.hidden = false;
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.colSpan = 6;
+          cell.className = "muted";
+          cell.textContent = "No revision data available.";
+          row.appendChild(cell);
+          revisionTableBody.appendChild(row);
+          return;
+        }
+
+        revisionEmpty.hidden = true;
+
+        entries
+          .slice()
+          .sort((a, b) => (b.revision_rate ?? 0) - (a.revision_rate ?? 0))
+          .forEach((entry) => {
+            const row = document.createElement("tr");
+
+            const labelCell = document.createElement("td");
+            labelCell.textContent = formatLabel(
+              entry.ground_truth_display || entry.ground_truth
+            );
+            row.appendChild(labelCell);
+
+            const rateCell = document.createElement("td");
+            rateCell.textContent = formatPercent(entry.revision_rate);
+            row.appendChild(rateCell);
+
+            const revisionsCell = document.createElement("td");
+            const countEl = document.createElement("div");
+            countEl.className = "table-strong";
+            countEl.textContent = formatCount(entry.revision_count);
+            revisionsCell.appendChild(countEl);
+            const subtitle = document.createElement("div");
+            subtitle.className = "muted";
+            subtitle.textContent = `${formatCount(entry.total_evaluations)} evaluations`;
+            revisionsCell.appendChild(subtitle);
+            row.appendChild(revisionsCell);
+
+            CASE_ORDER.forEach(([caseKey, variant]) => {
+              row.appendChild(createCaseCell(entry, caseKey, variant));
+            });
+
+            revisionTableBody.appendChild(row);
+          });
+      }
+
+      function updateRevisionInsights(revision) {
+        if (!revisionSection) {
+          return;
+        }
+
+        if (!revision) {
+          revisionSection.hidden = true;
+          return;
+        }
+
+        revisionSection.hidden = false;
+
+        const overall = revision.overall || {};
+        const revisionCount = Number.isFinite(overall.revision_count)
+          ? overall.revision_count
+          : 0;
+        const totalEvaluations = Number.isFinite(overall.total_evaluations)
+          ? overall.total_evaluations
+          : null;
+
+        revisionRateEl.textContent = formatPercent(overall.revision_rate);
+        revisionVolumeEl.textContent = `${formatCount(revisionCount)} revisions`;
+        if (totalEvaluations !== null) {
+          const noun = totalEvaluations === 1 ? "human review" : "human reviews";
+          revisionTotalEl.textContent = `Out of ${formatCount(totalEvaluations)} ${noun}`;
+        } else {
+          revisionTotalEl.textContent = "Total human reviews unavailable.";
+        }
+
+        renderRevisionCases(revision.cases, revisionCount);
+        updateRevisionTable(revision.by_ground_truth || []);
       }
 
       function updatePromptTable(entries) {
@@ -409,10 +872,15 @@
               entry.human_accuracy !== null &&
               entry.human_accuracy !== undefined
             ) {
+              const diff = entry.autograder_accuracy - entry.human_accuracy;
               const badge = document.createElement("span");
               badge.classList.add("pill");
-              const diff = entry.autograder_accuracy - entry.human_accuracy;
               badge.textContent = `${diff > 0 ? "+" : ""}${(diff * 100).toFixed(1)}%`;
+              badge.title = "Autograder accuracy minus human accuracy";
+              badge.setAttribute(
+                "aria-label",
+                `Autograder minus human accuracy: ${(diff * 100).toFixed(1)}%`
+              );
               deltaCell.appendChild(badge);
             } else {
               deltaCell.textContent = "--";
@@ -431,6 +899,7 @@
           }
           const data = await response.json();
           updateCards(data.summary || {});
+          updateRevisionInsights(data.revision);
           updatePromptTable(data.per_prompt || []);
         } catch (error) {
           console.error(error);
@@ -438,6 +907,9 @@
           errorEl.textContent =
             "We were unable to load the latest accuracy metrics. Confirm that accuracy.json has been generated.";
           promptTableBody.innerHTML = "";
+          if (revisionSection) {
+            revisionSection.hidden = true;
+          }
         }
       }
 
