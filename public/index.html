@@ -1065,12 +1065,6 @@
           : revisionCount
           ? count / revisionCount
           : 0;
-        const shareOfAutoWrong = Number.isFinite(
-          caseData.share_of_autograder_wrong
-        )
-          ? caseData.share_of_autograder_wrong
-          : null;
-
         const countEl = document.createElement("div");
         countEl.className = "table-strong";
         countEl.textContent = formatCount(count);
@@ -1084,18 +1078,145 @@
         shareEl.textContent = `${(shareValue * 100).toFixed(1)}% of revisions`;
         pillWrapper.appendChild(shareEl);
 
-        if (shareOfAutoWrong !== null) {
-          const recallPill = document.createElement("span");
-          recallPill.className = "case-pill secondary";
-          recallPill.textContent = `${(shareOfAutoWrong * 100).toFixed(
-            1
-          )}% of auto mistakes`;
-          pillWrapper.appendChild(recallPill);
-        }
-
         cell.appendChild(pillWrapper);
 
         return cell;
+      }
+
+      function computePrecisionTotals(entries = []) {
+        if (!entries?.length) {
+          return null;
+        }
+
+        const totals = {
+          label_display: "Total",
+          revision_count: 0,
+          total_evaluations: 0,
+          correct_revision_count: 0,
+          cases: {},
+        };
+
+        entries.forEach((entry) => {
+          if (!entry) {
+            return;
+          }
+
+          const revisionCount = Number.isFinite(entry.revision_count)
+            ? entry.revision_count
+            : 0;
+          const totalEvaluations = Number.isFinite(entry.total_evaluations)
+            ? entry.total_evaluations
+            : 0;
+          const correctRevisionCount = Number.isFinite(
+            entry.correct_revision_count
+          )
+            ? entry.correct_revision_count
+            : 0;
+
+          totals.revision_count += revisionCount;
+          totals.total_evaluations += totalEvaluations;
+          totals.correct_revision_count += correctRevisionCount;
+
+          CASE_ORDER.forEach(([caseKey]) => {
+            const caseData = entry?.cases?.[caseKey] || {};
+            const caseCount = Number.isFinite(caseData.count)
+              ? caseData.count
+              : 0;
+            totals.cases[caseKey] = (totals.cases[caseKey] || 0) + caseCount;
+          });
+        });
+
+        const totalRevisionCount = totals.revision_count;
+        const totalEvaluations = totals.total_evaluations;
+
+        totals.revision_rate =
+          totalEvaluations > 0 ? totalRevisionCount / totalEvaluations : null;
+
+        totals.correct_revision_precision =
+          totalRevisionCount > 0
+            ? totals.correct_revision_count / totalRevisionCount
+            : null;
+
+        totals.cases = Object.fromEntries(
+          CASE_ORDER.map(([caseKey]) => {
+            const caseCount = totals.cases[caseKey] || 0;
+            return [
+              caseKey,
+              {
+                count: caseCount,
+                share_of_revisions:
+                  totalRevisionCount > 0 ? caseCount / totalRevisionCount : 0,
+              },
+            ];
+          })
+        );
+
+        return totals;
+      }
+
+      function buildPrecisionRow(entry) {
+        if (!entry) {
+          return document.createElement("tr");
+        }
+
+        const row = document.createElement("tr");
+
+        const labelCell = document.createElement("td");
+        labelCell.textContent = resolveBreakdownLabel(entry);
+        row.appendChild(labelCell);
+
+        const rateCell = document.createElement("td");
+        rateCell.textContent = formatPercent(entry.revision_rate);
+        row.appendChild(rateCell);
+
+        const revisionsCell = document.createElement("td");
+        const revisionCount = Number.isFinite(entry.revision_count)
+          ? entry.revision_count
+          : 0;
+        const totalEvaluations = Number.isFinite(entry.total_evaluations)
+          ? entry.total_evaluations
+          : 0;
+        const countEl = document.createElement("div");
+        countEl.className = "table-strong";
+        countEl.textContent = formatCount(revisionCount);
+        revisionsCell.appendChild(countEl);
+        const subtitle = document.createElement("div");
+        subtitle.className = "muted";
+        subtitle.textContent = `${formatCount(totalEvaluations)} evaluations`;
+        revisionsCell.appendChild(subtitle);
+        row.appendChild(revisionsCell);
+
+        const precisionCell = document.createElement("td");
+        const precisionValue = document.createElement("div");
+        precisionValue.className = "table-strong";
+        precisionValue.textContent = formatPercent(
+          entry.correct_revision_precision
+        );
+        precisionCell.appendChild(precisionValue);
+        const precisionDetail = document.createElement("div");
+        precisionDetail.className = "muted";
+        const correctRevisionCount = Number.isFinite(
+          entry.correct_revision_count
+        )
+          ? entry.correct_revision_count
+          : 0;
+        if (revisionCount) {
+          precisionDetail.textContent = `${formatCount(
+            correctRevisionCount
+          )} of ${formatCount(revisionCount)} revisions`;
+        } else {
+          precisionDetail.textContent = `${formatCount(
+            correctRevisionCount
+          )} correct revisions`;
+        }
+        precisionCell.appendChild(precisionDetail);
+        row.appendChild(precisionCell);
+
+        CASE_ORDER.forEach(([caseKey, variant]) => {
+          row.appendChild(createCaseCell(entry, caseKey, variant));
+        });
+
+        return row;
       }
 
       function createRecallBreakdownCell(entry, breakdownKey, factor) {
@@ -1105,9 +1226,6 @@
         const displayCount = baseCount * factor;
         const shareOfMistakes = Number.isFinite(breakdown.share_of_autograder_wrong)
           ? breakdown.share_of_autograder_wrong
-          : null;
-        const shareOfTotal = Number.isFinite(breakdown.share_of_total)
-          ? breakdown.share_of_total
           : null;
 
         const countEl = document.createElement("div");
@@ -1127,18 +1245,129 @@
           pillWrapper.appendChild(sharePill);
         }
 
-        if (shareOfTotal !== null) {
-          const totalPill = document.createElement("span");
-          totalPill.className = "case-pill secondary";
-          totalPill.textContent = `${(shareOfTotal * 100).toFixed(1)}% of evaluations`;
-          pillWrapper.appendChild(totalPill);
-        }
-
         if (pillWrapper.childElementCount) {
           cell.appendChild(pillWrapper);
         }
 
         return cell;
+      }
+
+      function computeRecallTotals(entries = []) {
+        if (!entries?.length) {
+          return null;
+        }
+
+        const totals = {
+          label_display: "Total",
+          corrected_autograder_wrong: 0,
+          autograder_wrong_total: 0,
+          autograder_wrong_breakdown: {},
+        };
+
+        entries.forEach((entry) => {
+          if (!entry) {
+            return;
+          }
+
+          const corrected = Number.isFinite(entry.corrected_autograder_wrong)
+            ? entry.corrected_autograder_wrong
+            : 0;
+          const totalMistakes = Number.isFinite(entry.autograder_wrong_total)
+            ? entry.autograder_wrong_total
+            : 0;
+
+          totals.corrected_autograder_wrong += corrected;
+          totals.autograder_wrong_total += totalMistakes;
+
+          AUTOGRADER_BREAKDOWN_ORDER.forEach((key) => {
+            const breakdown = entry?.autograder_wrong_breakdown?.[key] || {};
+            const count = Number.isFinite(breakdown.count) ? breakdown.count : 0;
+            totals.autograder_wrong_breakdown[key] =
+              (totals.autograder_wrong_breakdown[key] || 0) + count;
+          });
+        });
+
+        const totalMistakes = totals.autograder_wrong_total;
+        totals.autograder_wrong_recall =
+          totalMistakes > 0
+            ? totals.corrected_autograder_wrong / totalMistakes
+            : null;
+
+        totals.autograder_wrong_breakdown = Object.fromEntries(
+          AUTOGRADER_BREAKDOWN_ORDER.map((key) => {
+            const count = totals.autograder_wrong_breakdown[key] || 0;
+            return [
+              key,
+              {
+                count,
+                share_of_autograder_wrong:
+                  totalMistakes > 0 ? count / totalMistakes : 0,
+              },
+            ];
+          })
+        );
+
+        return totals;
+      }
+
+      function buildRecallRow(entry, factor) {
+        if (!entry) {
+          return document.createElement("tr");
+        }
+
+        const row = document.createElement("tr");
+
+        const labelCell = document.createElement("td");
+        labelCell.textContent = resolveBreakdownLabel(entry);
+        row.appendChild(labelCell);
+
+        const recallCell = document.createElement("td");
+        const recallValue = document.createElement("div");
+        recallValue.className = "table-strong";
+        recallValue.textContent = formatPercent(entry.autograder_wrong_recall);
+        recallCell.appendChild(recallValue);
+        const recallDetail = document.createElement("div");
+        recallDetail.className = "muted";
+        const corrected = Number.isFinite(entry.corrected_autograder_wrong)
+          ? entry.corrected_autograder_wrong
+          : 0;
+        const totalMistakes = Number.isFinite(entry.autograder_wrong_total)
+          ? entry.autograder_wrong_total
+          : 0;
+        const correctedDisplay = corrected * factor;
+        const totalDisplay = totalMistakes * factor;
+        if (totalDisplay) {
+          recallDetail.textContent = `${formatCount(
+            correctedDisplay
+          )} of ${formatCount(totalDisplay)} mistake evaluations`;
+        } else {
+          recallDetail.textContent = `${formatCount(
+            correctedDisplay
+          )} mistake evaluations`;
+        }
+        recallCell.appendChild(recallDetail);
+        row.appendChild(recallCell);
+
+        const totalCell = document.createElement("td");
+        const totalValue = document.createElement("div");
+        totalValue.className = "table-strong";
+        totalValue.textContent = formatCount(totalDisplay);
+        totalCell.appendChild(totalValue);
+        const totalDetail = document.createElement("div");
+        totalDetail.className = "muted";
+        if (factor > 1 && totalMistakes) {
+          totalDetail.textContent = `${factor}× ${formatCount(totalMistakes)} mistakes`;
+        } else {
+          totalDetail.textContent = `${formatCount(totalMistakes)} mistakes`;
+        }
+        totalCell.appendChild(totalDetail);
+        row.appendChild(totalCell);
+
+        AUTOGRADER_BREAKDOWN_ORDER.forEach((key) => {
+          row.appendChild(createRecallBreakdownCell(entry, key, factor));
+        });
+
+        return row;
       }
 
       function renderPrecisionTable() {
@@ -1173,67 +1402,18 @@
           precisionEmpty.hidden = true;
         }
 
-        entries
+        const sortedEntries = entries
           .slice()
-          .sort((a, b) => (b.revision_rate ?? 0) - (a.revision_rate ?? 0))
-          .forEach((entry) => {
-            const row = document.createElement("tr");
+          .sort((a, b) => (b.revision_rate ?? 0) - (a.revision_rate ?? 0));
 
-            const labelCell = document.createElement("td");
-            labelCell.textContent = resolveBreakdownLabel(entry);
-            row.appendChild(labelCell);
+        sortedEntries.forEach((entry) => {
+          precisionTableBody.appendChild(buildPrecisionRow(entry));
+        });
 
-            const rateCell = document.createElement("td");
-            rateCell.textContent = formatPercent(entry.revision_rate);
-            row.appendChild(rateCell);
-
-            const revisionsCell = document.createElement("td");
-            const countEl = document.createElement("div");
-            countEl.className = "table-strong";
-            countEl.textContent = formatCount(entry.revision_count);
-            revisionsCell.appendChild(countEl);
-            const subtitle = document.createElement("div");
-            subtitle.className = "muted";
-            const totalEvaluations = Number.isFinite(entry.total_evaluations)
-              ? entry.total_evaluations
-              : 0;
-            subtitle.textContent = `${formatCount(totalEvaluations)} evaluations`;
-            revisionsCell.appendChild(subtitle);
-            row.appendChild(revisionsCell);
-
-            const precisionCell = document.createElement("td");
-            const precisionValue = document.createElement("div");
-            precisionValue.className = "table-strong";
-            precisionValue.textContent = formatPercent(
-              entry.correct_revision_precision
-            );
-            precisionCell.appendChild(precisionValue);
-            const precisionDetail = document.createElement("div");
-            precisionDetail.className = "muted";
-            const correctRevisionCount = Number.isFinite(entry.correct_revision_count)
-              ? entry.correct_revision_count
-              : 0;
-            const revisionCount = Number.isFinite(entry.revision_count)
-              ? entry.revision_count
-              : 0;
-            if (revisionCount) {
-              precisionDetail.textContent = `${formatCount(
-                correctRevisionCount
-              )} of ${formatCount(revisionCount)} revisions`;
-            } else {
-              precisionDetail.textContent = `${formatCount(
-                correctRevisionCount
-              )} correct revisions`;
-            }
-            precisionCell.appendChild(precisionDetail);
-            row.appendChild(precisionCell);
-
-            CASE_ORDER.forEach(([caseKey, variant]) => {
-              row.appendChild(createCaseCell(entry, caseKey, variant));
-            });
-
-            precisionTableBody.appendChild(row);
-          });
+        const totalsEntry = computePrecisionTotals(entries);
+        if (totalsEntry) {
+          precisionTableBody.appendChild(buildPrecisionRow(totalsEntry));
+        }
       }
 
       function renderRecallTable() {
@@ -1272,67 +1452,21 @@
           recallEmpty.hidden = true;
         }
 
-        entries
+        const sortedEntries = entries
           .slice()
           .sort(
             (a, b) =>
               (b.autograder_wrong_total ?? 0) - (a.autograder_wrong_total ?? 0)
-          )
-          .forEach((entry) => {
-            const row = document.createElement("tr");
+          );
 
-            const labelCell = document.createElement("td");
-            labelCell.textContent = resolveBreakdownLabel(entry);
-            row.appendChild(labelCell);
+        sortedEntries.forEach((entry) => {
+          recallTableBody.appendChild(buildRecallRow(entry, factor));
+        });
 
-            const recallCell = document.createElement("td");
-            const recallValue = document.createElement("div");
-            recallValue.className = "table-strong";
-            recallValue.textContent = formatPercent(entry.autograder_wrong_recall);
-            recallCell.appendChild(recallValue);
-            const recallDetail = document.createElement("div");
-            recallDetail.className = "muted";
-            const corrected = Number.isFinite(entry.corrected_autograder_wrong)
-              ? entry.corrected_autograder_wrong
-              : 0;
-            const totalMistakes = Number.isFinite(entry.autograder_wrong_total)
-              ? entry.autograder_wrong_total
-              : 0;
-            const correctedDisplay = corrected * factor;
-            const totalDisplay = totalMistakes * factor;
-            if (totalDisplay) {
-              recallDetail.textContent = `${formatCount(
-                correctedDisplay
-              )} of ${formatCount(totalDisplay)} mistake evaluations`;
-            } else {
-              recallDetail.textContent = `${formatCount(
-                correctedDisplay
-              )} mistake evaluations`;
-            }
-            recallCell.appendChild(recallDetail);
-            row.appendChild(recallCell);
-
-            const totalCell = document.createElement("td");
-            const totalValue = document.createElement("div");
-            totalValue.className = "table-strong";
-            totalValue.textContent = formatCount(totalDisplay);
-            totalCell.appendChild(totalValue);
-            const totalDetail = document.createElement("div");
-            totalDetail.className = "muted";
-            if (factor > 1 && totalMistakes) {
-              totalDetail.textContent = `${factor}× ${formatCount(totalMistakes)} mistakes`;
-            } else {
-              totalDetail.textContent = `${formatCount(totalMistakes)} mistakes`;
-            }
-            totalCell.appendChild(totalDetail);
-            row.appendChild(totalCell);
-
-            AUTOGRADER_BREAKDOWN_ORDER.forEach((key) => {
-              row.appendChild(createRecallBreakdownCell(entry, key, factor));
-            });
-
-            recallTableBody.appendChild(row);
-          });
+        const totalsEntry = computeRecallTotals(entries);
+        if (totalsEntry) {
+          recallTableBody.appendChild(buildRecallRow(totalsEntry, factor));
+        }
       }
 
       function updateRevisionInsights(revision) {
