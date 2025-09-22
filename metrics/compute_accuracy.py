@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -734,8 +735,10 @@ def write_metrics(metrics: Dict[str, object], output_path: Path) -> None:
     """Serialize ``metrics`` to ``output_path`` as pretty-printed JSON."""
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    payload = dict(metrics)
+    payload["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     with output_path.open("w", encoding="utf-8") as fh:
-        json.dump(metrics, fh, indent=2)
+        json.dump(payload, fh, indent=2)
         fh.write("\n")
 
 
