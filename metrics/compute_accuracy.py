@@ -56,11 +56,15 @@ def _format_rate(numerator: int, denominator: int) -> float | None:
     return _format(numerator / denominator)
 
 
-def _build_display_map(df: pd.DataFrame) -> Dict[str, str]:
-    """Map normalized ground-truth labels back to their display text."""
+def _build_display_map(series: pd.Series) -> Dict[str, str]:
+    """Map normalized label values back to their display text."""
 
-    normalized_col = df["Ground_Truth"].astype(str).str.strip().str.lower()
-    display_col = df["Ground_Truth"].astype(str).str.strip()
+    cleaned = series.dropna()
+    if cleaned.empty:
+        return {}
+
+    normalized_col = cleaned.astype(str).str.strip().str.lower()
+    display_col = cleaned.astype(str).str.strip()
     map_df = (
         pd.DataFrame({"normalized": normalized_col, "display": display_col})
         .drop_duplicates(subset="normalized")
@@ -73,7 +77,9 @@ def compute_metrics(df: pd.DataFrame) -> Tuple[Dict[str, object], Dict[str, obje
     """Compute accuracy and revision-focused metrics."""
 
     normalized = df.copy()
-    label_display_map = _build_display_map(normalized)
+    display_maps = {
+        column: _build_display_map(df[column]) for column in LABEL_COLUMNS if column in df.columns
+    }
     for column in LABEL_COLUMNS:
         normalized[column] = _normalize(normalized[column])
 
@@ -127,7 +133,7 @@ def compute_metrics(df: pd.DataFrame) -> Tuple[Dict[str, object], Dict[str, obje
 
     revision = compute_revision_metrics(
         normalized=normalized,
-        label_display_map=label_display_map,
+        display_maps=display_maps,
         autograder_matches=autograder_matches,
         human_matches=human_matches,
         revisions=revisions,
@@ -139,7 +145,7 @@ def compute_metrics(df: pd.DataFrame) -> Tuple[Dict[str, object], Dict[str, obje
 def compute_revision_metrics(
     *,
     normalized: pd.DataFrame,
-    label_display_map: Dict[str, str],
+    display_maps: Dict[str, Dict[str, str]],
     autograder_matches: pd.Series,
     human_matches: pd.Series,
     revisions: pd.Series,
@@ -182,6 +188,12 @@ def compute_revision_metrics(
             "share_of_total": _format_rate(count, total_evaluations),
         }
 
+    unique_repetitions = 1
+    if "Repetition" in normalized.columns:
+        unique_values = normalized["Repetition"].dropna().unique()
+        if len(unique_values):
+            unique_repetitions = int(len(unique_values))
+
     revision = {
         "overall": {
             "total_evaluations": total_evaluations,
@@ -196,6 +208,7 @@ def compute_revision_metrics(
             "autograder_wrong_recall": _format_rate(
                 corrected_revision_count, autograder_wrong_total
             ),
+            "mistake_repetition_factor": unique_repetitions,
         },
         "cases": {
             "autograder_wrong_human_correct": _case_entry(
@@ -211,13 +224,49 @@ def compute_revision_metrics(
             "not_revised": _breakdown_entry(autograder_wrong_unrevised),
             "revised_but_wrong": _breakdown_entry(both_wrong_count),
         },
-        "by_ground_truth": [],
+        "breakdowns": {},
     }
 
-    if "Ground_Truth" in normalized.columns:
-        for label, _group in normalized.groupby("Ground_Truth", sort=True):
-            label_mask = normalized["Ground_Truth"] == label
+    def _resolve_display(column: str, value: str) -> str:
+        mapping = display_maps.get(column, {})
+        return mapping.get(value, value.title() if isinstance(value, str) else str(value))
+
+    def _attach_dimension_fields(
+        entry: Dict[str, object], dimension: str, label: str, display_label: str
+    ) -> None:
+        entry["label"] = label
+        entry["label_display"] = display_label
+        if dimension == "ground_truth":
+            entry["ground_truth"] = label
+            entry["ground_truth_display"] = display_label
+        elif dimension == "autograder_label":
+            entry["autograder_label"] = label
+            entry["autograder_label_display"] = display_label
+        elif dimension == "human_label":
+            entry["human_label"] = label
+            entry["human_label_display"] = display_label
+
+    breakdowns: Dict[str, List[Dict[str, object]]] = {}
+    dimension_columns = (
+        ("ground_truth", "Ground_Truth"),
+        ("autograder_label", "Auto_Grade"),
+        ("human_label", "Human_Grade"),
+    )
+
+    for dimension_key, column_name in dimension_columns:
+        if column_name not in normalized.columns:
+            continue
+
+        entries: List[Dict[str, object]] = []
+        for label, _group in normalized.groupby(column_name, sort=True):
+            if pd.isna(label):
+                continue
+
+            label_mask = normalized[column_name] == label
             label_total = int(label_mask.sum())
+            if label_total == 0:
+                continue
+
             label_revision_count = int(revisions[label_mask].sum())
             label_case_counts = {
                 case: int(mask[label_mask].sum()) for case, mask in case_masks.items()
@@ -230,22 +279,24 @@ def compute_revision_metrics(
                 0, label_autograder_wrong_total - label_autograder_wrong_revised
             )
 
-            def _label_case_entry(case_key: str, *, include_autograder_share: bool) -> Dict[str, object]:
+            def _dimension_case_entry(
+                case_key: str, *, include_autograder_share: bool
+            ) -> Dict[str, object]:
                 count_value = label_case_counts[case_key]
-                entry = {
+                entry_case = {
                     "count": count_value,
                     "share_of_revisions": _format_rate(count_value, label_revision_count),
                     "share_of_total": _format_rate(count_value, label_total),
                 }
                 if include_autograder_share:
-                    entry["share_of_autograder_wrong"] = _format_rate(
+                    entry_case["share_of_autograder_wrong"] = _format_rate(
                         count_value, label_autograder_wrong_total
                     )
                 else:
-                    entry["share_of_autograder_wrong"] = None
-                return entry
+                    entry_case["share_of_autograder_wrong"] = None
+                return entry_case
 
-            def _label_breakdown_entry(count_value: int) -> Dict[str, object]:
+            def _dimension_breakdown_entry(count_value: int) -> Dict[str, object]:
                 return {
                     "count": count_value,
                     "share_of_autograder_wrong": _format_rate(
@@ -254,42 +305,48 @@ def compute_revision_metrics(
                     "share_of_total": _format_rate(count_value, label_total),
                 }
 
-            revision["by_ground_truth"].append(
-                {
-                    "ground_truth": label,
-                    "ground_truth_display": label_display_map.get(label, label.title()),
-                    "total_evaluations": label_total,
-                    "revision_count": label_revision_count,
-                    "revision_rate": _format_rate(label_revision_count, label_total),
-                    "correct_revision_count": label_corrected,
-                    "correct_revision_precision": _format_rate(
-                        label_corrected, label_revision_count
+            display_label = _resolve_display(column_name, label)
+            entry = {
+                "total_evaluations": label_total,
+                "revision_count": label_revision_count,
+                "revision_rate": _format_rate(label_revision_count, label_total),
+                "correct_revision_count": label_corrected,
+                "correct_revision_precision": _format_rate(
+                    label_corrected, label_revision_count
+                ),
+                "autograder_wrong_total": label_autograder_wrong_total,
+                "corrected_autograder_wrong": label_corrected,
+                "autograder_wrong_recall": _format_rate(
+                    label_corrected, label_autograder_wrong_total
+                ),
+                "cases": {
+                    "autograder_wrong_human_correct": _dimension_case_entry(
+                        "autograder_wrong_human_correct", include_autograder_share=True
                     ),
-                    "autograder_wrong_total": label_autograder_wrong_total,
-                    "corrected_autograder_wrong": label_corrected,
-                    "autograder_wrong_recall": _format_rate(
-                        label_corrected, label_autograder_wrong_total
+                    "autograder_correct_human_wrong": _dimension_case_entry(
+                        "autograder_correct_human_wrong", include_autograder_share=False
                     ),
-                    "cases": {
-                        "autograder_wrong_human_correct": _label_case_entry(
-                            "autograder_wrong_human_correct", include_autograder_share=True
-                        ),
-                        "autograder_correct_human_wrong": _label_case_entry(
-                            "autograder_correct_human_wrong", include_autograder_share=False
-                        ),
-                        "both_wrong": _label_case_entry(
-                            "both_wrong", include_autograder_share=True
-                        ),
-                    },
-                    "autograder_wrong_breakdown": {
-                        "corrected": _label_breakdown_entry(label_corrected),
-                        "not_revised": _label_breakdown_entry(
-                            label_autograder_wrong_unrevised
-                        ),
-                        "revised_but_wrong": _label_breakdown_entry(label_both_wrong),
-                    },
-                }
-            )
+                    "both_wrong": _dimension_case_entry(
+                        "both_wrong", include_autograder_share=True
+                    ),
+                },
+                "autograder_wrong_breakdown": {
+                    "corrected": _dimension_breakdown_entry(label_corrected),
+                    "not_revised": _dimension_breakdown_entry(
+                        label_autograder_wrong_unrevised
+                    ),
+                    "revised_but_wrong": _dimension_breakdown_entry(label_both_wrong),
+                },
+            }
+            _attach_dimension_fields(entry, dimension_key, label, display_label)
+            entries.append(entry)
+
+        if entries:
+            breakdowns[dimension_key] = entries
+
+    revision["breakdowns"] = breakdowns
+    if "ground_truth" in breakdowns:
+        revision["by_ground_truth"] = breakdowns["ground_truth"]
 
     return revision
 
