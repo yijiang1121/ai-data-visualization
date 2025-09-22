@@ -153,6 +153,52 @@
         overflow: hidden;
       }
 
+      .table-card {
+        background: var(--card-bg);
+        border-radius: 1rem;
+        box-shadow: 0 18px 36px -28px var(--card-shadow);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+      }
+
+      .table-card .table-controls {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1.25rem;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      .table-card .table-controls label {
+        font-weight: 600;
+      }
+
+      .table-card .table-controls select {
+        appearance: none;
+        border: none;
+        border-radius: 999px;
+        padding: 0.4rem 1.1rem;
+        background: rgba(148, 163, 184, 0.2);
+        color: var(--text-primary);
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .table-card .table-controls select:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .table-card .table-wrapper {
+        background: transparent;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
       table {
         width: 100%;
         border-collapse: collapse;
@@ -348,6 +394,15 @@
           align-items: flex-start;
           gap: 0.35rem;
         }
+
+        .table-card .table-controls {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .table-card .table-controls select {
+          width: 100%;
+        }
       }
     </style>
   </head>
@@ -415,28 +470,11 @@
           </article>
 
           <article class="metric-card" id="revision-precision-card">
-            <div class="metric-title">Correct revision precision</div>
+            <div class="metric-title">Revision precision</div>
             <p class="metric-value" id="revision-precision">--</p>
             <div class="metric-subtitle">
               <span id="revision-precision-detail">--</span>
               <span class="metric-footnote" id="revision-precision-footnote">--</span>
-            </div>
-          </article>
-
-          <article class="metric-card" id="autograder-recall-card">
-            <div class="metric-title">Autograder mistake recall</div>
-            <p class="metric-value" id="autograder-recall">--</p>
-            <div class="metric-subtitle">
-              <span id="autograder-recall-detail">--</span>
-              <span class="metric-footnote" id="autograder-recall-footnote">--</span>
-            </div>
-            <div
-              id="autograder-recall-chart"
-              class="bar-chart"
-              role="list"
-              aria-label="Autograder mistake breakdown"
-            >
-              <div class="muted">Awaiting data…</div>
             </div>
           </article>
         </div>
@@ -456,29 +494,95 @@
           </div>
         </article>
 
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Ground truth</th>
-                <th scope="col">Revision rate</th>
-                <th scope="col">Revisions</th>
-                <th scope="col">Correct revision precision</th>
-                <th scope="col">Autograder mistake recall</th>
-                <th scope="col">Auto wrong → Human correct</th>
-                <th scope="col">Auto correct → Human wrong</th>
-                <th scope="col">Both wrong</th>
-              </tr>
-            </thead>
-            <tbody id="revision-table-body">
-              <tr>
-                <td colspan="8" class="muted">Loading revision insights…</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="table-card">
+          <div class="table-controls">
+            <label for="precision-breakdown-select">Break down by</label>
+            <select id="precision-breakdown-select">
+              <option value="ground_truth">Ground truth</option>
+              <option value="autograder_label">Autograder label</option>
+              <option value="human_label">Human label</option>
+            </select>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col" id="precision-label-heading">Ground truth</th>
+                  <th scope="col">Revision rate</th>
+                  <th scope="col">Revisions</th>
+                  <th scope="col">Revision precision</th>
+                  <th scope="col">Auto wrong → Human correct</th>
+                  <th scope="col">Auto correct → Human wrong</th>
+                  <th scope="col">Both wrong</th>
+                </tr>
+              </thead>
+              <tbody id="precision-table-body">
+                <tr>
+                  <td colspan="7" class="muted">Loading revision insights…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div id="revision-empty" class="muted" hidden>
+        <div id="precision-empty" class="muted" hidden>
           No revision data available for this dataset.
+        </div>
+      </section>
+
+      <section id="recall-section">
+        <h2 class="section-heading">Autograder mistake recall</h2>
+        <p class="section-subtitle">
+          How effectively human revisions catch recurring autograder mistakes.
+        </p>
+
+        <article class="metric-card" id="autograder-recall-card">
+          <div class="metric-title">Autograder mistake recall</div>
+          <p class="metric-value" id="autograder-recall">--</p>
+          <div class="metric-subtitle">
+            <span id="autograder-recall-detail">--</span>
+            <span class="metric-footnote" id="autograder-recall-footnote">--</span>
+          </div>
+          <div
+            id="autograder-recall-chart"
+            class="bar-chart"
+            role="list"
+            aria-label="Autograder mistake breakdown"
+          >
+            <div class="muted">Awaiting data…</div>
+          </div>
+        </article>
+
+        <div class="table-card">
+          <div class="table-controls">
+            <label for="recall-breakdown-select">Break down by</label>
+            <select id="recall-breakdown-select">
+              <option value="ground_truth">Ground truth</option>
+              <option value="autograder_label">Autograder label</option>
+              <option value="human_label">Human label</option>
+            </select>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col" id="recall-label-heading">Ground truth</th>
+                  <th scope="col">Autograder mistake recall</th>
+                  <th scope="col">Mistake evaluations</th>
+                  <th scope="col">Corrected by human revision</th>
+                  <th scope="col">No revision applied</th>
+                  <th scope="col">Revised but still wrong</th>
+                </tr>
+              </thead>
+              <tbody id="recall-table-body">
+                <tr>
+                  <td colspan="6" class="muted">Loading recall insights…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="recall-empty" class="muted" hidden>
+          No autograder mistake data available for this dataset.
         </div>
       </section>
 
@@ -529,6 +633,7 @@
       const promptEmpty = document.getElementById("prompt-empty");
       const errorEl = document.getElementById("error");
       const revisionSection = document.getElementById("revision-section");
+      const recallSection = document.getElementById("recall-section");
       const revisionRateEl = document.getElementById("revision-rate");
       const revisionVolumeEl = document.getElementById("revision-volume");
       const revisionTotalEl = document.getElementById("revision-total");
@@ -550,8 +655,16 @@
         "autograder-recall-chart"
       );
       const revisionCaseChartEl = document.getElementById("revision-case-chart");
-      const revisionTableBody = document.getElementById("revision-table-body");
-      const revisionEmpty = document.getElementById("revision-empty");
+      const precisionTableBody = document.getElementById("precision-table-body");
+      const precisionEmpty = document.getElementById("precision-empty");
+      const precisionLabelHeading = document.getElementById("precision-label-heading");
+      const precisionBreakdownSelect = document.getElementById(
+        "precision-breakdown-select"
+      );
+      const recallTableBody = document.getElementById("recall-table-body");
+      const recallEmpty = document.getElementById("recall-empty");
+      const recallLabelHeading = document.getElementById("recall-label-heading");
+      const recallBreakdownSelect = document.getElementById("recall-breakdown-select");
 
       const CASE_LABELS = {
         autograder_wrong_human_correct: "Autograder wrong → human corrected",
@@ -591,6 +704,27 @@
         "not_revised",
         "revised_but_wrong",
       ];
+
+      const BREAKDOWN_LABELS = {
+        ground_truth: "Ground truth",
+        autograder_label: "Autograder label",
+        human_label: "Human label",
+      };
+
+      let revisionDataCache = null;
+      let mistakeRepetitionFactor = 1;
+
+      if (precisionBreakdownSelect) {
+        precisionBreakdownSelect.addEventListener("change", () => {
+          renderPrecisionTable();
+        });
+      }
+
+      if (recallBreakdownSelect) {
+        recallBreakdownSelect.addEventListener("change", () => {
+          renderRecallTable();
+        });
+      }
 
       function formatPercent(value) {
         if (value === null || value === undefined) {
@@ -647,6 +781,48 @@
           .split(/\s+/)
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ");
+      }
+
+      function getSelectedBreakdown(selectEl) {
+        const value = selectEl?.value;
+        if (
+          value &&
+          Object.prototype.hasOwnProperty.call(BREAKDOWN_LABELS, value)
+        ) {
+          return value;
+        }
+        return "ground_truth";
+      }
+
+      function getBreakdownHeading(key) {
+        return BREAKDOWN_LABELS[key] || "Segment";
+      }
+
+      function getBreakdownEntries(revision, key) {
+        return revision?.breakdowns?.[key] || [];
+      }
+
+      function resolveBreakdownLabel(entry) {
+        if (!entry) {
+          return "—";
+        }
+        return (
+          entry.label_display ||
+          entry.ground_truth_display ||
+          entry.autograder_label_display ||
+          entry.human_label_display ||
+          formatLabel(
+            entry.label ||
+              entry.ground_truth ||
+              entry.autograder_label ||
+              entry.human_label
+          )
+        );
+      }
+
+      function computeMistakeRepetitionFactor(revision) {
+        const factor = revision?.overall?.mistake_repetition_factor;
+        return Number.isFinite(factor) && factor > 0 ? factor : 1;
       }
 
       function renderDelta(subject, comparison, subjectLabel, comparisonLabel) {
@@ -800,12 +976,21 @@
         });
       }
 
-      function renderAutograderRecallBreakdown(breakdown = {}, totalMistakes = 0) {
+      function renderAutograderRecallBreakdown(
+        breakdown = {},
+        totalMistakes = 0,
+        repetitionFactor = 1
+      ) {
         if (!autograderRecallChartEl) {
           return;
         }
         autograderRecallChartEl.innerHTML = "";
         const hasMistakes = Number.isFinite(totalMistakes) && totalMistakes > 0;
+
+        const factor =
+          Number.isFinite(repetitionFactor) && repetitionFactor > 0
+            ? repetitionFactor
+            : 1;
 
         if (!hasMistakes) {
           const message = document.createElement("div");
@@ -826,6 +1011,7 @@
             ? data.share_of_autograder_wrong
             : count / totalMistakes;
           const share = Math.max(0, Math.min(shareValue, 1));
+          const displayCount = count * factor;
 
           const row = document.createElement("div");
           row.className = "bar-row";
@@ -842,7 +1028,7 @@
           const percentText = `${(share * 100).toFixed(1)}%`;
           const valueEl = document.createElement("span");
           valueEl.className = "bar-value";
-          valueEl.textContent = `${formatCount(count)} · ${percentText}`;
+          valueEl.textContent = `${formatCount(displayCount)} · ${percentText}`;
           header.appendChild(valueEl);
 
           row.appendChild(header);
@@ -856,7 +1042,9 @@
           fill.style.width = `${(share * 100).toFixed(1)}%`;
           fill.setAttribute(
             "aria-label",
-            `${entryMeta.label}: ${percentText} of autograder mistakes`
+            `${entryMeta.label}: ${percentText} of autograder mistakes (${formatCount(
+              displayCount
+            )} evaluations)`
           );
           track.appendChild(fill);
 
@@ -910,22 +1098,80 @@
         return cell;
       }
 
-      function updateRevisionTable(entries) {
-        revisionTableBody.innerHTML = "";
+      function createRecallBreakdownCell(entry, breakdownKey, factor) {
+        const cell = document.createElement("td");
+        const breakdown = entry?.autograder_wrong_breakdown?.[breakdownKey] || {};
+        const baseCount = Number.isFinite(breakdown.count) ? breakdown.count : 0;
+        const displayCount = baseCount * factor;
+        const shareOfMistakes = Number.isFinite(breakdown.share_of_autograder_wrong)
+          ? breakdown.share_of_autograder_wrong
+          : null;
+        const shareOfTotal = Number.isFinite(breakdown.share_of_total)
+          ? breakdown.share_of_total
+          : null;
 
-        if (!entries || entries.length === 0) {
-          revisionEmpty.hidden = false;
-          const row = document.createElement("tr");
-          const cell = document.createElement("td");
-          cell.colSpan = 8;
-          cell.className = "muted";
-          cell.textContent = "No revision data available.";
-          row.appendChild(cell);
-          revisionTableBody.appendChild(row);
+        const countEl = document.createElement("div");
+        countEl.className = "table-strong";
+        countEl.textContent = formatCount(displayCount);
+        cell.appendChild(countEl);
+
+        const pillWrapper = document.createElement("div");
+        pillWrapper.className = "case-pill-wrapper";
+
+        if (shareOfMistakes !== null) {
+          const variantClass =
+            AUTOGRADER_BREAKDOWN_META[breakdownKey]?.variant || "";
+          const sharePill = document.createElement("span");
+          sharePill.className = `case-pill ${variantClass}`.trim();
+          sharePill.textContent = `${(shareOfMistakes * 100).toFixed(1)}% of mistakes`;
+          pillWrapper.appendChild(sharePill);
+        }
+
+        if (shareOfTotal !== null) {
+          const totalPill = document.createElement("span");
+          totalPill.className = "case-pill secondary";
+          totalPill.textContent = `${(shareOfTotal * 100).toFixed(1)}% of evaluations`;
+          pillWrapper.appendChild(totalPill);
+        }
+
+        if (pillWrapper.childElementCount) {
+          cell.appendChild(pillWrapper);
+        }
+
+        return cell;
+      }
+
+      function renderPrecisionTable() {
+        if (!precisionTableBody) {
           return;
         }
 
-        revisionEmpty.hidden = true;
+        precisionTableBody.innerHTML = "";
+
+        const breakdownKey = getSelectedBreakdown(precisionBreakdownSelect);
+        if (precisionLabelHeading) {
+          precisionLabelHeading.textContent = getBreakdownHeading(breakdownKey);
+        }
+
+        const entries = getBreakdownEntries(revisionDataCache, breakdownKey);
+
+        if (!entries || entries.length === 0) {
+          if (precisionEmpty) {
+            precisionEmpty.hidden = false;
+          }
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.colSpan = 7;
+          cell.className = "muted";
+          cell.textContent = "No revision data available.";
+          row.appendChild(cell);
+          precisionTableBody.appendChild(row);
+          return;
+        }
+
+        if (precisionEmpty) {
+          precisionEmpty.hidden = true;
+        }
 
         entries
           .slice()
@@ -934,9 +1180,7 @@
             const row = document.createElement("tr");
 
             const labelCell = document.createElement("td");
-            labelCell.textContent = formatLabel(
-              entry.ground_truth_display || entry.ground_truth
-            );
+            labelCell.textContent = resolveBreakdownLabel(entry);
             row.appendChild(labelCell);
 
             const rateCell = document.createElement("td");
@@ -950,7 +1194,10 @@
             revisionsCell.appendChild(countEl);
             const subtitle = document.createElement("div");
             subtitle.className = "muted";
-            subtitle.textContent = `${formatCount(entry.total_evaluations)} evaluations`;
+            const totalEvaluations = Number.isFinite(entry.total_evaluations)
+              ? entry.total_evaluations
+              : 0;
+            subtitle.textContent = `${formatCount(totalEvaluations)} evaluations`;
             revisionsCell.appendChild(subtitle);
             row.appendChild(revisionsCell);
 
@@ -981,6 +1228,63 @@
             precisionCell.appendChild(precisionDetail);
             row.appendChild(precisionCell);
 
+            CASE_ORDER.forEach(([caseKey, variant]) => {
+              row.appendChild(createCaseCell(entry, caseKey, variant));
+            });
+
+            precisionTableBody.appendChild(row);
+          });
+      }
+
+      function renderRecallTable() {
+        if (!recallTableBody) {
+          return;
+        }
+
+        recallTableBody.innerHTML = "";
+
+        const breakdownKey = getSelectedBreakdown(recallBreakdownSelect);
+        if (recallLabelHeading) {
+          recallLabelHeading.textContent = getBreakdownHeading(breakdownKey);
+        }
+
+        const entries = getBreakdownEntries(revisionDataCache, breakdownKey);
+        const factor =
+          Number.isFinite(mistakeRepetitionFactor) && mistakeRepetitionFactor > 0
+            ? mistakeRepetitionFactor
+            : 1;
+
+        if (!entries || entries.length === 0) {
+          if (recallEmpty) {
+            recallEmpty.hidden = false;
+          }
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.colSpan = 6;
+          cell.className = "muted";
+          cell.textContent = "No autograder mistake data available.";
+          row.appendChild(cell);
+          recallTableBody.appendChild(row);
+          return;
+        }
+
+        if (recallEmpty) {
+          recallEmpty.hidden = true;
+        }
+
+        entries
+          .slice()
+          .sort(
+            (a, b) =>
+              (b.autograder_wrong_total ?? 0) - (a.autograder_wrong_total ?? 0)
+          )
+          .forEach((entry) => {
+            const row = document.createElement("tr");
+
+            const labelCell = document.createElement("td");
+            labelCell.textContent = resolveBreakdownLabel(entry);
+            row.appendChild(labelCell);
+
             const recallCell = document.createElement("td");
             const recallValue = document.createElement("div");
             recallValue.className = "table-strong";
@@ -988,31 +1292,46 @@
             recallCell.appendChild(recallValue);
             const recallDetail = document.createElement("div");
             recallDetail.className = "muted";
-            const correctedMistakes = Number.isFinite(
-              entry.corrected_autograder_wrong
-            )
+            const corrected = Number.isFinite(entry.corrected_autograder_wrong)
               ? entry.corrected_autograder_wrong
               : 0;
             const totalMistakes = Number.isFinite(entry.autograder_wrong_total)
               ? entry.autograder_wrong_total
               : 0;
-            if (totalMistakes) {
+            const correctedDisplay = corrected * factor;
+            const totalDisplay = totalMistakes * factor;
+            if (totalDisplay) {
               recallDetail.textContent = `${formatCount(
-                correctedMistakes
-              )} of ${formatCount(totalMistakes)} mistakes`;
+                correctedDisplay
+              )} of ${formatCount(totalDisplay)} mistake evaluations`;
             } else {
               recallDetail.textContent = `${formatCount(
-                correctedMistakes
-              )} mistakes corrected`;
+                correctedDisplay
+              )} mistake evaluations`;
             }
             recallCell.appendChild(recallDetail);
             row.appendChild(recallCell);
 
-            CASE_ORDER.forEach(([caseKey, variant]) => {
-              row.appendChild(createCaseCell(entry, caseKey, variant));
+            const totalCell = document.createElement("td");
+            const totalValue = document.createElement("div");
+            totalValue.className = "table-strong";
+            totalValue.textContent = formatCount(totalDisplay);
+            totalCell.appendChild(totalValue);
+            const totalDetail = document.createElement("div");
+            totalDetail.className = "muted";
+            if (factor > 1 && totalMistakes) {
+              totalDetail.textContent = `${factor}× ${formatCount(totalMistakes)} mistakes`;
+            } else {
+              totalDetail.textContent = `${formatCount(totalMistakes)} mistakes`;
+            }
+            totalCell.appendChild(totalDetail);
+            row.appendChild(totalCell);
+
+            AUTOGRADER_BREAKDOWN_ORDER.forEach((key) => {
+              row.appendChild(createRecallBreakdownCell(entry, key, factor));
             });
 
-            revisionTableBody.appendChild(row);
+            recallTableBody.appendChild(row);
           });
       }
 
@@ -1021,12 +1340,65 @@
           return;
         }
 
+        revisionDataCache = revision;
+        mistakeRepetitionFactor = computeMistakeRepetitionFactor(revision);
+
         if (!revision) {
           revisionSection.hidden = true;
+          if (recallSection) {
+            recallSection.hidden = true;
+          }
+          if (revisionRateEl) {
+            revisionRateEl.textContent = "--";
+          }
+          if (revisionVolumeEl) {
+            revisionVolumeEl.textContent = "--";
+          }
+          if (revisionTotalEl) {
+            revisionTotalEl.textContent = "--";
+          }
+          if (revisionPrecisionEl) {
+            revisionPrecisionEl.textContent = "--";
+          }
+          if (revisionPrecisionDetailEl) {
+            revisionPrecisionDetailEl.textContent = "--";
+          }
+          if (revisionPrecisionFootnoteEl) {
+            revisionPrecisionFootnoteEl.textContent = "No revisions recorded.";
+          }
+          if (autograderRecallEl) {
+            autograderRecallEl.textContent = "--";
+          }
+          if (autograderRecallDetailEl) {
+            autograderRecallDetailEl.textContent = "--";
+          }
+          if (autograderRecallFootnoteEl) {
+            autograderRecallFootnoteEl.textContent =
+              "No autograder mistake data available.";
+          }
+          if (revisionCaseChartEl) {
+            revisionCaseChartEl.innerHTML = "";
+            const message = document.createElement("div");
+            message.className = "muted";
+            message.textContent = "No revisions recorded in this dataset.";
+            revisionCaseChartEl.appendChild(message);
+          }
+          if (autograderRecallChartEl) {
+            autograderRecallChartEl.innerHTML = "";
+            const message = document.createElement("div");
+            message.className = "muted";
+            message.textContent = "No autograder mistakes recorded.";
+            autograderRecallChartEl.appendChild(message);
+          }
+          renderPrecisionTable();
+          renderRecallTable();
           return;
         }
 
         revisionSection.hidden = false;
+        if (recallSection) {
+          recallSection.hidden = false;
+        }
 
         const overall = revision.overall || {};
         const revisionCount = Number.isFinite(overall.revision_count)
@@ -1048,6 +1420,13 @@
         )
           ? overall.corrected_autograder_wrong
           : 0;
+
+        const repetitionFactor =
+          Number.isFinite(mistakeRepetitionFactor) && mistakeRepetitionFactor > 0
+            ? mistakeRepetitionFactor
+            : 1;
+        const displayTotalMistakes = autograderMistakeTotal * repetitionFactor;
+        const displayCorrectedMistakes = correctedMistakes * repetitionFactor;
 
         revisionRateEl.textContent = formatPercent(overall.revision_rate);
         revisionVolumeEl.textContent = `${formatCount(revisionCount)} revisions`;
@@ -1085,18 +1464,24 @@
         }
         if (autograderRecallDetailEl) {
           autograderRecallDetailEl.textContent = `${formatCount(
-            correctedMistakes
-          )} mistakes corrected`;
+            displayCorrectedMistakes
+          )} mistake evaluations corrected`;
         }
         if (autograderRecallFootnoteEl) {
           if (autograderMistakeTotal) {
             const noun =
-              autograderMistakeTotal === 1
-                ? "autograder mistake"
-                : "autograder mistakes";
-            autograderRecallFootnoteEl.textContent = `Out of ${formatCount(
-              autograderMistakeTotal
-            )} ${noun}.`;
+              autograderMistakeTotal === 1 ? "mistake" : "mistakes";
+            if (repetitionFactor > 1) {
+              autograderRecallFootnoteEl.textContent = `Out of ${formatCount(
+                displayTotalMistakes
+              )} autograder mistake evaluations (${repetitionFactor}× ${formatCount(
+                autograderMistakeTotal
+              )} ${noun}).`;
+            } else {
+              autograderRecallFootnoteEl.textContent = `Out of ${formatCount(
+                autograderMistakeTotal
+              )} autograder ${noun}.`;
+            }
           } else {
             autograderRecallFootnoteEl.textContent =
               "No autograder mistakes detected.";
@@ -1106,9 +1491,11 @@
         renderRevisionCases(revision.cases, revisionCount);
         renderAutograderRecallBreakdown(
           revision.autograder_wrong_breakdown,
-          autograderMistakeTotal
+          autograderMistakeTotal,
+          repetitionFactor
         );
-        updateRevisionTable(revision.by_ground_truth || []);
+        renderPrecisionTable();
+        renderRecallTable();
       }
 
       function updatePromptTable(entries) {
