@@ -451,6 +451,27 @@ def _format_case_entries(
     }
 
 
+def _format_autograder_correct_case_entries(
+    case_counts: Dict[str, int],
+    *,
+    total_evaluations: int,
+    autograder_correct_total: int,
+) -> Dict[str, Dict[str, object]]:
+    """Return share metrics for autograder-correct outcomes."""
+
+    entries: Dict[str, Dict[str, object]] = {}
+    for case, count in case_counts.items():
+        entries[case] = {
+            "count": count,
+            "share_of_total": _format_rate(count, total_evaluations),
+            "share_of_autograder_correct": _format_rate(
+                count, autograder_correct_total
+            ),
+        }
+
+    return entries
+
+
 def _format_agreement_case_entries(
     case_counts: Dict[str, int],
     *,
@@ -718,6 +739,67 @@ def _agreement_dimension_breakdowns(
     return entries
 
 
+def _autograder_correct_dimension_breakdowns(
+    *,
+    normalized: pd.DataFrame,
+    column_name: str,
+    dimension_key: str,
+    display_maps: Dict[str, Dict[str, str]],
+    autograder_matches: pd.Series,
+    human_matches: pd.Series,
+) -> List[Dict[str, object]]:
+    """Build breakdowns for autograder correctness by dimension."""
+
+    entries: List[Dict[str, object]] = []
+
+    for label, group in normalized.groupby(column_name, sort=True):
+        if pd.isna(label):
+            continue
+
+        label_total = int(len(group))
+        if label_total == 0:
+            continue
+
+        indices = group.index
+        correct_mask = autograder_matches.loc[indices]
+        human_mask = human_matches.loc[indices]
+        correct_total = int(correct_mask.sum())
+        wrong_total = label_total - correct_total
+        both_correct = int((correct_mask & human_mask).sum())
+        autograder_correct_human_wrong = int((correct_mask & ~human_mask).sum())
+
+        display_label = _resolve_display_label(column_name, label, display_maps)
+
+        entry = {
+            "total_evaluations": label_total,
+            "autograder_correct_total": correct_total,
+            "autograder_correct_rate": _format_rate(correct_total, label_total),
+            "autograder_wrong_total": wrong_total,
+            "autograder_wrong_rate": _format_rate(wrong_total, label_total),
+            "both_correct_total": both_correct,
+            "cases": _format_autograder_correct_case_entries(
+                {
+                    "autograder_correct_human_wrong": autograder_correct_human_wrong,
+                    "both_correct": both_correct,
+                },
+                total_evaluations=label_total,
+                autograder_correct_total=correct_total,
+            ),
+            "label": label,
+            "label_display": display_label,
+        }
+
+        field_names = DIMENSION_FIELDS.get(dimension_key)
+        if field_names:
+            label_field, display_field = field_names
+            entry[label_field] = label
+            entry[display_field] = display_label
+
+        entries.append(entry)
+
+    return entries
+
+
 def _compute_agreement_metrics_for_scale(
     *,
     normalized: pd.DataFrame,
@@ -789,6 +871,76 @@ def _compute_agreement_metrics_for_scale(
     return agreement
 
 
+def _compute_autograder_correct_metrics_for_scale(
+    *,
+    normalized: pd.DataFrame,
+    display_maps: Dict[str, Dict[str, str]],
+    config: Dict[str, Dict[str, str]],
+    autograder_matches: pd.Series,
+    human_matches: pd.Series,
+) -> Dict[str, object]:
+    """Compute autograder correctness metrics for a grading scale."""
+
+    columns = _resolve_scale_columns(normalized, config)
+    if not columns:
+        return {"overall": {}, "cases": {}, "breakdowns": {}}
+
+    total_evaluations = int(len(normalized))
+    autograder_correct_total = int(autograder_matches.sum())
+    both_correct = int((autograder_matches & human_matches).sum())
+    autograder_correct_human_wrong = int((autograder_matches & ~human_matches).sum())
+
+    overall = {
+        "total_evaluations": total_evaluations,
+        "autograder_correct_total": autograder_correct_total,
+        "autograder_correct_rate": _format_rate(
+            autograder_correct_total, total_evaluations
+        ),
+        "both_correct_total": both_correct,
+        "autograder_correct_human_wrong_total": autograder_correct_human_wrong,
+    }
+
+    case_counts = {
+        "autograder_correct_human_wrong": autograder_correct_human_wrong,
+        "both_correct": both_correct,
+    }
+
+    breakdowns: Dict[str, List[Dict[str, object]]] = {}
+    for dimension_key, column_name in (
+        ("ground_truth", columns.ground_truth),
+        ("autograder_label", columns.autograder),
+        ("human_label", columns.human),
+    ):
+        if not column_name or column_name not in normalized.columns:
+            continue
+
+        entries = _autograder_correct_dimension_breakdowns(
+            normalized=normalized,
+            column_name=column_name,
+            dimension_key=dimension_key,
+            display_maps=display_maps,
+            autograder_matches=autograder_matches,
+            human_matches=human_matches,
+        )
+        if entries:
+            breakdowns[dimension_key] = entries
+
+    outcome = {
+        "overall": overall,
+        "cases": _format_autograder_correct_case_entries(
+            case_counts,
+            total_evaluations=total_evaluations,
+            autograder_correct_total=autograder_correct_total,
+        ),
+        "breakdowns": breakdowns,
+    }
+
+    if "ground_truth" in breakdowns:
+        outcome["by_ground_truth"] = breakdowns["ground_truth"]
+
+    return outcome
+
+
 def _compute_revision_metrics_for_scale(
     *,
     normalized: pd.DataFrame,
@@ -842,6 +994,13 @@ def _compute_revision_metrics_for_scale(
         autograder_matches=autograder_matches,
         human_matches=human_matches,
     )
+    autograder_correct = _compute_autograder_correct_metrics_for_scale(
+        normalized=normalized,
+        display_maps=display_maps,
+        config=config,
+        autograder_matches=autograder_matches,
+        human_matches=human_matches,
+    )
 
     unique_repetitions = 1
     if "Repetition" in normalized.columns:
@@ -854,6 +1013,7 @@ def _compute_revision_metrics_for_scale(
         )
 
     # ``revision`` mirrors the nested structure written to ``revision.json``.
+    autograder_correct_total = total_evaluations - autograder_wrong_total
     revision = {
         "overall": {
             "total_evaluations": total_evaluations,
@@ -867,6 +1027,10 @@ def _compute_revision_metrics_for_scale(
             "corrected_autograder_wrong": corrected_revision_count,
             "autograder_wrong_recall": _format_rate(
                 corrected_revision_count, autograder_wrong_total
+            ),
+            "autograder_correct_total": autograder_correct_total,
+            "autograder_correct_rate": _format_rate(
+                autograder_correct_total, total_evaluations
             ),
             "mistake_repetition_factor": unique_repetitions,
         },
@@ -915,6 +1079,7 @@ def _compute_revision_metrics_for_scale(
         revision["by_ground_truth"] = breakdowns["ground_truth"]
 
     revision["agreement"] = agreement
+    revision["autograder_correct"] = autograder_correct
     revision["slices"] = {
         "disagreement": {
             "label": "Human disagrees with autograder",
@@ -929,6 +1094,11 @@ def _compute_revision_metrics_for_scale(
             "label": "Human agrees with autograder",
             "metric_label": "Agreement",
             **agreement,
+        },
+        "autograder_correct": {
+            "label": "Autograder correct",
+            "metric_label": "Autograder correctness",
+            **autograder_correct,
         },
     }
 

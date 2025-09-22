@@ -977,39 +977,39 @@
           ],
         },
         autograder_correct: {
-          sliceKey: "agreement",
+          sliceKey: "autograder_correct",
           label: "Autograder correct",
-          rateLabel: "Agreement rate",
+          rateLabel: "Correctness rate",
           countLabel: "Auto correct",
           countUnit: ["auto correct evaluation", "auto correct evaluations"],
-          correctUnit: ["correct agreement", "correct agreements"],
-          rateField: "agreement_rate",
-          countField: "agreement_count",
-          correctCountField: "correct_agreement_count",
-          sortField: "agreement_count",
+          correctUnit: ["both correct evaluation", "both correct evaluations"],
+          rateField: "autograder_correct_rate",
+          countField: "autograder_correct_total",
+          correctCountField: "both_correct_total",
+          sortField: "autograder_correct_total",
           computeRate: (totals) => {
             const totalEvaluations = Number.isFinite(totals.total_evaluations)
               ? totals.total_evaluations
               : 0;
-            const agreements = Number.isFinite(totals.agreement_count)
-              ? totals.agreement_count
+            const autoCorrect = Number.isFinite(totals.autograder_correct_total)
+              ? totals.autograder_correct_total
               : 0;
-            return totalEvaluations > 0 ? agreements / totalEvaluations : null;
+            return totalEvaluations > 0 ? autoCorrect / totalEvaluations : null;
           },
           rateDetailFormatter: (entry) => {
-            const agreements = Number.isFinite(entry?.agreement_count)
-              ? entry.agreement_count
+            const autoCorrect = Number.isFinite(entry?.autograder_correct_total)
+              ? entry.autograder_correct_total
               : 0;
             const totalEvaluations = Number.isFinite(entry?.total_evaluations)
               ? entry.total_evaluations
               : 0;
             if (totalEvaluations) {
-              return `${formatCount(agreements)} of ${formatCount(
+              return `${formatCount(autoCorrect)} of ${formatCount(
                 totalEvaluations
               )} evaluations`;
             }
-            const noun = agreements === 1 ? "agreement" : "agreements";
-            return `${formatCount(agreements)} ${noun}`;
+            const noun = autoCorrect === 1 ? "auto correct evaluation" : "auto correct evaluations";
+            return `${formatCount(autoCorrect)} ${noun}`;
           },
           countDetailFormatter: (entry) => {
             const totalEvaluations = Number.isFinite(entry?.total_evaluations)
@@ -1018,49 +1018,24 @@
             const noun = totalEvaluations === 1 ? "evaluation" : "evaluations";
             return `${formatCount(totalEvaluations)} ${noun}`;
           },
-          caseShareField: "share_of_agreements",
-          caseBaseField: "agreement_count",
-          shareLabel: "of agreements",
-          emptyMessage: "No agreement data available.",
-          datasetEmptyMessage: "No agreement data available for this dataset.",
+          caseShareField: "share_of_autograder_correct",
+          caseBaseField: "autograder_correct_total",
+          shareLabel: "of auto correct",
+          emptyMessage: "No autograder correctness data available.",
+          datasetEmptyMessage:
+            "No autograder correctness data available for this dataset.",
           cases: [
-            {
-              key: CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT,
-              label: CASE_LABELS[CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT],
-              variant: "success",
-              shareField: "share_of_agreements",
-            },
             {
               key: CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG,
               label: CASE_LABELS[CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG],
               variant: "info",
-              shareField: "share_of_agreements",
+              shareField: "share_of_autograder_correct",
             },
             {
               key: CASE_KEYS.BOTH_CORRECT,
               label: CASE_LABELS[CASE_KEYS.BOTH_CORRECT],
               variant: "success",
-              shareField: "share_of_agreements",
-            },
-            {
-              key: CASE_KEYS.BOTH_WRONG_REVISED,
-              label: "Both wrong, human revised",
-              variant: "warning",
-              shareField: "share_of_agreements",
-              getCaseData: () => ({
-                count: 0,
-                share_of_agreements: 0,
-              }),
-            },
-            {
-              key: CASE_KEYS.BOTH_WRONG_NOT_REVISED,
-              label: "Both wrong, no revision",
-              variant: "warning",
-              shareField: "share_of_agreements",
-              getCaseData: () => ({
-                count: 0,
-                share_of_agreements: 0,
-              }),
+              shareField: "share_of_autograder_correct",
             },
           ],
         },

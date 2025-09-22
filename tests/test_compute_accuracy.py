@@ -240,6 +240,28 @@ def test_compute_metrics_returns_expected_structure() -> None:
         revision_metrics["slices"]["disagreement"]["overall"]["revision_count"]
         == 3
     )
+    assert revision_metrics["overall"]["autograder_correct_total"] == 1
+    assert revision_metrics["overall"]["autograder_correct_rate"] == 0.3333
+    assert (
+        revision_metrics["autograder_correct"]["overall"]["autograder_correct_total"]
+        == 1
+    )
+    assert (
+        revision_metrics["slices"]["autograder_correct"]["overall"][
+            "autograder_correct_total"
+        ]
+        == 1
+    )
+    assert (
+        revision_metrics["autograder_correct"]["cases"][
+            "autograder_correct_human_wrong"
+        ]["count"]
+        == 1
+    )
+    assert (
+        revision_metrics["autograder_correct"]["cases"]["both_correct"]["count"]
+        == 0
+    )
 
 
 def test_compute_revision_metrics_for_scale_provides_breakdowns() -> None:
@@ -267,6 +289,8 @@ def test_compute_revision_metrics_for_scale_provides_breakdowns() -> None:
     assert overall["correct_revision_precision"] == 0.3333
     assert overall["autograder_wrong_total"] == 2
     assert overall["autograder_wrong_recall"] == 0.5
+    assert overall["autograder_correct_total"] == 1
+    assert overall["autograder_correct_rate"] == 0.3333
 
     cases = revision["cases"]
     assert cases["autograder_wrong_human_correct"]["count"] == 1
@@ -285,6 +309,20 @@ def test_compute_revision_metrics_for_scale_provides_breakdowns() -> None:
     assert labels["highly satisfying"]["label_display"] == "Highly Satisfying"
     assert labels["highly satisfying"]["autograder_wrong_recall"] == 1.0
     assert revision["by_ground_truth"] == ground_truth_breakdowns
+
+    autograder_correct = revision["autograder_correct"]
+    assert (
+        autograder_correct["cases"]["autograder_correct_human_wrong"]["count"]
+        == 1
+    )
+    assert autograder_correct["cases"]["both_correct"]["count"] == 0
+    correct_by_gt = {
+        entry["label"]: entry
+        for entry in autograder_correct["breakdowns"].get("ground_truth", [])
+    }
+    assert (
+        correct_by_gt["slightly unsatisfying"]["autograder_correct_total"] == 1
+    )
 
     agreement = revision["agreement"]
     assert agreement["overall"]["agreement_count"] == 0
