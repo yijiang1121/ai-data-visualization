@@ -39,6 +39,24 @@ LEGACY_ARTIFACTS = [
 # ---------------------------------------------------------------------------
 # Dataset generation helpers
 # ---------------------------------------------------------------------------
+GNP_MAPPING = {
+    "highly satisfying": "G",
+    "slightly satisfying": "G",
+    "slightly unsatisfying": "N",
+    "highly unsatisfying": "P",
+}
+
+
+def to_gnp_label(label: object) -> str | None:
+    """Convert a detailed satisfaction label into ``G``/``N``/``P``."""
+
+    if label is None or (isinstance(label, float) and np.isnan(label)):
+        return None
+
+    normalized = str(label).strip().lower()
+    return GNP_MAPPING.get(normalized)
+
+
 def set_seeds(seed: int) -> None:
     """Seed NumPy and Python's ``random`` module for reproducibility."""
 
@@ -106,7 +124,13 @@ def generate_toy_dataset(
                 }
             )
 
-    return pd.DataFrame.from_records(records)
+    df = pd.DataFrame.from_records(records)
+
+    df["Auto_Grade_GNP"] = df["Auto_Grade"].map(to_gnp_label)
+    df["Human_Grade_GNP"] = df["Human_Grade"].map(to_gnp_label)
+    df["Ground_Truth_GNP"] = df["Ground_Truth"].map(to_gnp_label)
+
+    return df
 
 
 # ---------------------------------------------------------------------------
