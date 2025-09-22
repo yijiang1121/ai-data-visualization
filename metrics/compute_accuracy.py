@@ -8,19 +8,75 @@ from typing import Dict, List, Tuple
 
 import pandas as pd
 
-CASE_KEYS = (
-    "autograder_wrong_human_correct",
-    "autograder_correct_human_wrong",
-    "both_wrong",
-)
-
 REQUIRED_COLUMNS = {"Prompt_ID", "Human_Grade", "Auto_Grade", "Ground_Truth"}
-LABEL_COLUMNS = {"Human_Grade", "Auto_Grade", "Ground_Truth"}
+DERIVED_GNP_COLUMNS = {
+    "Auto_Grade_GNP": "Auto_Grade",
+    "Human_Grade_GNP": "Human_Grade",
+    "Ground_Truth_GNP": "Ground_Truth",
+}
+
+GNP_MAPPING = {
+    "highly satisfying": "G",
+    "slightly satisfying": "G",
+    "slightly unsatisfying": "N",
+    "highly unsatisfying": "P",
+}
+
+SCALE_CONFIGS = {
+    "four_level": {
+        "label": "4-Point Detail",
+        "columns": {
+            "ground_truth": "Ground_Truth",
+            "autograder": "Auto_Grade",
+            "human": "Human_Grade",
+        },
+    },
+    "gnp": {
+        "label": "G / N / P",
+        "columns": {
+            "ground_truth": "Ground_Truth_GNP",
+            "autograder": "Auto_Grade_GNP",
+            "human": "Human_Grade_GNP",
+        },
+    },
+}
+
+DEFAULT_SCALE_KEY = "four_level"
+
+LABEL_COLUMNS = {
+    column
+    for config in SCALE_CONFIGS.values()
+    for column in config["columns"].values()
+}
 
 
 def _normalize(series: pd.Series) -> pd.Series:
     """Normalize label text for reliable comparisons."""
     return series.astype(str).str.strip().str.lower()
+
+
+def derive_gnp_label(value: object) -> str | None:
+    """Return the ``G``/``N``/``P`` bucket for a detailed satisfaction label."""
+
+    if value is None or pd.isna(value):
+        return None
+
+    text = str(value).strip()
+    if not text:
+        return None
+
+    return GNP_MAPPING.get(text.lower())
+
+
+def ensure_gnp_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """Populate the derived G/N/P columns based on the detailed ratings."""
+
+    for derived_column, source_column in DERIVED_GNP_COLUMNS.items():
+        if source_column not in df.columns:
+            continue
+        df[derived_column] = df[source_column].map(derive_gnp_label)
+
+    return df
 
 
 def load_dataset(csv_path: Path) -> pd.DataFrame:
@@ -43,7 +99,7 @@ def load_dataset(csv_path: Path) -> pd.DataFrame:
             f"Dropped {before_drop - len(df)} rows with incomplete data out of {before_drop} total"
         )
 
-    return df
+    return ensure_gnp_columns(df)
 
 
 def _format(value: float | None) -> float | None:
@@ -54,6 +110,13 @@ def _format_rate(numerator: int, denominator: int) -> float | None:
     if not denominator:
         return None
     return _format(numerator / denominator)
+
+
+def _safe_mean(series: pd.Series) -> float | None:
+    if series.empty:
+        return None
+    value = series.mean()
+    return None if pd.isna(value) else float(value)
 
 
 def _build_display_map(series: pd.Series) -> Dict[str, str]:
@@ -73,37 +136,33 @@ def _build_display_map(series: pd.Series) -> Dict[str, str]:
     return map_df["display"].to_dict()
 
 
-def compute_metrics(df: pd.DataFrame) -> Tuple[Dict[str, object], Dict[str, object]]:
-    """Compute accuracy and revision-focused metrics."""
+def _compute_accuracy_for_scale(
+    normalized: pd.DataFrame, config: Dict[str, Dict[str, str]]
+) -> Dict[str, object]:
+    columns = config.get("columns", {})
+    autograder_column = columns.get("autograder")
+    human_column = columns.get("human")
+    ground_truth_column = columns.get("ground_truth")
 
-    normalized = df.copy()
-    display_maps = {
-        column: _build_display_map(df[column]) for column in LABEL_COLUMNS if column in df.columns
-    }
-    for column in LABEL_COLUMNS:
-        normalized[column] = _normalize(normalized[column])
+    if not all(
+        column in normalized.columns
+        for column in (autograder_column, human_column, ground_truth_column)
+    ):
+        return {"summary": {}, "per_prompt": []}
 
-    autograder_matches = normalized["Auto_Grade"] == normalized["Ground_Truth"]
-    human_matches = normalized["Human_Grade"] == normalized["Ground_Truth"]
-    revisions = normalized["Human_Grade"] != normalized["Auto_Grade"]
-
-    def _safe_mean(series: pd.Series) -> float | None:
-        if series.empty:
-            return None
-        value = series.mean()
-        return None if pd.isna(value) else float(value)
+    autograder_matches = normalized[autograder_column] == normalized[ground_truth_column]
+    human_matches = normalized[human_column] == normalized[ground_truth_column]
 
     total_evaluations = int(len(normalized))
-    unique_prompts = (
-        int(normalized["Prompt_ID"].nunique())
-        if "Prompt_ID" in normalized.columns
-        else total_evaluations
-    )
+    if "Prompt_ID" in normalized.columns:
+        unique_prompts = int(normalized["Prompt_ID"].nunique())
+    else:
+        unique_prompts = total_evaluations
 
     if "Prompt_ID" in normalized.columns and unique_prompts:
         prompt_groups = normalized.groupby("Prompt_ID", sort=False)
-        prompt_autograder = prompt_groups["Auto_Grade"].first()
-        prompt_ground_truth = prompt_groups["Ground_Truth"].first()
+        prompt_autograder = prompt_groups[autograder_column].first()
+        prompt_ground_truth = prompt_groups[ground_truth_column].first()
         autograder_accuracy_value = _safe_mean(prompt_autograder == prompt_ground_truth)
     else:
         autograder_accuracy_value = _safe_mean(autograder_matches)
@@ -120,8 +179,10 @@ def compute_metrics(df: pd.DataFrame) -> Tuple[Dict[str, object], Dict[str, obje
     per_prompt: List[Dict[str, object]] = []
     if "Prompt_ID" in normalized.columns:
         for prompt_id, group in normalized.groupby("Prompt_ID", sort=True):
-            prompt_autograder = _safe_mean(group["Auto_Grade"] == group["Ground_Truth"])
-            prompt_human = _safe_mean(group["Human_Grade"] == group["Ground_Truth"])
+            prompt_autograder = _safe_mean(
+                group[autograder_column] == group[ground_truth_column]
+            )
+            prompt_human = _safe_mean(group[human_column] == group[ground_truth_column])
             per_prompt.append(
                 {
                     "prompt_id": str(prompt_id),
@@ -131,26 +192,88 @@ def compute_metrics(df: pd.DataFrame) -> Tuple[Dict[str, object], Dict[str, obje
                 }
             )
 
-    revision = compute_revision_metrics(
-        normalized=normalized,
-        display_maps=display_maps,
-        autograder_matches=autograder_matches,
-        human_matches=human_matches,
-        revisions=revisions,
+    return {"summary": summary, "per_prompt": per_prompt}
+
+
+def compute_metrics(df: pd.DataFrame) -> Tuple[Dict[str, object], Dict[str, object]]:
+    """Compute accuracy and revision-focused metrics for every supported scale."""
+
+    df = ensure_gnp_columns(df)
+    normalized = df.copy()
+
+    display_maps = {
+        column: _build_display_map(df[column]) for column in LABEL_COLUMNS if column in df.columns
+    }
+    for column in LABEL_COLUMNS:
+        if column in normalized.columns:
+            normalized[column] = _normalize(normalized[column])
+
+    accuracy_scales: Dict[str, Dict[str, object]] = {}
+    for scale_key, config in SCALE_CONFIGS.items():
+        accuracy_scales[scale_key] = _compute_accuracy_for_scale(normalized, config)
+
+    default_accuracy = accuracy_scales.get(
+        DEFAULT_SCALE_KEY,
+        next(iter(accuracy_scales.values()), {"summary": {}, "per_prompt": []}),
     )
 
-    return {"summary": summary, "per_prompt": per_prompt}, revision
+    revision_scales: Dict[str, Dict[str, object]] = {}
+    for scale_key, config in SCALE_CONFIGS.items():
+        revision_scales[scale_key] = _compute_revision_metrics_for_scale(
+            normalized=normalized,
+            display_maps=display_maps,
+            config=config,
+        )
+
+    default_revision = revision_scales.get(
+        DEFAULT_SCALE_KEY, next(iter(revision_scales.values()), {})
+    )
+
+    scale_labels = {key: value["label"] for key, value in SCALE_CONFIGS.items()}
+
+    accuracy_metrics = {
+        "default_scale": DEFAULT_SCALE_KEY,
+        "scale_labels": scale_labels,
+        "scales": accuracy_scales,
+        "summary": default_accuracy.get("summary", {}),
+        "per_prompt": default_accuracy.get("per_prompt", []),
+    }
+
+    revision_metrics = {
+        "default_scale": DEFAULT_SCALE_KEY,
+        "scale_labels": scale_labels,
+        "scales": revision_scales,
+    }
+    revision_metrics.update(default_revision)
+
+    return accuracy_metrics, revision_metrics
 
 
-def compute_revision_metrics(
+def _compute_revision_metrics_for_scale(
     *,
     normalized: pd.DataFrame,
     display_maps: Dict[str, Dict[str, str]],
-    autograder_matches: pd.Series,
-    human_matches: pd.Series,
-    revisions: pd.Series,
+    config: Dict[str, Dict[str, str]],
 ) -> Dict[str, object]:
-    """Compute revision-focused metrics including precision and recall."""
+    """Compute revision-focused metrics for a single grading scale."""
+
+    columns = config.get("columns", {})
+    autograder_column = columns.get("autograder")
+    human_column = columns.get("human")
+    ground_truth_column = columns.get("ground_truth")
+
+    required_columns = [autograder_column, human_column, ground_truth_column]
+    if not all(column in normalized.columns for column in required_columns):
+        return {
+            "overall": {},
+            "cases": {},
+            "autograder_wrong_breakdown": {},
+            "breakdowns": {},
+        }
+
+    autograder_matches = normalized[autograder_column] == normalized[ground_truth_column]
+    human_matches = normalized[human_column] == normalized[ground_truth_column]
+    revisions = normalized[human_column] != normalized[autograder_column]
 
     total_evaluations = int(len(normalized))
     autograder_wrong_mask = ~autograder_matches
@@ -164,8 +287,8 @@ def compute_revision_metrics(
     case_counts = {case: int(mask.sum()) for case, mask in case_masks.items()}
     revision_count = int(revisions.sum())
     autograder_wrong_total = int(autograder_wrong_mask.sum())
-    corrected_revision_count = case_counts["autograder_wrong_human_correct"]
-    both_wrong_count = case_counts["both_wrong"]
+    corrected_revision_count = case_counts.get("autograder_wrong_human_correct", 0)
+    both_wrong_count = case_counts.get("both_wrong", 0)
     autograder_wrong_revised = corrected_revision_count + both_wrong_count
     autograder_wrong_unrevised = max(0, autograder_wrong_total - autograder_wrong_revised)
 
@@ -212,12 +335,16 @@ def compute_revision_metrics(
         },
         "cases": {
             "autograder_wrong_human_correct": _case_entry(
-                case_counts["autograder_wrong_human_correct"], include_autograder_share=True
+                case_counts.get("autograder_wrong_human_correct", 0),
+                include_autograder_share=True,
             ),
             "autograder_correct_human_wrong": _case_entry(
-                case_counts["autograder_correct_human_wrong"], include_autograder_share=False
+                case_counts.get("autograder_correct_human_wrong", 0),
+                include_autograder_share=False,
             ),
-            "both_wrong": _case_entry(case_counts["both_wrong"], include_autograder_share=True),
+            "both_wrong": _case_entry(
+                case_counts.get("both_wrong", 0), include_autograder_share=True
+            ),
         },
         "autograder_wrong_breakdown": {
             "corrected": _breakdown_entry(corrected_revision_count),
@@ -248,13 +375,13 @@ def compute_revision_metrics(
 
     breakdowns: Dict[str, List[Dict[str, object]]] = {}
     dimension_columns = (
-        ("ground_truth", "Ground_Truth"),
-        ("autograder_label", "Auto_Grade"),
-        ("human_label", "Human_Grade"),
+        ("ground_truth", ground_truth_column),
+        ("autograder_label", autograder_column),
+        ("human_label", human_column),
     )
 
     for dimension_key, column_name in dimension_columns:
-        if column_name not in normalized.columns:
+        if not column_name or column_name not in normalized.columns:
             continue
 
         entries: List[Dict[str, object]] = []
@@ -272,8 +399,8 @@ def compute_revision_metrics(
                 case: int(mask[label_mask].sum()) for case, mask in case_masks.items()
             }
             label_autograder_wrong_total = int((autograder_wrong_mask & label_mask).sum())
-            label_corrected = label_case_counts["autograder_wrong_human_correct"]
-            label_both_wrong = label_case_counts["both_wrong"]
+            label_corrected = label_case_counts.get("autograder_wrong_human_correct", 0)
+            label_both_wrong = label_case_counts.get("both_wrong", 0)
             label_autograder_wrong_revised = label_corrected + label_both_wrong
             label_autograder_wrong_unrevised = max(
                 0, label_autograder_wrong_total - label_autograder_wrong_revised
@@ -282,7 +409,7 @@ def compute_revision_metrics(
             def _dimension_case_entry(
                 case_key: str, *, include_autograder_share: bool
             ) -> Dict[str, object]:
-                count_value = label_case_counts[case_key]
+                count_value = label_case_counts.get(case_key, 0)
                 entry_case = {
                     "count": count_value,
                     "share_of_revisions": _format_rate(count_value, label_revision_count),

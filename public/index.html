@@ -193,6 +193,37 @@
         outline-offset: 2px;
       }
 
+      .revision-breakdown-toggle {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0 0 1.25rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      .revision-breakdown-toggle label {
+        font-weight: 600;
+      }
+
+      .revision-breakdown-toggle select {
+        appearance: none;
+        border: none;
+        border-radius: 999px;
+        padding: 0.4rem 1.1rem;
+        background: rgba(148, 163, 184, 0.2);
+        color: var(--text-primary);
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .revision-breakdown-toggle select:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
       .table-card .table-wrapper {
         background: transparent;
         box-shadow: none;
@@ -403,6 +434,17 @@
         .table-card .table-controls select {
           width: 100%;
         }
+
+        .revision-breakdown-toggle {
+          justify-content: flex-start;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+
+        .revision-breakdown-toggle select {
+          width: 100%;
+        }
       }
     </style>
   </head>
@@ -493,6 +535,14 @@
             <span>Share of revisions by outcome vs. ground truth</span>
           </div>
         </article>
+
+        <div class="revision-breakdown-toggle">
+          <label for="breakdown-scale-select">Breakdown scale</label>
+          <select id="breakdown-scale-select">
+            <option value="four_level">4-Point Detail</option>
+            <option value="gnp">G / N / P</option>
+          </select>
+        </div>
 
         <div class="table-card">
           <div class="table-controls">
@@ -665,6 +715,7 @@
       const recallEmpty = document.getElementById("recall-empty");
       const recallLabelHeading = document.getElementById("recall-label-heading");
       const recallBreakdownSelect = document.getElementById("recall-breakdown-select");
+      const breakdownScaleSelect = document.getElementById("breakdown-scale-select");
 
       const CASE_LABELS = {
         autograder_wrong_human_correct: "Autograder wrong → human corrected",
@@ -726,6 +777,13 @@
         });
       }
 
+      if (breakdownScaleSelect) {
+        breakdownScaleSelect.addEventListener("change", () => {
+          renderPrecisionTable();
+          renderRecallTable();
+        });
+      }
+
       function formatPercent(value) {
         if (value === null || value === undefined) {
           return "--";
@@ -783,6 +841,94 @@
           .join(" ");
       }
 
+      function getRevisionDefaultScale(revision) {
+        if (!revision) {
+          return "four_level";
+        }
+        const scales = revision?.scales || {};
+        const keys = Object.keys(scales);
+        if (
+          revision.default_scale &&
+          keys.includes(revision.default_scale)
+        ) {
+          return revision.default_scale;
+        }
+        if (keys.length) {
+          return keys[0];
+        }
+        return "four_level";
+      }
+
+      function getRevisionScaleData(revision, scaleKey) {
+        if (!revision) {
+          return null;
+        }
+        const scales = revision.scales;
+        if (
+          scales &&
+          scaleKey &&
+          Object.prototype.hasOwnProperty.call(scales, scaleKey)
+        ) {
+          return scales[scaleKey];
+        }
+        if (scales) {
+          const fallbackKey = getRevisionDefaultScale(revision);
+          if (Object.prototype.hasOwnProperty.call(scales, fallbackKey)) {
+            return scales[fallbackKey];
+          }
+        }
+        return {
+          overall: revision.overall || {},
+          cases: revision.cases || {},
+          autograder_wrong_breakdown: revision.autograder_wrong_breakdown || {},
+          breakdowns: revision.breakdowns || {},
+        };
+      }
+
+      function getSelectedScaleKey() {
+        const revision = revisionDataCache;
+        const requested = breakdownScaleSelect?.value;
+        const available = revision?.scales
+          ? Object.keys(revision.scales)
+          : [];
+        if (requested && available.includes(requested)) {
+          return requested;
+        }
+        return getRevisionDefaultScale(revision);
+      }
+
+      function updateBreakdownScaleSelectOptions(revision) {
+        if (!breakdownScaleSelect) {
+          return;
+        }
+
+        const labels = revision?.scale_labels || {};
+        const available = revision?.scales
+          ? Object.keys(revision.scales)
+          : [];
+        const defaultScale = getRevisionDefaultScale(revision);
+
+        Array.from(breakdownScaleSelect.options || []).forEach((option) => {
+          const value = option.value;
+          if (!value) {
+            return;
+          }
+
+          if (!available.includes(value)) {
+            option.disabled = true;
+          } else {
+            option.disabled = false;
+            if (labels[value]) {
+              option.textContent = labels[value];
+            }
+          }
+        });
+
+        if (!available.includes(breakdownScaleSelect.value)) {
+          breakdownScaleSelect.value = defaultScale;
+        }
+      }
+
       function getSelectedBreakdown(selectEl) {
         const value = selectEl?.value;
         if (
@@ -794,12 +940,16 @@
         return "ground_truth";
       }
 
-      function getBreakdownHeading(key) {
-        return BREAKDOWN_LABELS[key] || "Segment";
+      function getBreakdownHeading(key, scaleKey) {
+        const base = BREAKDOWN_LABELS[key] || "Segment";
+        const labels = revisionDataCache?.scale_labels || {};
+        const scaleLabel = labels?.[scaleKey];
+        return scaleLabel ? `${base} (${scaleLabel})` : base;
       }
 
-      function getBreakdownEntries(revision, key) {
-        return revision?.breakdowns?.[key] || [];
+      function getBreakdownEntries(revision, key, scaleKey) {
+        const scaleData = getRevisionScaleData(revision, scaleKey);
+        return scaleData?.breakdowns?.[key] || [];
       }
 
       function resolveBreakdownLabel(entry) {
@@ -820,8 +970,8 @@
         );
       }
 
-      function computeMistakeRepetitionFactor(revision) {
-        const factor = revision?.overall?.mistake_repetition_factor;
+      function computeMistakeRepetitionFactor(source) {
+        const factor = source?.overall?.mistake_repetition_factor;
         return Number.isFinite(factor) && factor > 0 ? factor : 1;
       }
 
@@ -1377,12 +1527,20 @@
 
         precisionTableBody.innerHTML = "";
 
+        const scaleKey = getSelectedScaleKey();
         const breakdownKey = getSelectedBreakdown(precisionBreakdownSelect);
         if (precisionLabelHeading) {
-          precisionLabelHeading.textContent = getBreakdownHeading(breakdownKey);
+          precisionLabelHeading.textContent = getBreakdownHeading(
+            breakdownKey,
+            scaleKey
+          );
         }
 
-        const entries = getBreakdownEntries(revisionDataCache, breakdownKey);
+        const entries = getBreakdownEntries(
+          revisionDataCache,
+          breakdownKey,
+          scaleKey
+        );
 
         if (!entries || entries.length === 0) {
           if (precisionEmpty) {
@@ -1423,16 +1581,22 @@
 
         recallTableBody.innerHTML = "";
 
+        const scaleKey = getSelectedScaleKey();
+        const scaleData = getRevisionScaleData(revisionDataCache, scaleKey);
         const breakdownKey = getSelectedBreakdown(recallBreakdownSelect);
         if (recallLabelHeading) {
-          recallLabelHeading.textContent = getBreakdownHeading(breakdownKey);
+          recallLabelHeading.textContent = getBreakdownHeading(
+            breakdownKey,
+            scaleKey
+          );
         }
 
-        const entries = getBreakdownEntries(revisionDataCache, breakdownKey);
-        const factor =
-          Number.isFinite(mistakeRepetitionFactor) && mistakeRepetitionFactor > 0
-            ? mistakeRepetitionFactor
-            : 1;
+        const entries = getBreakdownEntries(
+          revisionDataCache,
+          breakdownKey,
+          scaleKey
+        );
+        const factor = computeMistakeRepetitionFactor(scaleData);
 
         if (!entries || entries.length === 0) {
           if (recallEmpty) {
@@ -1475,6 +1639,7 @@
         }
 
         revisionDataCache = revision;
+        updateBreakdownScaleSelectOptions(revision);
         mistakeRepetitionFactor = computeMistakeRepetitionFactor(revision);
 
         if (!revision) {

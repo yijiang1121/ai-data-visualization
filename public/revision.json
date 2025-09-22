@@ -1,4 +1,1559 @@
 {
+  "default_scale": "four_level",
+  "scale_labels": {
+    "four_level": "4-Point Detail",
+    "gnp": "G / N / P"
+  },
+  "scales": {
+    "four_level": {
+      "overall": {
+        "total_evaluations": 3000,
+        "revision_count": 1217,
+        "revision_rate": 0.4057,
+        "correct_revision_count": 562,
+        "correct_revision_precision": 0.4618,
+        "autograder_wrong_total": 750,
+        "corrected_autograder_wrong": 562,
+        "autograder_wrong_recall": 0.7493,
+        "mistake_repetition_factor": 3
+      },
+      "cases": {
+        "autograder_wrong_human_correct": {
+          "count": 562,
+          "share_of_revisions": 0.4618,
+          "share_of_total": 0.1873,
+          "share_of_autograder_wrong": 0.7493
+        },
+        "autograder_correct_human_wrong": {
+          "count": 532,
+          "share_of_revisions": 0.4371,
+          "share_of_total": 0.1773,
+          "share_of_autograder_wrong": null
+        },
+        "both_wrong": {
+          "count": 123,
+          "share_of_revisions": 0.1011,
+          "share_of_total": 0.041,
+          "share_of_autograder_wrong": 0.164
+        }
+      },
+      "autograder_wrong_breakdown": {
+        "corrected": {
+          "count": 562,
+          "share_of_autograder_wrong": 0.7493,
+          "share_of_total": 0.1873
+        },
+        "not_revised": {
+          "count": 65,
+          "share_of_autograder_wrong": 0.0867,
+          "share_of_total": 0.0217
+        },
+        "revised_but_wrong": {
+          "count": 123,
+          "share_of_autograder_wrong": 0.164,
+          "share_of_total": 0.041
+        }
+      },
+      "breakdowns": {
+        "ground_truth": [
+          {
+            "total_evaluations": 750,
+            "revision_count": 281,
+            "revision_rate": 0.3747,
+            "correct_revision_count": 115,
+            "correct_revision_precision": 0.4093,
+            "autograder_wrong_total": 147,
+            "corrected_autograder_wrong": 115,
+            "autograder_wrong_recall": 0.7823,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 115,
+                "share_of_revisions": 0.4093,
+                "share_of_total": 0.1533,
+                "share_of_autograder_wrong": 0.7823
+              },
+              "autograder_correct_human_wrong": {
+                "count": 145,
+                "share_of_revisions": 0.516,
+                "share_of_total": 0.1933,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 21,
+                "share_of_revisions": 0.0747,
+                "share_of_total": 0.028,
+                "share_of_autograder_wrong": 0.1429
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 115,
+                "share_of_autograder_wrong": 0.7823,
+                "share_of_total": 0.1533
+              },
+              "not_revised": {
+                "count": 11,
+                "share_of_autograder_wrong": 0.0748,
+                "share_of_total": 0.0147
+              },
+              "revised_but_wrong": {
+                "count": 21,
+                "share_of_autograder_wrong": 0.1429,
+                "share_of_total": 0.028
+              }
+            },
+            "label": "highly satisfying",
+            "label_display": "highly satisfying",
+            "ground_truth": "highly satisfying",
+            "ground_truth_display": "highly satisfying"
+          },
+          {
+            "total_evaluations": 750,
+            "revision_count": 311,
+            "revision_rate": 0.4147,
+            "correct_revision_count": 157,
+            "correct_revision_precision": 0.5048,
+            "autograder_wrong_total": 204,
+            "corrected_autograder_wrong": 157,
+            "autograder_wrong_recall": 0.7696,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 157,
+                "share_of_revisions": 0.5048,
+                "share_of_total": 0.2093,
+                "share_of_autograder_wrong": 0.7696
+              },
+              "autograder_correct_human_wrong": {
+                "count": 120,
+                "share_of_revisions": 0.3859,
+                "share_of_total": 0.16,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 34,
+                "share_of_revisions": 0.1093,
+                "share_of_total": 0.0453,
+                "share_of_autograder_wrong": 0.1667
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 157,
+                "share_of_autograder_wrong": 0.7696,
+                "share_of_total": 0.2093
+              },
+              "not_revised": {
+                "count": 13,
+                "share_of_autograder_wrong": 0.0637,
+                "share_of_total": 0.0173
+              },
+              "revised_but_wrong": {
+                "count": 34,
+                "share_of_autograder_wrong": 0.1667,
+                "share_of_total": 0.0453
+              }
+            },
+            "label": "highly unsatisfying",
+            "label_display": "highly unsatisfying",
+            "ground_truth": "highly unsatisfying",
+            "ground_truth_display": "highly unsatisfying"
+          },
+          {
+            "total_evaluations": 750,
+            "revision_count": 308,
+            "revision_rate": 0.4107,
+            "correct_revision_count": 137,
+            "correct_revision_precision": 0.4448,
+            "autograder_wrong_total": 180,
+            "corrected_autograder_wrong": 137,
+            "autograder_wrong_recall": 0.7611,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 137,
+                "share_of_revisions": 0.4448,
+                "share_of_total": 0.1827,
+                "share_of_autograder_wrong": 0.7611
+              },
+              "autograder_correct_human_wrong": {
+                "count": 145,
+                "share_of_revisions": 0.4708,
+                "share_of_total": 0.1933,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 26,
+                "share_of_revisions": 0.0844,
+                "share_of_total": 0.0347,
+                "share_of_autograder_wrong": 0.1444
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 137,
+                "share_of_autograder_wrong": 0.7611,
+                "share_of_total": 0.1827
+              },
+              "not_revised": {
+                "count": 17,
+                "share_of_autograder_wrong": 0.0944,
+                "share_of_total": 0.0227
+              },
+              "revised_but_wrong": {
+                "count": 26,
+                "share_of_autograder_wrong": 0.1444,
+                "share_of_total": 0.0347
+              }
+            },
+            "label": "slightly satisfying",
+            "label_display": "slightly satisfying",
+            "ground_truth": "slightly satisfying",
+            "ground_truth_display": "slightly satisfying"
+          },
+          {
+            "total_evaluations": 750,
+            "revision_count": 317,
+            "revision_rate": 0.4227,
+            "correct_revision_count": 153,
+            "correct_revision_precision": 0.4826,
+            "autograder_wrong_total": 219,
+            "corrected_autograder_wrong": 153,
+            "autograder_wrong_recall": 0.6986,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 153,
+                "share_of_revisions": 0.4826,
+                "share_of_total": 0.204,
+                "share_of_autograder_wrong": 0.6986
+              },
+              "autograder_correct_human_wrong": {
+                "count": 122,
+                "share_of_revisions": 0.3849,
+                "share_of_total": 0.1627,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 42,
+                "share_of_revisions": 0.1325,
+                "share_of_total": 0.056,
+                "share_of_autograder_wrong": 0.1918
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 153,
+                "share_of_autograder_wrong": 0.6986,
+                "share_of_total": 0.204
+              },
+              "not_revised": {
+                "count": 24,
+                "share_of_autograder_wrong": 0.1096,
+                "share_of_total": 0.032
+              },
+              "revised_but_wrong": {
+                "count": 42,
+                "share_of_autograder_wrong": 0.1918,
+                "share_of_total": 0.056
+              }
+            },
+            "label": "slightly unsatisfying",
+            "label_display": "slightly unsatisfying",
+            "ground_truth": "slightly unsatisfying",
+            "ground_truth_display": "slightly unsatisfying"
+          }
+        ],
+        "autograder_label": [
+          {
+            "total_evaluations": 822,
+            "revision_count": 340,
+            "revision_rate": 0.4136,
+            "correct_revision_count": 154,
+            "correct_revision_precision": 0.4529,
+            "autograder_wrong_total": 219,
+            "corrected_autograder_wrong": 154,
+            "autograder_wrong_recall": 0.7032,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 154,
+                "share_of_revisions": 0.4529,
+                "share_of_total": 0.1873,
+                "share_of_autograder_wrong": 0.7032
+              },
+              "autograder_correct_human_wrong": {
+                "count": 145,
+                "share_of_revisions": 0.4265,
+                "share_of_total": 0.1764,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 41,
+                "share_of_revisions": 0.1206,
+                "share_of_total": 0.0499,
+                "share_of_autograder_wrong": 0.1872
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 154,
+                "share_of_autograder_wrong": 0.7032,
+                "share_of_total": 0.1873
+              },
+              "not_revised": {
+                "count": 24,
+                "share_of_autograder_wrong": 0.1096,
+                "share_of_total": 0.0292
+              },
+              "revised_but_wrong": {
+                "count": 41,
+                "share_of_autograder_wrong": 0.1872,
+                "share_of_total": 0.0499
+              }
+            },
+            "label": "highly satisfying",
+            "label_display": "highly satisfying",
+            "autograder_label": "highly satisfying",
+            "autograder_label_display": "highly satisfying"
+          },
+          {
+            "total_evaluations": 735,
+            "revision_count": 287,
+            "revision_rate": 0.3905,
+            "correct_revision_count": 138,
+            "correct_revision_precision": 0.4808,
+            "autograder_wrong_total": 189,
+            "corrected_autograder_wrong": 138,
+            "autograder_wrong_recall": 0.7302,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 138,
+                "share_of_revisions": 0.4808,
+                "share_of_total": 0.1878,
+                "share_of_autograder_wrong": 0.7302
+              },
+              "autograder_correct_human_wrong": {
+                "count": 120,
+                "share_of_revisions": 0.4181,
+                "share_of_total": 0.1633,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 29,
+                "share_of_revisions": 0.101,
+                "share_of_total": 0.0395,
+                "share_of_autograder_wrong": 0.1534
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 138,
+                "share_of_autograder_wrong": 0.7302,
+                "share_of_total": 0.1878
+              },
+              "not_revised": {
+                "count": 22,
+                "share_of_autograder_wrong": 0.1164,
+                "share_of_total": 0.0299
+              },
+              "revised_but_wrong": {
+                "count": 29,
+                "share_of_autograder_wrong": 0.1534,
+                "share_of_total": 0.0395
+              }
+            },
+            "label": "highly unsatisfying",
+            "label_display": "highly unsatisfying",
+            "autograder_label": "highly unsatisfying",
+            "autograder_label_display": "highly unsatisfying"
+          },
+          {
+            "total_evaluations": 738,
+            "revision_count": 301,
+            "revision_rate": 0.4079,
+            "correct_revision_count": 130,
+            "correct_revision_precision": 0.4319,
+            "autograder_wrong_total": 168,
+            "corrected_autograder_wrong": 130,
+            "autograder_wrong_recall": 0.7738,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 130,
+                "share_of_revisions": 0.4319,
+                "share_of_total": 0.1762,
+                "share_of_autograder_wrong": 0.7738
+              },
+              "autograder_correct_human_wrong": {
+                "count": 145,
+                "share_of_revisions": 0.4817,
+                "share_of_total": 0.1965,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 26,
+                "share_of_revisions": 0.0864,
+                "share_of_total": 0.0352,
+                "share_of_autograder_wrong": 0.1548
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 130,
+                "share_of_autograder_wrong": 0.7738,
+                "share_of_total": 0.1762
+              },
+              "not_revised": {
+                "count": 12,
+                "share_of_autograder_wrong": 0.0714,
+                "share_of_total": 0.0163
+              },
+              "revised_but_wrong": {
+                "count": 26,
+                "share_of_autograder_wrong": 0.1548,
+                "share_of_total": 0.0352
+              }
+            },
+            "label": "slightly satisfying",
+            "label_display": "slightly satisfying",
+            "autograder_label": "slightly satisfying",
+            "autograder_label_display": "slightly satisfying"
+          },
+          {
+            "total_evaluations": 705,
+            "revision_count": 289,
+            "revision_rate": 0.4099,
+            "correct_revision_count": 140,
+            "correct_revision_precision": 0.4844,
+            "autograder_wrong_total": 174,
+            "corrected_autograder_wrong": 140,
+            "autograder_wrong_recall": 0.8046,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 140,
+                "share_of_revisions": 0.4844,
+                "share_of_total": 0.1986,
+                "share_of_autograder_wrong": 0.8046
+              },
+              "autograder_correct_human_wrong": {
+                "count": 122,
+                "share_of_revisions": 0.4221,
+                "share_of_total": 0.173,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 27,
+                "share_of_revisions": 0.0934,
+                "share_of_total": 0.0383,
+                "share_of_autograder_wrong": 0.1552
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 140,
+                "share_of_autograder_wrong": 0.8046,
+                "share_of_total": 0.1986
+              },
+              "not_revised": {
+                "count": 7,
+                "share_of_autograder_wrong": 0.0402,
+                "share_of_total": 0.0099
+              },
+              "revised_but_wrong": {
+                "count": 27,
+                "share_of_autograder_wrong": 0.1552,
+                "share_of_total": 0.0383
+              }
+            },
+            "label": "slightly unsatisfying",
+            "label_display": "slightly unsatisfying",
+            "autograder_label": "slightly unsatisfying",
+            "autograder_label_display": "slightly unsatisfying"
+          }
+        ],
+        "human_label": [
+          {
+            "total_evaluations": 745,
+            "revision_count": 263,
+            "revision_rate": 0.353,
+            "correct_revision_count": 115,
+            "correct_revision_precision": 0.4373,
+            "autograder_wrong_total": 168,
+            "corrected_autograder_wrong": 115,
+            "autograder_wrong_recall": 0.6845,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 115,
+                "share_of_revisions": 0.4373,
+                "share_of_total": 0.1544,
+                "share_of_autograder_wrong": 0.6845
+              },
+              "autograder_correct_human_wrong": {
+                "count": 119,
+                "share_of_revisions": 0.4525,
+                "share_of_total": 0.1597,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 29,
+                "share_of_revisions": 0.1103,
+                "share_of_total": 0.0389,
+                "share_of_autograder_wrong": 0.1726
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 115,
+                "share_of_autograder_wrong": 0.6845,
+                "share_of_total": 0.1544
+              },
+              "not_revised": {
+                "count": 24,
+                "share_of_autograder_wrong": 0.1429,
+                "share_of_total": 0.0322
+              },
+              "revised_but_wrong": {
+                "count": 29,
+                "share_of_autograder_wrong": 0.1726,
+                "share_of_total": 0.0389
+              }
+            },
+            "label": "highly satisfying",
+            "label_display": "highly satisfying",
+            "human_label": "highly satisfying",
+            "human_label_display": "highly satisfying"
+          },
+          {
+            "total_evaluations": 784,
+            "revision_count": 336,
+            "revision_rate": 0.4286,
+            "correct_revision_count": 157,
+            "correct_revision_precision": 0.4673,
+            "autograder_wrong_total": 215,
+            "corrected_autograder_wrong": 157,
+            "autograder_wrong_recall": 0.7302,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 157,
+                "share_of_revisions": 0.4673,
+                "share_of_total": 0.2003,
+                "share_of_autograder_wrong": 0.7302
+              },
+              "autograder_correct_human_wrong": {
+                "count": 143,
+                "share_of_revisions": 0.4256,
+                "share_of_total": 0.1824,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 36,
+                "share_of_revisions": 0.1071,
+                "share_of_total": 0.0459,
+                "share_of_autograder_wrong": 0.1674
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 157,
+                "share_of_autograder_wrong": 0.7302,
+                "share_of_total": 0.2003
+              },
+              "not_revised": {
+                "count": 22,
+                "share_of_autograder_wrong": 0.1023,
+                "share_of_total": 0.0281
+              },
+              "revised_but_wrong": {
+                "count": 36,
+                "share_of_autograder_wrong": 0.1674,
+                "share_of_total": 0.0459
+              }
+            },
+            "label": "highly unsatisfying",
+            "label_display": "highly unsatisfying",
+            "human_label": "highly unsatisfying",
+            "human_label_display": "highly unsatisfying"
+          },
+          {
+            "total_evaluations": 725,
+            "revision_count": 288,
+            "revision_rate": 0.3972,
+            "correct_revision_count": 137,
+            "correct_revision_precision": 0.4757,
+            "autograder_wrong_total": 182,
+            "corrected_autograder_wrong": 137,
+            "autograder_wrong_recall": 0.7527,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 137,
+                "share_of_revisions": 0.4757,
+                "share_of_total": 0.189,
+                "share_of_autograder_wrong": 0.7527
+              },
+              "autograder_correct_human_wrong": {
+                "count": 118,
+                "share_of_revisions": 0.4097,
+                "share_of_total": 0.1628,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 33,
+                "share_of_revisions": 0.1146,
+                "share_of_total": 0.0455,
+                "share_of_autograder_wrong": 0.1813
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 137,
+                "share_of_autograder_wrong": 0.7527,
+                "share_of_total": 0.189
+              },
+              "not_revised": {
+                "count": 12,
+                "share_of_autograder_wrong": 0.0659,
+                "share_of_total": 0.0166
+              },
+              "revised_but_wrong": {
+                "count": 33,
+                "share_of_autograder_wrong": 0.1813,
+                "share_of_total": 0.0455
+              }
+            },
+            "label": "slightly satisfying",
+            "label_display": "slightly satisfying",
+            "human_label": "slightly satisfying",
+            "human_label_display": "slightly satisfying"
+          },
+          {
+            "total_evaluations": 746,
+            "revision_count": 330,
+            "revision_rate": 0.4424,
+            "correct_revision_count": 153,
+            "correct_revision_precision": 0.4636,
+            "autograder_wrong_total": 185,
+            "corrected_autograder_wrong": 153,
+            "autograder_wrong_recall": 0.827,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 153,
+                "share_of_revisions": 0.4636,
+                "share_of_total": 0.2051,
+                "share_of_autograder_wrong": 0.827
+              },
+              "autograder_correct_human_wrong": {
+                "count": 152,
+                "share_of_revisions": 0.4606,
+                "share_of_total": 0.2038,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 25,
+                "share_of_revisions": 0.0758,
+                "share_of_total": 0.0335,
+                "share_of_autograder_wrong": 0.1351
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 153,
+                "share_of_autograder_wrong": 0.827,
+                "share_of_total": 0.2051
+              },
+              "not_revised": {
+                "count": 7,
+                "share_of_autograder_wrong": 0.0378,
+                "share_of_total": 0.0094
+              },
+              "revised_but_wrong": {
+                "count": 25,
+                "share_of_autograder_wrong": 0.1351,
+                "share_of_total": 0.0335
+              }
+            },
+            "label": "slightly unsatisfying",
+            "label_display": "slightly unsatisfying",
+            "human_label": "slightly unsatisfying",
+            "human_label_display": "slightly unsatisfying"
+          }
+        ]
+      },
+      "by_ground_truth": [
+        {
+          "total_evaluations": 750,
+          "revision_count": 281,
+          "revision_rate": 0.3747,
+          "correct_revision_count": 115,
+          "correct_revision_precision": 0.4093,
+          "autograder_wrong_total": 147,
+          "corrected_autograder_wrong": 115,
+          "autograder_wrong_recall": 0.7823,
+          "cases": {
+            "autograder_wrong_human_correct": {
+              "count": 115,
+              "share_of_revisions": 0.4093,
+              "share_of_total": 0.1533,
+              "share_of_autograder_wrong": 0.7823
+            },
+            "autograder_correct_human_wrong": {
+              "count": 145,
+              "share_of_revisions": 0.516,
+              "share_of_total": 0.1933,
+              "share_of_autograder_wrong": null
+            },
+            "both_wrong": {
+              "count": 21,
+              "share_of_revisions": 0.0747,
+              "share_of_total": 0.028,
+              "share_of_autograder_wrong": 0.1429
+            }
+          },
+          "autograder_wrong_breakdown": {
+            "corrected": {
+              "count": 115,
+              "share_of_autograder_wrong": 0.7823,
+              "share_of_total": 0.1533
+            },
+            "not_revised": {
+              "count": 11,
+              "share_of_autograder_wrong": 0.0748,
+              "share_of_total": 0.0147
+            },
+            "revised_but_wrong": {
+              "count": 21,
+              "share_of_autograder_wrong": 0.1429,
+              "share_of_total": 0.028
+            }
+          },
+          "label": "highly satisfying",
+          "label_display": "highly satisfying",
+          "ground_truth": "highly satisfying",
+          "ground_truth_display": "highly satisfying"
+        },
+        {
+          "total_evaluations": 750,
+          "revision_count": 311,
+          "revision_rate": 0.4147,
+          "correct_revision_count": 157,
+          "correct_revision_precision": 0.5048,
+          "autograder_wrong_total": 204,
+          "corrected_autograder_wrong": 157,
+          "autograder_wrong_recall": 0.7696,
+          "cases": {
+            "autograder_wrong_human_correct": {
+              "count": 157,
+              "share_of_revisions": 0.5048,
+              "share_of_total": 0.2093,
+              "share_of_autograder_wrong": 0.7696
+            },
+            "autograder_correct_human_wrong": {
+              "count": 120,
+              "share_of_revisions": 0.3859,
+              "share_of_total": 0.16,
+              "share_of_autograder_wrong": null
+            },
+            "both_wrong": {
+              "count": 34,
+              "share_of_revisions": 0.1093,
+              "share_of_total": 0.0453,
+              "share_of_autograder_wrong": 0.1667
+            }
+          },
+          "autograder_wrong_breakdown": {
+            "corrected": {
+              "count": 157,
+              "share_of_autograder_wrong": 0.7696,
+              "share_of_total": 0.2093
+            },
+            "not_revised": {
+              "count": 13,
+              "share_of_autograder_wrong": 0.0637,
+              "share_of_total": 0.0173
+            },
+            "revised_but_wrong": {
+              "count": 34,
+              "share_of_autograder_wrong": 0.1667,
+              "share_of_total": 0.0453
+            }
+          },
+          "label": "highly unsatisfying",
+          "label_display": "highly unsatisfying",
+          "ground_truth": "highly unsatisfying",
+          "ground_truth_display": "highly unsatisfying"
+        },
+        {
+          "total_evaluations": 750,
+          "revision_count": 308,
+          "revision_rate": 0.4107,
+          "correct_revision_count": 137,
+          "correct_revision_precision": 0.4448,
+          "autograder_wrong_total": 180,
+          "corrected_autograder_wrong": 137,
+          "autograder_wrong_recall": 0.7611,
+          "cases": {
+            "autograder_wrong_human_correct": {
+              "count": 137,
+              "share_of_revisions": 0.4448,
+              "share_of_total": 0.1827,
+              "share_of_autograder_wrong": 0.7611
+            },
+            "autograder_correct_human_wrong": {
+              "count": 145,
+              "share_of_revisions": 0.4708,
+              "share_of_total": 0.1933,
+              "share_of_autograder_wrong": null
+            },
+            "both_wrong": {
+              "count": 26,
+              "share_of_revisions": 0.0844,
+              "share_of_total": 0.0347,
+              "share_of_autograder_wrong": 0.1444
+            }
+          },
+          "autograder_wrong_breakdown": {
+            "corrected": {
+              "count": 137,
+              "share_of_autograder_wrong": 0.7611,
+              "share_of_total": 0.1827
+            },
+            "not_revised": {
+              "count": 17,
+              "share_of_autograder_wrong": 0.0944,
+              "share_of_total": 0.0227
+            },
+            "revised_but_wrong": {
+              "count": 26,
+              "share_of_autograder_wrong": 0.1444,
+              "share_of_total": 0.0347
+            }
+          },
+          "label": "slightly satisfying",
+          "label_display": "slightly satisfying",
+          "ground_truth": "slightly satisfying",
+          "ground_truth_display": "slightly satisfying"
+        },
+        {
+          "total_evaluations": 750,
+          "revision_count": 317,
+          "revision_rate": 0.4227,
+          "correct_revision_count": 153,
+          "correct_revision_precision": 0.4826,
+          "autograder_wrong_total": 219,
+          "corrected_autograder_wrong": 153,
+          "autograder_wrong_recall": 0.6986,
+          "cases": {
+            "autograder_wrong_human_correct": {
+              "count": 153,
+              "share_of_revisions": 0.4826,
+              "share_of_total": 0.204,
+              "share_of_autograder_wrong": 0.6986
+            },
+            "autograder_correct_human_wrong": {
+              "count": 122,
+              "share_of_revisions": 0.3849,
+              "share_of_total": 0.1627,
+              "share_of_autograder_wrong": null
+            },
+            "both_wrong": {
+              "count": 42,
+              "share_of_revisions": 0.1325,
+              "share_of_total": 0.056,
+              "share_of_autograder_wrong": 0.1918
+            }
+          },
+          "autograder_wrong_breakdown": {
+            "corrected": {
+              "count": 153,
+              "share_of_autograder_wrong": 0.6986,
+              "share_of_total": 0.204
+            },
+            "not_revised": {
+              "count": 24,
+              "share_of_autograder_wrong": 0.1096,
+              "share_of_total": 0.032
+            },
+            "revised_but_wrong": {
+              "count": 42,
+              "share_of_autograder_wrong": 0.1918,
+              "share_of_total": 0.056
+            }
+          },
+          "label": "slightly unsatisfying",
+          "label_display": "slightly unsatisfying",
+          "ground_truth": "slightly unsatisfying",
+          "ground_truth_display": "slightly unsatisfying"
+        }
+      ]
+    },
+    "gnp": {
+      "overall": {
+        "total_evaluations": 3000,
+        "revision_count": 1016,
+        "revision_rate": 0.3387,
+        "correct_revision_count": 487,
+        "correct_revision_precision": 0.4793,
+        "autograder_wrong_total": 633,
+        "corrected_autograder_wrong": 487,
+        "autograder_wrong_recall": 0.7694,
+        "mistake_repetition_factor": 3
+      },
+      "cases": {
+        "autograder_wrong_human_correct": {
+          "count": 487,
+          "share_of_revisions": 0.4793,
+          "share_of_total": 0.1623,
+          "share_of_autograder_wrong": 0.7694
+        },
+        "autograder_correct_human_wrong": {
+          "count": 459,
+          "share_of_revisions": 0.4518,
+          "share_of_total": 0.153,
+          "share_of_autograder_wrong": null
+        },
+        "both_wrong": {
+          "count": 70,
+          "share_of_revisions": 0.0689,
+          "share_of_total": 0.0233,
+          "share_of_autograder_wrong": 0.1106
+        }
+      },
+      "autograder_wrong_breakdown": {
+        "corrected": {
+          "count": 487,
+          "share_of_autograder_wrong": 0.7694,
+          "share_of_total": 0.1623
+        },
+        "not_revised": {
+          "count": 76,
+          "share_of_autograder_wrong": 0.1201,
+          "share_of_total": 0.0253
+        },
+        "revised_but_wrong": {
+          "count": 70,
+          "share_of_autograder_wrong": 0.1106,
+          "share_of_total": 0.0233
+        }
+      },
+      "breakdowns": {
+        "ground_truth": [
+          {
+            "total_evaluations": 1500,
+            "revision_count": 411,
+            "revision_rate": 0.274,
+            "correct_revision_count": 177,
+            "correct_revision_precision": 0.4307,
+            "autograder_wrong_total": 210,
+            "corrected_autograder_wrong": 177,
+            "autograder_wrong_recall": 0.8429,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 177,
+                "share_of_revisions": 0.4307,
+                "share_of_total": 0.118,
+                "share_of_autograder_wrong": 0.8429
+              },
+              "autograder_correct_human_wrong": {
+                "count": 217,
+                "share_of_revisions": 0.528,
+                "share_of_total": 0.1447,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 17,
+                "share_of_revisions": 0.0414,
+                "share_of_total": 0.0113,
+                "share_of_autograder_wrong": 0.081
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 177,
+                "share_of_autograder_wrong": 0.8429,
+                "share_of_total": 0.118
+              },
+              "not_revised": {
+                "count": 16,
+                "share_of_autograder_wrong": 0.0762,
+                "share_of_total": 0.0107
+              },
+              "revised_but_wrong": {
+                "count": 17,
+                "share_of_autograder_wrong": 0.081,
+                "share_of_total": 0.0113
+              }
+            },
+            "label": "g",
+            "label_display": "G",
+            "ground_truth": "g",
+            "ground_truth_display": "G"
+          },
+          {
+            "total_evaluations": 750,
+            "revision_count": 305,
+            "revision_rate": 0.4067,
+            "correct_revision_count": 153,
+            "correct_revision_precision": 0.5016,
+            "autograder_wrong_total": 219,
+            "corrected_autograder_wrong": 153,
+            "autograder_wrong_recall": 0.6986,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 153,
+                "share_of_revisions": 0.5016,
+                "share_of_total": 0.204,
+                "share_of_autograder_wrong": 0.6986
+              },
+              "autograder_correct_human_wrong": {
+                "count": 122,
+                "share_of_revisions": 0.4,
+                "share_of_total": 0.1627,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 30,
+                "share_of_revisions": 0.0984,
+                "share_of_total": 0.04,
+                "share_of_autograder_wrong": 0.137
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 153,
+                "share_of_autograder_wrong": 0.6986,
+                "share_of_total": 0.204
+              },
+              "not_revised": {
+                "count": 36,
+                "share_of_autograder_wrong": 0.1644,
+                "share_of_total": 0.048
+              },
+              "revised_but_wrong": {
+                "count": 30,
+                "share_of_autograder_wrong": 0.137,
+                "share_of_total": 0.04
+              }
+            },
+            "label": "n",
+            "label_display": "N",
+            "ground_truth": "n",
+            "ground_truth_display": "N"
+          },
+          {
+            "total_evaluations": 750,
+            "revision_count": 300,
+            "revision_rate": 0.4,
+            "correct_revision_count": 157,
+            "correct_revision_precision": 0.5233,
+            "autograder_wrong_total": 204,
+            "corrected_autograder_wrong": 157,
+            "autograder_wrong_recall": 0.7696,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 157,
+                "share_of_revisions": 0.5233,
+                "share_of_total": 0.2093,
+                "share_of_autograder_wrong": 0.7696
+              },
+              "autograder_correct_human_wrong": {
+                "count": 120,
+                "share_of_revisions": 0.4,
+                "share_of_total": 0.16,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 23,
+                "share_of_revisions": 0.0767,
+                "share_of_total": 0.0307,
+                "share_of_autograder_wrong": 0.1127
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 157,
+                "share_of_autograder_wrong": 0.7696,
+                "share_of_total": 0.2093
+              },
+              "not_revised": {
+                "count": 24,
+                "share_of_autograder_wrong": 0.1176,
+                "share_of_total": 0.032
+              },
+              "revised_but_wrong": {
+                "count": 23,
+                "share_of_autograder_wrong": 0.1127,
+                "share_of_total": 0.0307
+              }
+            },
+            "label": "p",
+            "label_display": "P",
+            "ground_truth": "p",
+            "ground_truth_display": "P"
+          }
+        ],
+        "autograder_label": [
+          {
+            "total_evaluations": 1560,
+            "revision_count": 440,
+            "revision_rate": 0.2821,
+            "correct_revision_count": 196,
+            "correct_revision_precision": 0.4455,
+            "autograder_wrong_total": 270,
+            "corrected_autograder_wrong": 196,
+            "autograder_wrong_recall": 0.7259,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 196,
+                "share_of_revisions": 0.4455,
+                "share_of_total": 0.1256,
+                "share_of_autograder_wrong": 0.7259
+              },
+              "autograder_correct_human_wrong": {
+                "count": 217,
+                "share_of_revisions": 0.4932,
+                "share_of_total": 0.1391,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 27,
+                "share_of_revisions": 0.0614,
+                "share_of_total": 0.0173,
+                "share_of_autograder_wrong": 0.1
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 196,
+                "share_of_autograder_wrong": 0.7259,
+                "share_of_total": 0.1256
+              },
+              "not_revised": {
+                "count": 47,
+                "share_of_autograder_wrong": 0.1741,
+                "share_of_total": 0.0301
+              },
+              "revised_but_wrong": {
+                "count": 27,
+                "share_of_autograder_wrong": 0.1,
+                "share_of_total": 0.0173
+              }
+            },
+            "label": "g",
+            "label_display": "G",
+            "autograder_label": "g",
+            "autograder_label_display": "G"
+          },
+          {
+            "total_evaluations": 705,
+            "revision_count": 289,
+            "revision_rate": 0.4099,
+            "correct_revision_count": 146,
+            "correct_revision_precision": 0.5052,
+            "autograder_wrong_total": 174,
+            "corrected_autograder_wrong": 146,
+            "autograder_wrong_recall": 0.8391,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 146,
+                "share_of_revisions": 0.5052,
+                "share_of_total": 0.2071,
+                "share_of_autograder_wrong": 0.8391
+              },
+              "autograder_correct_human_wrong": {
+                "count": 122,
+                "share_of_revisions": 0.4221,
+                "share_of_total": 0.173,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 21,
+                "share_of_revisions": 0.0727,
+                "share_of_total": 0.0298,
+                "share_of_autograder_wrong": 0.1207
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 146,
+                "share_of_autograder_wrong": 0.8391,
+                "share_of_total": 0.2071
+              },
+              "not_revised": {
+                "count": 7,
+                "share_of_autograder_wrong": 0.0402,
+                "share_of_total": 0.0099
+              },
+              "revised_but_wrong": {
+                "count": 21,
+                "share_of_autograder_wrong": 0.1207,
+                "share_of_total": 0.0298
+              }
+            },
+            "label": "n",
+            "label_display": "N",
+            "autograder_label": "n",
+            "autograder_label_display": "N"
+          },
+          {
+            "total_evaluations": 735,
+            "revision_count": 287,
+            "revision_rate": 0.3905,
+            "correct_revision_count": 145,
+            "correct_revision_precision": 0.5052,
+            "autograder_wrong_total": 189,
+            "corrected_autograder_wrong": 145,
+            "autograder_wrong_recall": 0.7672,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 145,
+                "share_of_revisions": 0.5052,
+                "share_of_total": 0.1973,
+                "share_of_autograder_wrong": 0.7672
+              },
+              "autograder_correct_human_wrong": {
+                "count": 120,
+                "share_of_revisions": 0.4181,
+                "share_of_total": 0.1633,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 22,
+                "share_of_revisions": 0.0767,
+                "share_of_total": 0.0299,
+                "share_of_autograder_wrong": 0.1164
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 145,
+                "share_of_autograder_wrong": 0.7672,
+                "share_of_total": 0.1973
+              },
+              "not_revised": {
+                "count": 22,
+                "share_of_autograder_wrong": 0.1164,
+                "share_of_total": 0.0299
+              },
+              "revised_but_wrong": {
+                "count": 22,
+                "share_of_autograder_wrong": 0.1164,
+                "share_of_total": 0.0299
+              }
+            },
+            "label": "p",
+            "label_display": "P",
+            "autograder_label": "p",
+            "autograder_label_display": "P"
+          }
+        ],
+        "human_label": [
+          {
+            "total_evaluations": 1470,
+            "revision_count": 350,
+            "revision_rate": 0.2381,
+            "correct_revision_count": 177,
+            "correct_revision_precision": 0.5057,
+            "autograder_wrong_total": 250,
+            "corrected_autograder_wrong": 177,
+            "autograder_wrong_recall": 0.708,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 177,
+                "share_of_revisions": 0.5057,
+                "share_of_total": 0.1204,
+                "share_of_autograder_wrong": 0.708
+              },
+              "autograder_correct_human_wrong": {
+                "count": 147,
+                "share_of_revisions": 0.42,
+                "share_of_total": 0.1,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 26,
+                "share_of_revisions": 0.0743,
+                "share_of_total": 0.0177,
+                "share_of_autograder_wrong": 0.104
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 177,
+                "share_of_autograder_wrong": 0.708,
+                "share_of_total": 0.1204
+              },
+              "not_revised": {
+                "count": 47,
+                "share_of_autograder_wrong": 0.188,
+                "share_of_total": 0.032
+              },
+              "revised_but_wrong": {
+                "count": 26,
+                "share_of_autograder_wrong": 0.104,
+                "share_of_total": 0.0177
+              }
+            },
+            "label": "g",
+            "label_display": "G",
+            "human_label": "g",
+            "human_label_display": "G"
+          },
+          {
+            "total_evaluations": 746,
+            "revision_count": 330,
+            "revision_rate": 0.4424,
+            "correct_revision_count": 153,
+            "correct_revision_precision": 0.4636,
+            "autograder_wrong_total": 179,
+            "corrected_autograder_wrong": 153,
+            "autograder_wrong_recall": 0.8547,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 153,
+                "share_of_revisions": 0.4636,
+                "share_of_total": 0.2051,
+                "share_of_autograder_wrong": 0.8547
+              },
+              "autograder_correct_human_wrong": {
+                "count": 158,
+                "share_of_revisions": 0.4788,
+                "share_of_total": 0.2118,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 19,
+                "share_of_revisions": 0.0576,
+                "share_of_total": 0.0255,
+                "share_of_autograder_wrong": 0.1061
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 153,
+                "share_of_autograder_wrong": 0.8547,
+                "share_of_total": 0.2051
+              },
+              "not_revised": {
+                "count": 7,
+                "share_of_autograder_wrong": 0.0391,
+                "share_of_total": 0.0094
+              },
+              "revised_but_wrong": {
+                "count": 19,
+                "share_of_autograder_wrong": 0.1061,
+                "share_of_total": 0.0255
+              }
+            },
+            "label": "n",
+            "label_display": "N",
+            "human_label": "n",
+            "human_label_display": "N"
+          },
+          {
+            "total_evaluations": 784,
+            "revision_count": 336,
+            "revision_rate": 0.4286,
+            "correct_revision_count": 157,
+            "correct_revision_precision": 0.4673,
+            "autograder_wrong_total": 204,
+            "corrected_autograder_wrong": 157,
+            "autograder_wrong_recall": 0.7696,
+            "cases": {
+              "autograder_wrong_human_correct": {
+                "count": 157,
+                "share_of_revisions": 0.4673,
+                "share_of_total": 0.2003,
+                "share_of_autograder_wrong": 0.7696
+              },
+              "autograder_correct_human_wrong": {
+                "count": 154,
+                "share_of_revisions": 0.4583,
+                "share_of_total": 0.1964,
+                "share_of_autograder_wrong": null
+              },
+              "both_wrong": {
+                "count": 25,
+                "share_of_revisions": 0.0744,
+                "share_of_total": 0.0319,
+                "share_of_autograder_wrong": 0.1225
+              }
+            },
+            "autograder_wrong_breakdown": {
+              "corrected": {
+                "count": 157,
+                "share_of_autograder_wrong": 0.7696,
+                "share_of_total": 0.2003
+              },
+              "not_revised": {
+                "count": 22,
+                "share_of_autograder_wrong": 0.1078,
+                "share_of_total": 0.0281
+              },
+              "revised_but_wrong": {
+                "count": 25,
+                "share_of_autograder_wrong": 0.1225,
+                "share_of_total": 0.0319
+              }
+            },
+            "label": "p",
+            "label_display": "P",
+            "human_label": "p",
+            "human_label_display": "P"
+          }
+        ]
+      },
+      "by_ground_truth": [
+        {
+          "total_evaluations": 1500,
+          "revision_count": 411,
+          "revision_rate": 0.274,
+          "correct_revision_count": 177,
+          "correct_revision_precision": 0.4307,
+          "autograder_wrong_total": 210,
+          "corrected_autograder_wrong": 177,
+          "autograder_wrong_recall": 0.8429,
+          "cases": {
+            "autograder_wrong_human_correct": {
+              "count": 177,
+              "share_of_revisions": 0.4307,
+              "share_of_total": 0.118,
+              "share_of_autograder_wrong": 0.8429
+            },
+            "autograder_correct_human_wrong": {
+              "count": 217,
+              "share_of_revisions": 0.528,
+              "share_of_total": 0.1447,
+              "share_of_autograder_wrong": null
+            },
+            "both_wrong": {
+              "count": 17,
+              "share_of_revisions": 0.0414,
+              "share_of_total": 0.0113,
+              "share_of_autograder_wrong": 0.081
+            }
+          },
+          "autograder_wrong_breakdown": {
+            "corrected": {
+              "count": 177,
+              "share_of_autograder_wrong": 0.8429,
+              "share_of_total": 0.118
+            },
+            "not_revised": {
+              "count": 16,
+              "share_of_autograder_wrong": 0.0762,
+              "share_of_total": 0.0107
+            },
+            "revised_but_wrong": {
+              "count": 17,
+              "share_of_autograder_wrong": 0.081,
+              "share_of_total": 0.0113
+            }
+          },
+          "label": "g",
+          "label_display": "G",
+          "ground_truth": "g",
+          "ground_truth_display": "G"
+        },
+        {
+          "total_evaluations": 750,
+          "revision_count": 305,
+          "revision_rate": 0.4067,
+          "correct_revision_count": 153,
+          "correct_revision_precision": 0.5016,
+          "autograder_wrong_total": 219,
+          "corrected_autograder_wrong": 153,
+          "autograder_wrong_recall": 0.6986,
+          "cases": {
+            "autograder_wrong_human_correct": {
+              "count": 153,
+              "share_of_revisions": 0.5016,
+              "share_of_total": 0.204,
+              "share_of_autograder_wrong": 0.6986
+            },
+            "autograder_correct_human_wrong": {
+              "count": 122,
+              "share_of_revisions": 0.4,
+              "share_of_total": 0.1627,
+              "share_of_autograder_wrong": null
+            },
+            "both_wrong": {
+              "count": 30,
+              "share_of_revisions": 0.0984,
+              "share_of_total": 0.04,
+              "share_of_autograder_wrong": 0.137
+            }
+          },
+          "autograder_wrong_breakdown": {
+            "corrected": {
+              "count": 153,
+              "share_of_autograder_wrong": 0.6986,
+              "share_of_total": 0.204
+            },
+            "not_revised": {
+              "count": 36,
+              "share_of_autograder_wrong": 0.1644,
+              "share_of_total": 0.048
+            },
+            "revised_but_wrong": {
+              "count": 30,
+              "share_of_autograder_wrong": 0.137,
+              "share_of_total": 0.04
+            }
+          },
+          "label": "n",
+          "label_display": "N",
+          "ground_truth": "n",
+          "ground_truth_display": "N"
+        },
+        {
+          "total_evaluations": 750,
+          "revision_count": 300,
+          "revision_rate": 0.4,
+          "correct_revision_count": 157,
+          "correct_revision_precision": 0.5233,
+          "autograder_wrong_total": 204,
+          "corrected_autograder_wrong": 157,
+          "autograder_wrong_recall": 0.7696,
+          "cases": {
+            "autograder_wrong_human_correct": {
+              "count": 157,
+              "share_of_revisions": 0.5233,
+              "share_of_total": 0.2093,
+              "share_of_autograder_wrong": 0.7696
+            },
+            "autograder_correct_human_wrong": {
+              "count": 120,
+              "share_of_revisions": 0.4,
+              "share_of_total": 0.16,
+              "share_of_autograder_wrong": null
+            },
+            "both_wrong": {
+              "count": 23,
+              "share_of_revisions": 0.0767,
+              "share_of_total": 0.0307,
+              "share_of_autograder_wrong": 0.1127
+            }
+          },
+          "autograder_wrong_breakdown": {
+            "corrected": {
+              "count": 157,
+              "share_of_autograder_wrong": 0.7696,
+              "share_of_total": 0.2093
+            },
+            "not_revised": {
+              "count": 24,
+              "share_of_autograder_wrong": 0.1176,
+              "share_of_total": 0.032
+            },
+            "revised_but_wrong": {
+              "count": 23,
+              "share_of_autograder_wrong": 0.1127,
+              "share_of_total": 0.0307
+            }
+          },
+          "label": "p",
+          "label_display": "P",
+          "ground_truth": "p",
+          "ground_truth_display": "P"
+        }
+      ]
+    }
+  },
   "overall": {
     "total_evaluations": 3000,
     "revision_count": 1217,
