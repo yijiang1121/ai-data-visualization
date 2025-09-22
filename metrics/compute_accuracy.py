@@ -73,6 +73,8 @@ CASE_CONFIGS: Tuple[Tuple[str, bool], ...] = (
     ("both_wrong", True),
 )
 
+AGREEMENT_CASES: Tuple[str, ...] = ("both_correct", "both_wrong")
+
 DIMENSION_FIELDS: Dict[str, Tuple[str, str]] = {
     "ground_truth": ("ground_truth", "ground_truth_display"),
     "autograder_label": ("autograder_label", "autograder_label_display"),
@@ -447,6 +449,28 @@ def _format_case_entries(
     }
 
 
+def _format_agreement_case_entries(
+    case_counts: Dict[str, int],
+    *,
+    agreement_count: int,
+    total_evaluations: int,
+) -> Dict[str, Dict[str, object]]:
+    """Return aggregate metrics for agreement-focused cases."""
+
+    return {
+        case: {
+            "count": case_counts.get(case, 0),
+            "share_of_agreements": _format_rate(
+                case_counts.get(case, 0), agreement_count
+            ),
+            "share_of_total": _format_rate(
+                case_counts.get(case, 0), total_evaluations
+            ),
+        }
+        for case in AGREEMENT_CASES
+    }
+
+
 def _format_autograder_breakdown(
     *,
     corrected: int,
@@ -533,6 +557,28 @@ def _summarize_label_counts(
     }
 
 
+def _summarize_agreement_counts(
+    indices: pd.Index,
+    *,
+    agreements: pd.Series,
+    case_masks: Dict[str, pd.Series],
+) -> Dict[str, object]:
+    """Collect agreement-focused counts for a single label slice."""
+
+    agreement_count = int(agreements.loc[indices].sum())
+    case_counts = {
+        case: int(mask.loc[indices].sum())
+        for case, mask in case_masks.items()
+    }
+
+    return {
+        "agreement_count": agreement_count,
+        "case_counts": case_counts,
+        "correct": case_counts.get("both_correct", 0),
+        "both_wrong": case_counts.get("both_wrong", 0),
+    }
+
+
 def _dimension_breakdowns(
     *,
     normalized: pd.DataFrame,
@@ -611,6 +657,136 @@ def _dimension_breakdowns(
     return entries
 
 
+def _agreement_dimension_breakdowns(
+    *,
+    normalized: pd.DataFrame,
+    column_name: str,
+    dimension_key: str,
+    display_maps: Dict[str, Dict[str, str]],
+    case_masks: Dict[str, pd.Series],
+    agreements: pd.Series,
+    total_evaluations: int,
+) -> List[Dict[str, object]]:
+    """Build agreement breakdowns for a single dimension."""
+
+    entries: List[Dict[str, object]] = []
+
+    for label, group in normalized.groupby(column_name, sort=True):
+        if pd.isna(label):
+            continue
+
+        label_total = int(len(group))
+        if label_total == 0:
+            continue
+
+        indices = group.index
+        label_counts = _summarize_agreement_counts(
+            indices,
+            agreements=agreements,
+            case_masks=case_masks,
+        )
+        display_label = _resolve_display_label(column_name, label, display_maps)
+
+        agreement_count = label_counts["agreement_count"]
+        correct_count = label_counts["correct"]
+
+        entry = {
+            "total_evaluations": label_total,
+            "agreement_count": agreement_count,
+            "agreement_rate": _format_rate(agreement_count, label_total),
+            "correct_agreement_count": correct_count,
+            "agreement_accuracy": _format_rate(correct_count, agreement_count),
+            "cases": _format_agreement_case_entries(
+                label_counts["case_counts"],
+                agreement_count=agreement_count,
+                total_evaluations=label_total,
+            ),
+            "label": label,
+            "label_display": display_label,
+        }
+
+        field_names = DIMENSION_FIELDS.get(dimension_key)
+        if field_names:
+            label_field, display_field = field_names
+            entry[label_field] = label
+            entry[display_field] = display_label
+
+        entries.append(entry)
+
+    return entries
+
+
+def _compute_agreement_metrics_for_scale(
+    *,
+    normalized: pd.DataFrame,
+    display_maps: Dict[str, Dict[str, str]],
+    config: Dict[str, Dict[str, str]],
+    autograder_matches: pd.Series,
+    human_matches: pd.Series,
+) -> Dict[str, object]:
+    """Compute agreement-focused metrics for a single grading scale."""
+
+    columns = _resolve_scale_columns(normalized, config)
+    if not columns:
+        return {"overall": {}, "cases": {}, "breakdowns": {}}
+
+    agreements = normalized[columns.human] == normalized[columns.autograder]
+    total_evaluations = int(len(normalized))
+
+    case_masks = {
+        "both_correct": agreements & autograder_matches & human_matches,
+        "both_wrong": agreements & ~autograder_matches & ~human_matches,
+    }
+    case_counts = {case: int(mask.sum()) for case, mask in case_masks.items()}
+    agreement_count = int(agreements.sum())
+    correct_agreement_count = case_counts.get("both_correct", 0)
+
+    overall = {
+        "total_evaluations": total_evaluations,
+        "agreement_count": agreement_count,
+        "agreement_rate": _format_rate(agreement_count, total_evaluations),
+        "correct_agreement_count": correct_agreement_count,
+        "agreement_accuracy": _format_rate(
+            correct_agreement_count, agreement_count
+        ),
+    }
+
+    breakdowns: Dict[str, List[Dict[str, object]]] = {}
+    for dimension_key, column_name in (
+        ("ground_truth", columns.ground_truth),
+        ("autograder_label", columns.autograder),
+        ("human_label", columns.human),
+    ):
+        if not column_name or column_name not in normalized.columns:
+            continue
+
+        entries = _agreement_dimension_breakdowns(
+            normalized=normalized,
+            column_name=column_name,
+            dimension_key=dimension_key,
+            display_maps=display_maps,
+            case_masks=case_masks,
+            agreements=agreements,
+            total_evaluations=total_evaluations,
+        )
+        if entries:
+            breakdowns[dimension_key] = entries
+
+    agreement = {
+        "overall": overall,
+        "cases": _format_agreement_case_entries(
+            case_counts,
+            agreement_count=agreement_count,
+            total_evaluations=total_evaluations,
+        ),
+        "breakdowns": breakdowns,
+    }
+    if "ground_truth" in breakdowns:
+        agreement["by_ground_truth"] = breakdowns["ground_truth"]
+
+    return agreement
+
+
 def _compute_revision_metrics_for_scale(
     *,
     normalized: pd.DataFrame,
@@ -655,6 +831,14 @@ def _compute_revision_metrics_for_scale(
         corrected=corrected_revision_count,
         both_wrong=both_wrong_count,
         autograder_wrong_total=autograder_wrong_total,
+    )
+
+    agreement = _compute_agreement_metrics_for_scale(
+        normalized=normalized,
+        display_maps=display_maps,
+        config=config,
+        autograder_matches=autograder_matches,
+        human_matches=human_matches,
     )
 
     unique_repetitions = 1
@@ -727,6 +911,24 @@ def _compute_revision_metrics_for_scale(
     revision["breakdowns"] = breakdowns
     if "ground_truth" in breakdowns:
         revision["by_ground_truth"] = breakdowns["ground_truth"]
+
+    revision["agreement"] = agreement
+    revision["slices"] = {
+        "disagreement": {
+            "label": "Human disagrees with autograder",
+            "metric_label": "Revision",
+            "overall": revision["overall"],
+            "cases": revision["cases"],
+            "autograder_wrong_breakdown": revision["autograder_wrong_breakdown"],
+            "breakdowns": revision["breakdowns"],
+            "by_ground_truth": revision.get("by_ground_truth", []),
+        },
+        "agreement": {
+            "label": "Human agrees with autograder",
+            "metric_label": "Agreement",
+            **agreement,
+        },
+    }
 
     return revision
 

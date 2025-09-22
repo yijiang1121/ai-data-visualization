@@ -232,6 +232,13 @@ def test_compute_metrics_returns_expected_structure() -> None:
         revision_metrics["autograder_wrong_breakdown"]["not_revised"]["count"]
         == 0
     )
+    assert "agreement" in revision_metrics
+    assert revision_metrics["agreement"]["overall"]["agreement_count"] == 0
+    assert revision_metrics["slices"]["agreement"]["overall"]["agreement_count"] == 0
+    assert (
+        revision_metrics["slices"]["disagreement"]["overall"]["revision_count"]
+        == 3
+    )
 
 
 def test_compute_revision_metrics_for_scale_provides_breakdowns() -> None:
@@ -276,6 +283,77 @@ def test_compute_revision_metrics_for_scale_provides_breakdowns() -> None:
     assert labels["highly satisfying"]["label_display"] == "Highly Satisfying"
     assert labels["highly satisfying"]["autograder_wrong_recall"] == 1.0
     assert revision["by_ground_truth"] == ground_truth_breakdowns
+
+    agreement = revision["agreement"]
+    assert agreement["overall"]["agreement_count"] == 0
+    assert agreement["cases"]["both_correct"]["count"] == 0
+    gt_agreement = {
+        entry["label"]: entry
+        for entry in agreement["breakdowns"].get("ground_truth", [])
+    }
+    assert gt_agreement["highly satisfying"]["agreement_count"] == 0
+
+
+def test_agreement_slice_captures_alignment_metrics() -> None:
+    df = pd.DataFrame(
+        {
+            "Prompt_ID": [1, 2, 3, 4],
+            "Ground_Truth": [
+                "Highly Satisfying",
+                "Highly Unsatisfying",
+                "Slightly Satisfying",
+                "Slightly Unsatisfying",
+            ],
+            "Auto_Grade": [
+                "Highly Satisfying",
+                "Highly Unsatisfying",
+                "Slightly Satisfying",
+                "Highly Unsatisfying",
+            ],
+            "Human_Grade": [
+                "Highly Satisfying",
+                "Highly Unsatisfying",
+                "Slightly Satisfying",
+                "Highly Unsatisfying",
+            ],
+        }
+    )
+
+    df = ensure_gnp_columns(df)
+    display_maps = {
+        column: _build_display_map(df[column])
+        for column in df.columns
+        if column in SCALE_CONFIGS["four_level"]["columns"].values()
+        or column.endswith("_GNP")
+    }
+    normalized = df.copy()
+    for column in normalized.columns:
+        if normalized[column].dtype == object:
+            normalized[column] = _normalize(normalized[column])
+
+    revision = _compute_revision_metrics_for_scale(
+        normalized=normalized,
+        display_maps=display_maps,
+        config=SCALE_CONFIGS["four_level"],
+    )
+    agreement = revision["agreement"]
+
+    overall = agreement["overall"]
+    assert overall["agreement_count"] == 4
+    assert overall["agreement_rate"] == 1.0
+    assert overall["agreement_accuracy"] == 0.75
+
+    cases = agreement["cases"]
+    assert cases["both_correct"]["count"] == 3
+    assert cases["both_wrong"]["count"] == 1
+    assert cases["both_wrong"]["share_of_agreements"] == 0.25
+
+    ground_truth_entries = {
+        entry["label"]: entry
+        for entry in agreement["breakdowns"].get("ground_truth", [])
+    }
+    assert ground_truth_entries["highly satisfying"]["agreement_accuracy"] == 1.0
+    assert ground_truth_entries["slightly unsatisfying"]["agreement_accuracy"] == 0.0
 
 
 def test_write_metrics_creates_expected_json(tmp_path: Path) -> None:
