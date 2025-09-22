@@ -97,24 +97,30 @@ precision/recall details plus case breakdowns for every supported scale:
     "autograder_wrong_recall": 0.7493,
     "mistake_repetition_factor": 3
   },
-  "cases": {
-    "autograder_wrong_human_correct": {
-      "count": 562,
-      "share_of_revisions": 0.4618,
-      "share_of_total": 0.1873,
-      "share_of_autograder_wrong": 0.7493
-    },
-    "autograder_correct_human_wrong": {
-      "count": 532,
-      "share_of_revisions": 0.4371,
-      "share_of_total": 0.1773,
-      "share_of_autograder_wrong": null
-    },
-    "both_wrong": {
-      "count": 123,
-      "share_of_revisions": 0.1011,
-      "share_of_total": 0.041,
-      "share_of_autograder_wrong": 0.164
+    "cases": {
+      "autograder_wrong_human_correct": {
+        "count": 562,
+        "share_of_revisions": 0.4618,
+        "share_of_total": 0.1873,
+        "share_of_autograder_wrong": 0.7493
+      },
+      "autograder_correct_human_wrong": {
+        "count": 532,
+        "share_of_revisions": 0.4371,
+        "share_of_total": 0.1773,
+        "share_of_autograder_wrong": null
+      },
+      "both_correct": {
+        "count": 0,
+        "share_of_revisions": 0.0,
+        "share_of_total": 0.0,
+        "share_of_autograder_wrong": null
+      },
+      "both_wrong": {
+        "count": 123,
+        "share_of_revisions": 0.1011,
+        "share_of_total": 0.041,
+        "share_of_autograder_wrong": 0.164
     }
   },
   "autograder_wrong_breakdown": {

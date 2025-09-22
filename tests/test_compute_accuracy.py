@@ -227,6 +227,7 @@ def test_compute_metrics_returns_expected_structure() -> None:
     assert revision_metrics["overall"]["mistake_repetition_factor"] == 2
     assert revision_metrics["cases"]["autograder_wrong_human_correct"]["count"] == 1
     assert revision_metrics["cases"]["autograder_correct_human_wrong"]["count"] == 1
+    assert revision_metrics["cases"]["both_correct"]["count"] == 0
     assert revision_metrics["cases"]["both_wrong"]["count"] == 1
     assert (
         revision_metrics["autograder_wrong_breakdown"]["not_revised"]["count"]
@@ -271,6 +272,7 @@ def test_compute_revision_metrics_for_scale_provides_breakdowns() -> None:
     assert cases["autograder_wrong_human_correct"]["count"] == 1
     assert cases["autograder_wrong_human_correct"]["share_of_autograder_wrong"] == 0.5
     assert cases["autograder_correct_human_wrong"]["count"] == 1
+    assert cases["both_correct"]["count"] == 0
     assert cases["both_wrong"]["count"] == 1
 
     breakdown = revision["autograder_wrong_breakdown"]
