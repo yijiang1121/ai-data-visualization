@@ -755,25 +755,37 @@
       const recallBreakdownSelect = document.getElementById("recall-breakdown-select");
       const breakdownScaleSelect = document.getElementById("breakdown-scale-select");
 
+      const CASE_KEYS = Object.freeze({
+        AUTOGRADER_WRONG_HUMAN_CORRECT: "autograder_wrong_human_correct",
+        AUTOGRADER_CORRECT_HUMAN_WRONG: "autograder_correct_human_wrong",
+        BOTH_CORRECT: "both_correct",
+        BOTH_WRONG: "both_wrong",
+      });
+
+      const AUTOGRADER_MISTAKE_CASE_KEYS = new Set([
+        CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT,
+        CASE_KEYS.BOTH_WRONG,
+      ]);
+
       const CASE_LABELS = {
-        autograder_wrong_human_correct: "Auto wrong, human correct",
-        autograder_correct_human_wrong: "Auto correct, human wrong",
-        both_correct: "Both correct",
-        both_wrong: "Both wrong",
+        [CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT]: "Auto wrong, human correct",
+        [CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG]: "Auto correct, human wrong",
+        [CASE_KEYS.BOTH_CORRECT]: "Both correct",
+        [CASE_KEYS.BOTH_WRONG]: "Both wrong",
       };
 
       const CASE_CLASS_MAP = {
-        autograder_wrong_human_correct: "success",
-        autograder_correct_human_wrong: "info",
-        both_correct: "success",
-        both_wrong: "warning",
+        [CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT]: "success",
+        [CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG]: "info",
+        [CASE_KEYS.BOTH_CORRECT]: "success",
+        [CASE_KEYS.BOTH_WRONG]: "warning",
       };
 
       const CASE_ORDER = [
-        ["autograder_wrong_human_correct", "success"],
-        ["autograder_correct_human_wrong", "info"],
-        ["both_correct", "success"],
-        ["both_wrong", "warning"],
+        [CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT, "success"],
+        [CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG, "info"],
+        [CASE_KEYS.BOTH_CORRECT, "success"],
+        [CASE_KEYS.BOTH_WRONG, "warning"],
       ];
 
       const PRECISION_MAX_CASE_COLUMNS =
@@ -801,26 +813,26 @@
             "No revision data available for this dataset.",
           cases: [
             {
-              key: "autograder_wrong_human_correct",
-              label: "Auto wrong, human correct",
+              key: CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT,
+              label: CASE_LABELS[CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT],
               variant: "success",
               shareField: "share_of_revisions",
             },
             {
-              key: "autograder_correct_human_wrong",
-              label: "Auto correct, human wrong",
+              key: CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG,
+              label: CASE_LABELS[CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG],
               variant: "info",
               shareField: "share_of_revisions",
             },
             {
-              key: "both_correct",
-              label: "Both correct",
+              key: CASE_KEYS.BOTH_CORRECT,
+              label: CASE_LABELS[CASE_KEYS.BOTH_CORRECT],
               variant: "success",
               shareField: "share_of_revisions",
             },
             {
-              key: "both_wrong",
-              label: "Both wrong",
+              key: CASE_KEYS.BOTH_WRONG,
+              label: CASE_LABELS[CASE_KEYS.BOTH_WRONG],
               variant: "warning",
               shareField: "share_of_revisions",
             },
@@ -934,28 +946,29 @@
           emptyMessage: "No autograder mistake data available.",
           datasetEmptyMessage:
             "No autograder mistake data available for this dataset.",
+          caseFilter: (caseKey) => AUTOGRADER_MISTAKE_CASE_KEYS.has(caseKey),
           cases: [
             {
-              key: "autograder_wrong_human_correct",
-              label: CASE_LABELS.autograder_wrong_human_correct,
+              key: CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT,
+              label: CASE_LABELS[CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT],
               variant: "success",
               shareField: "share_of_total",
             },
             {
-              key: "autograder_correct_human_wrong",
-              label: CASE_LABELS.autograder_correct_human_wrong,
+              key: CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG,
+              label: CASE_LABELS[CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG],
               variant: "info",
               shareField: "share_of_total",
             },
             {
-              key: "both_correct",
-              label: CASE_LABELS.both_correct,
+              key: CASE_KEYS.BOTH_CORRECT,
+              label: CASE_LABELS[CASE_KEYS.BOTH_CORRECT],
               variant: "success",
               shareField: "share_of_total",
             },
             {
-              key: "both_wrong",
-              label: CASE_LABELS.both_wrong,
+              key: CASE_KEYS.BOTH_WRONG,
+              label: CASE_LABELS[CASE_KEYS.BOTH_WRONG],
               variant: "warning",
               shareField: "share_of_total",
             },
@@ -1010,26 +1023,26 @@
           datasetEmptyMessage: "No agreement data available for this dataset.",
           cases: [
             {
-              key: "autograder_wrong_human_correct",
-              label: CASE_LABELS.autograder_wrong_human_correct,
+              key: CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT,
+              label: CASE_LABELS[CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT],
               variant: "success",
               shareField: "share_of_agreements",
             },
             {
-              key: "autograder_correct_human_wrong",
-              label: CASE_LABELS.autograder_correct_human_wrong,
+              key: CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG,
+              label: CASE_LABELS[CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG],
               variant: "info",
               shareField: "share_of_agreements",
             },
             {
-              key: "both_correct",
-              label: CASE_LABELS.both_correct,
+              key: CASE_KEYS.BOTH_CORRECT,
+              label: CASE_LABELS[CASE_KEYS.BOTH_CORRECT],
               variant: "success",
               shareField: "share_of_agreements",
             },
             {
-              key: "both_wrong",
-              label: CASE_LABELS.both_wrong,
+              key: CASE_KEYS.BOTH_WRONG,
+              label: CASE_LABELS[CASE_KEYS.BOTH_WRONG],
               variant: "warning",
               shareField: "share_of_agreements",
             },
@@ -1838,10 +1851,29 @@
         );
       }
 
+      function shouldIncludeCase(sliceConfig, caseKey, entry) {
+        if (!sliceConfig || !caseKey) {
+          return true;
+        }
+        const { caseFilter } = sliceConfig;
+        if (typeof caseFilter === "function") {
+          return Boolean(caseFilter(caseKey, entry));
+        }
+        return true;
+      }
+
       function createCaseCell(entry, caseMeta, sliceConfig, options = {}) {
         const cell = document.createElement("td");
+        if (!caseMeta?.key) {
+          cell.className = "muted";
+          cell.textContent = "—";
+          return cell;
+        }
+
+        const includeCase = shouldIncludeCase(sliceConfig, caseMeta.key, entry);
         const caseData = entry?.cases?.[caseMeta.key] || {};
-        const rawCount = Number.isFinite(caseData.count) ? caseData.count : 0;
+        const rawCount =
+          includeCase && Number.isFinite(caseData.count) ? caseData.count : 0;
         const factor =
           Number.isFinite(options?.factor) && options.factor > 0
             ? options.factor
@@ -1860,13 +1892,14 @@
           ? entry[baseField]
           : 0;
         const shareField = caseMeta.shareField || sliceConfig.caseShareField;
-        let shareValue = Number.isFinite(caseData[shareField])
-          ? caseData[shareField]
-          : null;
-        if (shareValue === null && baseCount > 0) {
+        let shareValue =
+          includeCase && Number.isFinite(caseData[shareField])
+            ? caseData[shareField]
+            : null;
+        if (shareValue === null && includeCase && baseCount > 0) {
           shareValue = count / baseCount;
         }
-        if (!Number.isFinite(shareValue)) {
+        if (!Number.isFinite(shareValue) || !includeCase) {
           shareValue = 0;
         }
         const clampedShare = Math.max(0, Math.min(shareValue, 1));
@@ -2208,10 +2241,19 @@
           }
 
           sliceConfig.cases.forEach((caseMeta) => {
+            if (!caseMeta?.key) {
+              return;
+            }
             const caseKey = caseMeta.key;
-            const caseCount = Number.isFinite(entry?.cases?.[caseKey]?.count)
-              ? entry.cases[caseKey].count
-              : 0;
+            const includeCase = shouldIncludeCase(
+              sliceConfig,
+              caseKey,
+              entry
+            );
+            const caseCount =
+              includeCase && Number.isFinite(entry?.cases?.[caseKey]?.count)
+                ? entry.cases[caseKey].count
+                : 0;
             totals.cases[caseKey] =
               (totals.cases[caseKey] || 0) + caseCount;
           });
@@ -2222,24 +2264,34 @@
         }
 
         totals.cases = Object.fromEntries(
-          sliceConfig.cases.map((caseMeta) => {
-            const caseKey = caseMeta.key;
-            const caseCount = totals.cases[caseKey] || 0;
-            const shareField = caseMeta.shareField || sliceConfig.caseShareField;
-            const shareData = {};
-            if (shareField) {
-              let base = 0;
-              if (shareField === "share_of_total") {
-                base = totals.total_evaluations;
-              } else if (shareField === "share_of_agreements") {
-                base = totals[countField] || 0;
-              } else if (shareField === "share_of_revisions") {
-                base = totals[countField] || 0;
+          sliceConfig.cases
+            .filter((caseMeta) => caseMeta?.key)
+            .map((caseMeta) => {
+              const caseKey = caseMeta.key;
+              const caseCount = totals.cases[caseKey] || 0;
+              const shareField = caseMeta.shareField || sliceConfig.caseShareField;
+              const shareData = {};
+              if (shareField) {
+                let base = 0;
+                if (shareField === "share_of_total") {
+                  base = totals.total_evaluations;
+                } else if (shareField === "share_of_autograder_wrong") {
+                  base =
+                    totals.autograder_wrong_total ?? totals[countField] ?? 0;
+                } else if (shareField === sliceConfig.caseShareField) {
+                  const baseField = sliceConfig.caseBaseField || sliceConfig.countField;
+                  base = totals[baseField] || 0;
+                } else if (shareField === "share_of_agreements") {
+                  base = totals[countField] || 0;
+                } else if (shareField === "share_of_revisions") {
+                  base = totals[countField] || 0;
+                } else if (countField) {
+                  base = totals[countField] || 0;
+                }
+                shareData[shareField] = base > 0 ? caseCount / base : 0;
               }
-              shareData[shareField] = base > 0 ? caseCount / base : 0;
-            }
-            return [caseKey, { count: caseCount, ...shareData }];
-          })
+              return [caseKey, { count: caseCount, ...shareData }];
+            })
         );
 
         return totals;
