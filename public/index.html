@@ -1838,10 +1838,23 @@
         );
       }
 
-      function createCaseCell(entry, caseMeta, sliceConfig) {
+      function createCaseCell(entry, caseMeta, sliceConfig, options = {}) {
         const cell = document.createElement("td");
         const caseData = entry?.cases?.[caseMeta.key] || {};
-        const count = Number.isFinite(caseData.count) ? caseData.count : 0;
+        const rawCount = Number.isFinite(caseData.count) ? caseData.count : 0;
+        const factor =
+          Number.isFinite(options?.factor) && options.factor > 0
+            ? options.factor
+            : 1;
+        const countTransform =
+          typeof sliceConfig.caseCountValueTransform === "function"
+            ? sliceConfig.caseCountValueTransform
+            : typeof sliceConfig.countValueTransform === "function"
+            ? sliceConfig.countValueTransform
+            : null;
+        const count = countTransform
+          ? countTransform(rawCount, factor, entry, caseMeta)
+          : rawCount;
         const baseField = sliceConfig.caseBaseField || sliceConfig.countField;
         const baseCount = Number.isFinite(entry?.[baseField])
           ? entry[baseField]
@@ -2139,7 +2152,9 @@
         for (let index = 0; index < RECALL_MAX_CASE_COLUMNS; index += 1) {
           const caseMeta = sliceConfig.cases[index];
           if (caseMeta) {
-            row.appendChild(createCaseCell(entry, caseMeta, sliceConfig));
+            row.appendChild(
+              createCaseCell(entry, caseMeta, sliceConfig, { factor })
+            );
           } else {
             row.appendChild(createPrecisionPlaceholderCell());
           }
