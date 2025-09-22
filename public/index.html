@@ -193,21 +193,21 @@
         outline-offset: 2px;
       }
 
-      .revision-breakdown-toggle {
+      .scale-toggle {
         display: flex;
         justify-content: flex-end;
         align-items: center;
         gap: 0.75rem;
-        margin: 0 0 1.25rem;
-        font-size: 0.9rem;
+        margin: 0 0 2rem;
+        font-size: 0.95rem;
         color: var(--text-secondary);
       }
 
-      .revision-breakdown-toggle label {
+      .scale-toggle label {
         font-weight: 600;
       }
 
-      .revision-breakdown-toggle select {
+      .scale-toggle select {
         appearance: none;
         border: none;
         border-radius: 999px;
@@ -219,7 +219,7 @@
         font-size: 0.9rem;
       }
 
-      .revision-breakdown-toggle select:focus-visible {
+      .scale-toggle select:focus-visible {
         outline: 2px solid var(--accent);
         outline-offset: 2px;
       }
@@ -435,14 +435,14 @@
           width: 100%;
         }
 
-        .revision-breakdown-toggle {
+        .scale-toggle {
           justify-content: flex-start;
           flex-direction: column;
           align-items: flex-start;
           gap: 0.5rem;
         }
 
-        .revision-breakdown-toggle select {
+        .scale-toggle select {
           width: 100%;
         }
       }
@@ -459,6 +459,13 @@
     </header>
 
     <main>
+      <div class="scale-toggle">
+        <label for="breakdown-scale-select">Focus on scale</label>
+        <select id="breakdown-scale-select">
+          <option value="four_level">4-Point Detail</option>
+          <option value="gnp">G / N / P</option>
+        </select>
+      </div>
       <section class="summary-grid" aria-live="polite">
         <article class="metric-card" id="autograder-card">
           <div class="metric-title">Autograder Accuracy</div>
@@ -535,14 +542,6 @@
             <span>Share of revisions by outcome vs. ground truth</span>
           </div>
         </article>
-
-        <div class="revision-breakdown-toggle">
-          <label for="breakdown-scale-select">Breakdown scale</label>
-          <select id="breakdown-scale-select">
-            <option value="four_level">4-Point Detail</option>
-            <option value="gnp">G / N / P</option>
-          </select>
-        </div>
 
         <div class="table-card">
           <div class="table-controls">
@@ -860,8 +859,42 @@
         human_label: "Human label",
       };
 
+      let accuracyDataCache = null;
       let revisionDataCache = null;
-      let mistakeRepetitionFactor = 1;
+
+      function getCombinedScaleLabels() {
+        return {
+          four_level: "4-Point Detail",
+          gnp: "G / N / P",
+          ...(accuracyDataCache?.scale_labels || {}),
+          ...(revisionDataCache?.scale_labels || {}),
+        };
+      }
+
+      function getAvailableScaleKeys() {
+        const accuracyScales = accuracyDataCache?.scales
+          ? Object.keys(accuracyDataCache.scales)
+          : [];
+        const revisionScales = revisionDataCache?.scales
+          ? Object.keys(revisionDataCache.scales)
+          : [];
+        return Array.from(new Set([...accuracyScales, ...revisionScales]));
+      }
+
+      function getDefaultScaleKey() {
+        const available = getAvailableScaleKeys();
+        const preferences = [
+          revisionDataCache?.default_scale,
+          accuracyDataCache?.default_scale,
+          "four_level",
+        ];
+        for (const key of preferences) {
+          if (key && available.includes(key)) {
+            return key;
+          }
+        }
+        return available[0] || "four_level";
+      }
 
       if (precisionBreakdownSelect) {
         precisionBreakdownSelect.addEventListener("change", () => {
@@ -883,6 +916,8 @@
 
       if (breakdownScaleSelect) {
         breakdownScaleSelect.addEventListener("change", () => {
+          renderSummaryCards();
+          renderRevisionOverview();
           renderPrecisionTable();
           renderRecallTable();
         });
@@ -991,28 +1026,51 @@
         };
       }
 
+      function getAccuracyScaleData(accuracy, scaleKey) {
+        if (!accuracy) {
+          return null;
+        }
+        const scales = accuracy.scales || {};
+        if (
+          scaleKey &&
+          Object.prototype.hasOwnProperty.call(scales, scaleKey)
+        ) {
+          return scales[scaleKey];
+        }
+        if (
+          accuracy.default_scale &&
+          Object.prototype.hasOwnProperty.call(scales, accuracy.default_scale)
+        ) {
+          return scales[accuracy.default_scale];
+        }
+        return {
+          summary: accuracy.summary || {},
+          per_prompt: accuracy.per_prompt || [],
+        };
+      }
+
       function getSelectedScaleKey() {
-        const revision = revisionDataCache;
+        const available = getAvailableScaleKeys();
         const requested = breakdownScaleSelect?.value;
-        const available = revision?.scales
-          ? Object.keys(revision.scales)
-          : [];
         if (requested && available.includes(requested)) {
           return requested;
         }
-        return getRevisionDefaultScale(revision);
+        const fallback = getDefaultScaleKey();
+        if (breakdownScaleSelect && fallback) {
+          breakdownScaleSelect.value = fallback;
+        }
+        return fallback;
       }
 
-      function updateBreakdownScaleSelectOptions(revision) {
+      function updateBreakdownScaleSelectOptions() {
         if (!breakdownScaleSelect) {
-          return;
+          return false;
         }
 
-        const labels = revision?.scale_labels || {};
-        const available = revision?.scales
-          ? Object.keys(revision.scales)
-          : [];
-        const defaultScale = getRevisionDefaultScale(revision);
+        const labels = getCombinedScaleLabels();
+        const available = getAvailableScaleKeys();
+        const defaultScale = getDefaultScaleKey();
+        let selectionChanged = false;
 
         Array.from(breakdownScaleSelect.options || []).forEach((option) => {
           const value = option.value;
@@ -1020,19 +1078,34 @@
             return;
           }
 
-          if (!available.includes(value)) {
-            option.disabled = true;
-          } else {
-            option.disabled = false;
-            if (labels[value]) {
-              option.textContent = labels[value];
-            }
+          if (labels[value]) {
+            option.textContent = labels[value];
           }
+
+          if (!available.length) {
+            option.disabled = false;
+            return;
+          }
+
+          option.disabled = !available.includes(value);
         });
 
-        if (!available.includes(breakdownScaleSelect.value)) {
+        breakdownScaleSelect.disabled = available.length === 0;
+
+        if (available.length) {
+          if (!available.includes(breakdownScaleSelect.value) && defaultScale) {
+            breakdownScaleSelect.value = defaultScale;
+            selectionChanged = true;
+          }
+        } else if (
+          defaultScale &&
+          breakdownScaleSelect.value !== defaultScale
+        ) {
           breakdownScaleSelect.value = defaultScale;
+          selectionChanged = true;
         }
+
+        return selectionChanged;
       }
 
       function getSelectedBreakdown(selectEl) {
@@ -1228,6 +1301,23 @@
         }
       }
 
+      function renderSummaryCards() {
+        if (!accuracyDataCache) {
+          return;
+        }
+
+        const scaleKey = getSelectedScaleKey();
+        const scaleData =
+          getAccuracyScaleData(accuracyDataCache, scaleKey) || {};
+        const summary =
+          scaleData?.summary || accuracyDataCache.summary || {};
+        const promptEntries =
+          scaleData?.per_prompt || accuracyDataCache.per_prompt || [];
+
+        updateCards(summary);
+        updatePromptTable(promptEntries);
+      }
+
       function renderRevisionCases(cases = {}, totalRevisions = 0) {
         if (!revisionCaseChartEl) {
           return;
@@ -1371,6 +1461,130 @@
           row.appendChild(track);
           autograderRecallChartEl.appendChild(row);
         });
+      }
+
+      function renderRevisionOverview() {
+        if (!revisionDataCache) {
+          return;
+        }
+
+        const scaleKey = getSelectedScaleKey();
+        const scaleData =
+          getRevisionScaleData(revisionDataCache, scaleKey) || {};
+        const overall =
+          scaleData?.overall || revisionDataCache.overall || {};
+        const cases =
+          scaleData?.cases || revisionDataCache.cases || {};
+        const autograderBreakdown =
+          scaleData?.autograder_wrong_breakdown ||
+          revisionDataCache.autograder_wrong_breakdown ||
+          {};
+
+        const revisionCount = Number.isFinite(overall.revision_count)
+          ? overall.revision_count
+          : 0;
+        const totalEvaluations = Number.isFinite(overall.total_evaluations)
+          ? overall.total_evaluations
+          : null;
+        const correctRevisionCount = Number.isFinite(
+          overall.correct_revision_count
+        )
+          ? overall.correct_revision_count
+          : 0;
+        const autograderMistakeTotal = Number.isFinite(
+          overall.autograder_wrong_total
+        )
+          ? overall.autograder_wrong_total
+          : 0;
+        const correctedMistakes = Number.isFinite(
+          overall.corrected_autograder_wrong
+        )
+          ? overall.corrected_autograder_wrong
+          : 0;
+
+        const repetitionFactor = computeMistakeRepetitionFactor(scaleData);
+        const displayTotalMistakes = autograderMistakeTotal * repetitionFactor;
+        const displayCorrectedMistakes =
+          correctedMistakes * repetitionFactor;
+
+        if (revisionRateEl) {
+          revisionRateEl.textContent = formatPercent(overall.revision_rate);
+        }
+        if (revisionVolumeEl) {
+          revisionVolumeEl.textContent = `${formatCount(
+            revisionCount
+          )} revisions`;
+        }
+        if (revisionTotalEl) {
+          if (totalEvaluations !== null) {
+            const noun =
+              totalEvaluations === 1 ? "human review" : "human reviews";
+            revisionTotalEl.textContent = `Out of ${formatCount(
+              totalEvaluations
+            )} ${noun}`;
+          } else {
+            revisionTotalEl.textContent = "Total human reviews unavailable.";
+          }
+        }
+
+        if (revisionPrecisionEl) {
+          revisionPrecisionEl.textContent = formatPercent(
+            overall.correct_revision_precision
+          );
+        }
+        if (revisionPrecisionDetailEl) {
+          revisionPrecisionDetailEl.textContent = `${formatCount(
+            correctRevisionCount
+          )} correct revisions`;
+        }
+        if (revisionPrecisionFootnoteEl) {
+          if (revisionCount) {
+            revisionPrecisionFootnoteEl.textContent = `Out of ${formatCount(
+              revisionCount
+            )} total revisions.`;
+          } else {
+            revisionPrecisionFootnoteEl.textContent =
+              "No revisions recorded.";
+          }
+        }
+
+        if (autograderRecallEl) {
+          autograderRecallEl.textContent = formatPercent(
+            overall.autograder_wrong_recall
+          );
+        }
+        if (autograderRecallDetailEl) {
+          autograderRecallDetailEl.textContent = `${formatCount(
+            displayCorrectedMistakes
+          )} mistake evaluations corrected`;
+        }
+        if (autograderRecallFootnoteEl) {
+          if (autograderMistakeTotal) {
+            const noun =
+              autograderMistakeTotal === 1 ? "mistake" : "mistakes";
+            if (repetitionFactor > 1) {
+              autograderRecallFootnoteEl.textContent = `Out of ${formatCount(
+                displayTotalMistakes
+              )} autograder mistake evaluations (${repetitionFactor}× ${formatCount(
+                autograderMistakeTotal
+              )} ${noun}).`;
+            } else {
+              autograderRecallFootnoteEl.textContent = `Out of ${formatCount(
+                autograderMistakeTotal
+              )} autograder ${noun}.`;
+            }
+          } else {
+            autograderRecallFootnoteEl.textContent =
+              "No autograder mistakes detected.";
+          }
+        }
+
+        renderRevisionCases(cases, revisionCount);
+        renderAutograderRecallBreakdown(
+          autograderBreakdown,
+          autograderMistakeTotal,
+          repetitionFactor
+        );
       }
 
       function createCaseCell(entry, caseMeta, sliceConfig) {
@@ -1858,8 +2072,8 @@
         }
 
         revisionDataCache = revision;
-        updateBreakdownScaleSelectOptions(revision);
-        mistakeRepetitionFactor = computeMistakeRepetitionFactor(revision);
+        updateBreakdownScaleSelectOptions();
+        renderSummaryCards();
 
         if (!revision) {
           revisionSection.hidden = true;
@@ -1918,100 +2132,7 @@
           recallSection.hidden = false;
         }
 
-        const overall = revision.overall || {};
-        const revisionCount = Number.isFinite(overall.revision_count)
-          ? overall.revision_count
-          : 0;
-        const totalEvaluations = Number.isFinite(overall.total_evaluations)
-          ? overall.total_evaluations
-          : null;
-        const correctRevisionCount = Number.isFinite(overall.correct_revision_count)
-          ? overall.correct_revision_count
-          : 0;
-        const autograderMistakeTotal = Number.isFinite(
-          overall.autograder_wrong_total
-        )
-          ? overall.autograder_wrong_total
-          : 0;
-        const correctedMistakes = Number.isFinite(
-          overall.corrected_autograder_wrong
-        )
-          ? overall.corrected_autograder_wrong
-          : 0;
-
-        const repetitionFactor =
-          Number.isFinite(mistakeRepetitionFactor) && mistakeRepetitionFactor > 0
-            ? mistakeRepetitionFactor
-            : 1;
-        const displayTotalMistakes = autograderMistakeTotal * repetitionFactor;
-        const displayCorrectedMistakes = correctedMistakes * repetitionFactor;
-
-        revisionRateEl.textContent = formatPercent(overall.revision_rate);
-        revisionVolumeEl.textContent = `${formatCount(revisionCount)} revisions`;
-        if (totalEvaluations !== null) {
-          const noun = totalEvaluations === 1 ? "human review" : "human reviews";
-          revisionTotalEl.textContent = `Out of ${formatCount(totalEvaluations)} ${noun}`;
-        } else {
-          revisionTotalEl.textContent = "Total human reviews unavailable.";
-        }
-
-        if (revisionPrecisionEl) {
-          revisionPrecisionEl.textContent = formatPercent(
-            overall.correct_revision_precision
-          );
-        }
-        if (revisionPrecisionDetailEl) {
-          revisionPrecisionDetailEl.textContent = `${formatCount(
-            correctRevisionCount
-          )} correct revisions`;
-        }
-        if (revisionPrecisionFootnoteEl) {
-          if (revisionCount) {
-            revisionPrecisionFootnoteEl.textContent = `Out of ${formatCount(
-              revisionCount
-            )} total revisions.`;
-          } else {
-            revisionPrecisionFootnoteEl.textContent = "No revisions recorded.";
-          }
-        }
-
-        if (autograderRecallEl) {
-          autograderRecallEl.textContent = formatPercent(
-            overall.autograder_wrong_recall
-          );
-        }
-        if (autograderRecallDetailEl) {
-          autograderRecallDetailEl.textContent = `${formatCount(
-            displayCorrectedMistakes
-          )} mistake evaluations corrected`;
-        }
-        if (autograderRecallFootnoteEl) {
-          if (autograderMistakeTotal) {
-            const noun =
-              autograderMistakeTotal === 1 ? "mistake" : "mistakes";
-            if (repetitionFactor > 1) {
-              autograderRecallFootnoteEl.textContent = `Out of ${formatCount(
-                displayTotalMistakes
-              )} autograder mistake evaluations (${repetitionFactor}× ${formatCount(
-                autograderMistakeTotal
-              )} ${noun}).`;
-            } else {
-              autograderRecallFootnoteEl.textContent = `Out of ${formatCount(
-                autograderMistakeTotal
-              )} autograder ${noun}.`;
-            }
-          } else {
-            autograderRecallFootnoteEl.textContent =
-              "No autograder mistakes detected.";
-          }
-        }
-
-        renderRevisionCases(revision.cases, revisionCount);
-        renderAutograderRecallBreakdown(
-          revision.autograder_wrong_breakdown,
-          autograderMistakeTotal,
-          repetitionFactor
-        );
+        renderRevisionOverview();
         renderPrecisionTable();
         renderRecallTable();
       }
@@ -2092,20 +2213,24 @@
       async function loadMetrics() {
         try {
           const data = await fetchJson("accuracy.json");
-          updateCards(data.summary || {});
-          updatePromptTable(data.per_prompt || []);
+          accuracyDataCache = data;
           if (errorEl) {
             errorEl.hidden = true;
             errorEl.textContent = "";
           }
+          updateBreakdownScaleSelectOptions();
+          renderSummaryCards();
         } catch (error) {
           console.error(error);
+          accuracyDataCache = null;
           if (errorEl) {
             errorEl.hidden = false;
             errorEl.textContent =
               "We were unable to load the latest accuracy metrics. Confirm that accuracy.json has been generated.";
           }
-          promptTableBody.innerHTML = "";
+          updateCards({});
+          updatePromptTable([]);
+          updateBreakdownScaleSelectOptions();
           updateRevisionInsights(null);
           return;
         }
