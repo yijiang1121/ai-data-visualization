@@ -566,19 +566,22 @@
                   <th scope="col" id="precision-count-heading">Revisions</th>
                   <th scope="col" id="precision-accuracy-heading">Revision precision</th>
                   <th scope="col" class="precision-case-heading" data-case-index="0">
-                    Auto wrong → Human correct
+                    Auto wrong, human correct
                   </th>
                   <th scope="col" class="precision-case-heading" data-case-index="1">
-                    Auto correct → Human wrong
+                    Auto correct, human wrong
                   </th>
                   <th scope="col" class="precision-case-heading" data-case-index="2">
+                    Both correct
+                  </th>
+                  <th scope="col" class="precision-case-heading" data-case-index="3">
                     Both wrong
                   </th>
                 </tr>
               </thead>
               <tbody id="precision-table-body">
                 <tr>
-                  <td colspan="7" class="muted">Loading revision insights…</td>
+                  <td colspan="8" class="muted">Loading revision insights…</td>
                 </tr>
               </tbody>
             </table>
@@ -739,20 +742,23 @@
       const breakdownScaleSelect = document.getElementById("breakdown-scale-select");
 
       const CASE_LABELS = {
-        autograder_wrong_human_correct: "Autograder wrong → human corrected",
-        autograder_correct_human_wrong: "Autograder correct → human wrong",
-        both_wrong: "Both graders wrong",
+        autograder_wrong_human_correct: "Auto wrong, human correct",
+        autograder_correct_human_wrong: "Auto correct, human wrong",
+        both_correct: "Both correct",
+        both_wrong: "Both wrong",
       };
 
       const CASE_CLASS_MAP = {
         autograder_wrong_human_correct: "success",
         autograder_correct_human_wrong: "info",
+        both_correct: "success",
         both_wrong: "warning",
       };
 
       const CASE_ORDER = [
         ["autograder_wrong_human_correct", "success"],
         ["autograder_correct_human_wrong", "info"],
+        ["both_correct", "success"],
         ["both_wrong", "warning"],
       ];
 
@@ -780,14 +786,20 @@
           cases: [
             {
               key: "autograder_wrong_human_correct",
-              label: "Auto wrong → Human correct",
+              label: "Auto wrong, human correct",
               variant: "success",
               shareField: "share_of_revisions",
             },
             {
               key: "autograder_correct_human_wrong",
-              label: "Auto correct → Human wrong",
+              label: "Auto correct, human wrong",
               variant: "info",
+              shareField: "share_of_revisions",
+            },
+            {
+              key: "both_correct",
+              label: "Both correct",
+              variant: "success",
               shareField: "share_of_revisions",
             },
             {
@@ -817,14 +829,26 @@
             "No agreement data available for this dataset.",
           cases: [
             {
+              key: "autograder_wrong_human_correct",
+              label: "Auto wrong, human correct",
+              variant: "success",
+              shareField: "share_of_agreements",
+            },
+            {
+              key: "autograder_correct_human_wrong",
+              label: "Auto correct, human wrong",
+              variant: "info",
+              shareField: "share_of_agreements",
+            },
+            {
               key: "both_correct",
-              label: "Both correct vs. ground truth",
+              label: "Both correct",
               variant: "success",
               shareField: "share_of_agreements",
             },
             {
               key: "both_wrong",
-              label: "Both wrong vs. ground truth",
+              label: "Both wrong",
               variant: "warning",
               shareField: "share_of_agreements",
             },

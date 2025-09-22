@@ -30,6 +30,12 @@
           "share_of_total": 0.1773,
           "share_of_autograder_wrong": null
         },
+        "both_correct": {
+          "count": 0,
+          "share_of_revisions": 0.0,
+          "share_of_total": 0.0,
+          "share_of_autograder_wrong": null
+        },
         "both_wrong": {
           "count": 123,
           "share_of_revisions": 0.1011,
@@ -76,6 +82,12 @@
                 "count": 145,
                 "share_of_revisions": 0.516,
                 "share_of_total": 0.1933,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -129,6 +141,12 @@
                 "share_of_total": 0.16,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 34,
                 "share_of_revisions": 0.1093,
@@ -180,6 +198,12 @@
                 "share_of_total": 0.1933,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 26,
                 "share_of_revisions": 0.0844,
@@ -229,6 +253,12 @@
                 "count": 122,
                 "share_of_revisions": 0.3849,
                 "share_of_total": 0.1627,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -284,6 +314,12 @@
                 "share_of_total": 0.1764,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 41,
                 "share_of_revisions": 0.1206,
@@ -333,6 +369,12 @@
                 "count": 120,
                 "share_of_revisions": 0.4181,
                 "share_of_total": 0.1633,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -386,6 +428,12 @@
                 "share_of_total": 0.1965,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 26,
                 "share_of_revisions": 0.0864,
@@ -435,6 +483,12 @@
                 "count": 122,
                 "share_of_revisions": 0.4221,
                 "share_of_total": 0.173,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -490,6 +544,12 @@
                 "share_of_total": 0.1597,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 29,
                 "share_of_revisions": 0.1103,
@@ -539,6 +599,12 @@
                 "count": 143,
                 "share_of_revisions": 0.4256,
                 "share_of_total": 0.1824,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -592,6 +658,12 @@
                 "share_of_total": 0.1628,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 33,
                 "share_of_revisions": 0.1146,
@@ -641,6 +713,12 @@
                 "count": 152,
                 "share_of_revisions": 0.4606,
                 "share_of_total": 0.2038,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -697,6 +775,12 @@
               "share_of_total": 0.1933,
               "share_of_autograder_wrong": null
             },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
+              "share_of_autograder_wrong": null
+            },
             "both_wrong": {
               "count": 21,
               "share_of_revisions": 0.0747,
@@ -746,6 +830,12 @@
               "count": 120,
               "share_of_revisions": 0.3859,
               "share_of_total": 0.16,
+              "share_of_autograder_wrong": null
+            },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
               "share_of_autograder_wrong": null
             },
             "both_wrong": {
@@ -799,6 +889,12 @@
               "share_of_total": 0.1933,
               "share_of_autograder_wrong": null
             },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
+              "share_of_autograder_wrong": null
+            },
             "both_wrong": {
               "count": 26,
               "share_of_revisions": 0.0844,
@@ -848,6 +944,12 @@
               "count": 122,
               "share_of_revisions": 0.3849,
               "share_of_total": 0.1627,
+              "share_of_autograder_wrong": null
+            },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
               "share_of_autograder_wrong": null
             },
             "both_wrong": {
@@ -1307,6 +1409,12 @@
               "share_of_total": 0.1773,
               "share_of_autograder_wrong": null
             },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
+              "share_of_autograder_wrong": null
+            },
             "both_wrong": {
               "count": 123,
               "share_of_revisions": 0.1011,
@@ -1353,6 +1461,12 @@
                     "count": 145,
                     "share_of_revisions": 0.516,
                     "share_of_total": 0.1933,
+                    "share_of_autograder_wrong": null
+                  },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
                     "share_of_autograder_wrong": null
                   },
                   "both_wrong": {
@@ -1406,6 +1520,12 @@
                     "share_of_total": 0.16,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 34,
                     "share_of_revisions": 0.1093,
@@ -1457,6 +1577,12 @@
                     "share_of_total": 0.1933,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 26,
                     "share_of_revisions": 0.0844,
@@ -1506,6 +1632,12 @@
                     "count": 122,
                     "share_of_revisions": 0.3849,
                     "share_of_total": 0.1627,
+                    "share_of_autograder_wrong": null
+                  },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
                     "share_of_autograder_wrong": null
                   },
                   "both_wrong": {
@@ -1561,6 +1693,12 @@
                     "share_of_total": 0.1764,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 41,
                     "share_of_revisions": 0.1206,
@@ -1610,6 +1748,12 @@
                     "count": 120,
                     "share_of_revisions": 0.4181,
                     "share_of_total": 0.1633,
+                    "share_of_autograder_wrong": null
+                  },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
                     "share_of_autograder_wrong": null
                   },
                   "both_wrong": {
@@ -1663,6 +1807,12 @@
                     "share_of_total": 0.1965,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 26,
                     "share_of_revisions": 0.0864,
@@ -1712,6 +1862,12 @@
                     "count": 122,
                     "share_of_revisions": 0.4221,
                     "share_of_total": 0.173,
+                    "share_of_autograder_wrong": null
+                  },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
                     "share_of_autograder_wrong": null
                   },
                   "both_wrong": {
@@ -1767,6 +1923,12 @@
                     "share_of_total": 0.1597,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 29,
                     "share_of_revisions": 0.1103,
@@ -1816,6 +1978,12 @@
                     "count": 143,
                     "share_of_revisions": 0.4256,
                     "share_of_total": 0.1824,
+                    "share_of_autograder_wrong": null
+                  },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
                     "share_of_autograder_wrong": null
                   },
                   "both_wrong": {
@@ -1869,6 +2037,12 @@
                     "share_of_total": 0.1628,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 33,
                     "share_of_revisions": 0.1146,
@@ -1918,6 +2092,12 @@
                     "count": 152,
                     "share_of_revisions": 0.4606,
                     "share_of_total": 0.2038,
+                    "share_of_autograder_wrong": null
+                  },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
                     "share_of_autograder_wrong": null
                   },
                   "both_wrong": {
@@ -1974,6 +2154,12 @@
                   "share_of_total": 0.1933,
                   "share_of_autograder_wrong": null
                 },
+                "both_correct": {
+                  "count": 0,
+                  "share_of_revisions": 0.0,
+                  "share_of_total": 0.0,
+                  "share_of_autograder_wrong": null
+                },
                 "both_wrong": {
                   "count": 21,
                   "share_of_revisions": 0.0747,
@@ -2023,6 +2209,12 @@
                   "count": 120,
                   "share_of_revisions": 0.3859,
                   "share_of_total": 0.16,
+                  "share_of_autograder_wrong": null
+                },
+                "both_correct": {
+                  "count": 0,
+                  "share_of_revisions": 0.0,
+                  "share_of_total": 0.0,
                   "share_of_autograder_wrong": null
                 },
                 "both_wrong": {
@@ -2076,6 +2268,12 @@
                   "share_of_total": 0.1933,
                   "share_of_autograder_wrong": null
                 },
+                "both_correct": {
+                  "count": 0,
+                  "share_of_revisions": 0.0,
+                  "share_of_total": 0.0,
+                  "share_of_autograder_wrong": null
+                },
                 "both_wrong": {
                   "count": 26,
                   "share_of_revisions": 0.0844,
@@ -2125,6 +2323,12 @@
                   "count": 122,
                   "share_of_revisions": 0.3849,
                   "share_of_total": 0.1627,
+                  "share_of_autograder_wrong": null
+                },
+                "both_correct": {
+                  "count": 0,
+                  "share_of_revisions": 0.0,
+                  "share_of_total": 0.0,
                   "share_of_autograder_wrong": null
                 },
                 "both_wrong": {
@@ -2586,6 +2790,12 @@
           "share_of_total": 0.153,
           "share_of_autograder_wrong": null
         },
+        "both_correct": {
+          "count": 0,
+          "share_of_revisions": 0.0,
+          "share_of_total": 0.0,
+          "share_of_autograder_wrong": null
+        },
         "both_wrong": {
           "count": 70,
           "share_of_revisions": 0.0689,
@@ -2632,6 +2842,12 @@
                 "count": 217,
                 "share_of_revisions": 0.528,
                 "share_of_total": 0.1447,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -2685,6 +2901,12 @@
                 "share_of_total": 0.1627,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 30,
                 "share_of_revisions": 0.0984,
@@ -2734,6 +2956,12 @@
                 "count": 120,
                 "share_of_revisions": 0.4,
                 "share_of_total": 0.16,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -2789,6 +3017,12 @@
                 "share_of_total": 0.1391,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 27,
                 "share_of_revisions": 0.0614,
@@ -2840,6 +3074,12 @@
                 "share_of_total": 0.173,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 21,
                 "share_of_revisions": 0.0727,
@@ -2889,6 +3129,12 @@
                 "count": 120,
                 "share_of_revisions": 0.4181,
                 "share_of_total": 0.1633,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -2944,6 +3190,12 @@
                 "share_of_total": 0.1,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 26,
                 "share_of_revisions": 0.0743,
@@ -2995,6 +3247,12 @@
                 "share_of_total": 0.2118,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 19,
                 "share_of_revisions": 0.0576,
@@ -3044,6 +3302,12 @@
                 "count": 154,
                 "share_of_revisions": 0.4583,
                 "share_of_total": 0.1964,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -3100,6 +3364,12 @@
               "share_of_total": 0.1447,
               "share_of_autograder_wrong": null
             },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
+              "share_of_autograder_wrong": null
+            },
             "both_wrong": {
               "count": 17,
               "share_of_revisions": 0.0414,
@@ -3151,6 +3421,12 @@
               "share_of_total": 0.1627,
               "share_of_autograder_wrong": null
             },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
+              "share_of_autograder_wrong": null
+            },
             "both_wrong": {
               "count": 30,
               "share_of_revisions": 0.0984,
@@ -3200,6 +3476,12 @@
               "count": 120,
               "share_of_revisions": 0.4,
               "share_of_total": 0.16,
+              "share_of_autograder_wrong": null
+            },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
               "share_of_autograder_wrong": null
             },
             "both_wrong": {
@@ -3567,6 +3849,12 @@
               "share_of_total": 0.153,
               "share_of_autograder_wrong": null
             },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
+              "share_of_autograder_wrong": null
+            },
             "both_wrong": {
               "count": 70,
               "share_of_revisions": 0.0689,
@@ -3613,6 +3901,12 @@
                     "count": 217,
                     "share_of_revisions": 0.528,
                     "share_of_total": 0.1447,
+                    "share_of_autograder_wrong": null
+                  },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
                     "share_of_autograder_wrong": null
                   },
                   "both_wrong": {
@@ -3666,6 +3960,12 @@
                     "share_of_total": 0.1627,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 30,
                     "share_of_revisions": 0.0984,
@@ -3715,6 +4015,12 @@
                     "count": 120,
                     "share_of_revisions": 0.4,
                     "share_of_total": 0.16,
+                    "share_of_autograder_wrong": null
+                  },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
                     "share_of_autograder_wrong": null
                   },
                   "both_wrong": {
@@ -3770,6 +4076,12 @@
                     "share_of_total": 0.1391,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 27,
                     "share_of_revisions": 0.0614,
@@ -3821,6 +4133,12 @@
                     "share_of_total": 0.173,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 21,
                     "share_of_revisions": 0.0727,
@@ -3870,6 +4188,12 @@
                     "count": 120,
                     "share_of_revisions": 0.4181,
                     "share_of_total": 0.1633,
+                    "share_of_autograder_wrong": null
+                  },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
                     "share_of_autograder_wrong": null
                   },
                   "both_wrong": {
@@ -3925,6 +4249,12 @@
                     "share_of_total": 0.1,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 26,
                     "share_of_revisions": 0.0743,
@@ -3976,6 +4306,12 @@
                     "share_of_total": 0.2118,
                     "share_of_autograder_wrong": null
                   },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
+                    "share_of_autograder_wrong": null
+                  },
                   "both_wrong": {
                     "count": 19,
                     "share_of_revisions": 0.0576,
@@ -4025,6 +4361,12 @@
                     "count": 154,
                     "share_of_revisions": 0.4583,
                     "share_of_total": 0.1964,
+                    "share_of_autograder_wrong": null
+                  },
+                  "both_correct": {
+                    "count": 0,
+                    "share_of_revisions": 0.0,
+                    "share_of_total": 0.0,
                     "share_of_autograder_wrong": null
                   },
                   "both_wrong": {
@@ -4081,6 +4423,12 @@
                   "share_of_total": 0.1447,
                   "share_of_autograder_wrong": null
                 },
+                "both_correct": {
+                  "count": 0,
+                  "share_of_revisions": 0.0,
+                  "share_of_total": 0.0,
+                  "share_of_autograder_wrong": null
+                },
                 "both_wrong": {
                   "count": 17,
                   "share_of_revisions": 0.0414,
@@ -4132,6 +4480,12 @@
                   "share_of_total": 0.1627,
                   "share_of_autograder_wrong": null
                 },
+                "both_correct": {
+                  "count": 0,
+                  "share_of_revisions": 0.0,
+                  "share_of_total": 0.0,
+                  "share_of_autograder_wrong": null
+                },
                 "both_wrong": {
                   "count": 30,
                   "share_of_revisions": 0.0984,
@@ -4181,6 +4535,12 @@
                   "count": 120,
                   "share_of_revisions": 0.4,
                   "share_of_total": 0.16,
+                  "share_of_autograder_wrong": null
+                },
+                "both_correct": {
+                  "count": 0,
+                  "share_of_revisions": 0.0,
+                  "share_of_total": 0.0,
                   "share_of_autograder_wrong": null
                 },
                 "both_wrong": {
@@ -4550,6 +4910,12 @@
       "share_of_total": 0.1773,
       "share_of_autograder_wrong": null
     },
+    "both_correct": {
+      "count": 0,
+      "share_of_revisions": 0.0,
+      "share_of_total": 0.0,
+      "share_of_autograder_wrong": null
+    },
     "both_wrong": {
       "count": 123,
       "share_of_revisions": 0.1011,
@@ -4596,6 +4962,12 @@
             "count": 145,
             "share_of_revisions": 0.516,
             "share_of_total": 0.1933,
+            "share_of_autograder_wrong": null
+          },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
             "share_of_autograder_wrong": null
           },
           "both_wrong": {
@@ -4649,6 +5021,12 @@
             "share_of_total": 0.16,
             "share_of_autograder_wrong": null
           },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
+            "share_of_autograder_wrong": null
+          },
           "both_wrong": {
             "count": 34,
             "share_of_revisions": 0.1093,
@@ -4700,6 +5078,12 @@
             "share_of_total": 0.1933,
             "share_of_autograder_wrong": null
           },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
+            "share_of_autograder_wrong": null
+          },
           "both_wrong": {
             "count": 26,
             "share_of_revisions": 0.0844,
@@ -4749,6 +5133,12 @@
             "count": 122,
             "share_of_revisions": 0.3849,
             "share_of_total": 0.1627,
+            "share_of_autograder_wrong": null
+          },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
             "share_of_autograder_wrong": null
           },
           "both_wrong": {
@@ -4804,6 +5194,12 @@
             "share_of_total": 0.1764,
             "share_of_autograder_wrong": null
           },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
+            "share_of_autograder_wrong": null
+          },
           "both_wrong": {
             "count": 41,
             "share_of_revisions": 0.1206,
@@ -4853,6 +5249,12 @@
             "count": 120,
             "share_of_revisions": 0.4181,
             "share_of_total": 0.1633,
+            "share_of_autograder_wrong": null
+          },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
             "share_of_autograder_wrong": null
           },
           "both_wrong": {
@@ -4906,6 +5308,12 @@
             "share_of_total": 0.1965,
             "share_of_autograder_wrong": null
           },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
+            "share_of_autograder_wrong": null
+          },
           "both_wrong": {
             "count": 26,
             "share_of_revisions": 0.0864,
@@ -4955,6 +5363,12 @@
             "count": 122,
             "share_of_revisions": 0.4221,
             "share_of_total": 0.173,
+            "share_of_autograder_wrong": null
+          },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
             "share_of_autograder_wrong": null
           },
           "both_wrong": {
@@ -5010,6 +5424,12 @@
             "share_of_total": 0.1597,
             "share_of_autograder_wrong": null
           },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
+            "share_of_autograder_wrong": null
+          },
           "both_wrong": {
             "count": 29,
             "share_of_revisions": 0.1103,
@@ -5059,6 +5479,12 @@
             "count": 143,
             "share_of_revisions": 0.4256,
             "share_of_total": 0.1824,
+            "share_of_autograder_wrong": null
+          },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
             "share_of_autograder_wrong": null
           },
           "both_wrong": {
@@ -5112,6 +5538,12 @@
             "share_of_total": 0.1628,
             "share_of_autograder_wrong": null
           },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
+            "share_of_autograder_wrong": null
+          },
           "both_wrong": {
             "count": 33,
             "share_of_revisions": 0.1146,
@@ -5161,6 +5593,12 @@
             "count": 152,
             "share_of_revisions": 0.4606,
             "share_of_total": 0.2038,
+            "share_of_autograder_wrong": null
+          },
+          "both_correct": {
+            "count": 0,
+            "share_of_revisions": 0.0,
+            "share_of_total": 0.0,
             "share_of_autograder_wrong": null
           },
           "both_wrong": {
@@ -5217,6 +5655,12 @@
           "share_of_total": 0.1933,
           "share_of_autograder_wrong": null
         },
+        "both_correct": {
+          "count": 0,
+          "share_of_revisions": 0.0,
+          "share_of_total": 0.0,
+          "share_of_autograder_wrong": null
+        },
         "both_wrong": {
           "count": 21,
           "share_of_revisions": 0.0747,
@@ -5266,6 +5710,12 @@
           "count": 120,
           "share_of_revisions": 0.3859,
           "share_of_total": 0.16,
+          "share_of_autograder_wrong": null
+        },
+        "both_correct": {
+          "count": 0,
+          "share_of_revisions": 0.0,
+          "share_of_total": 0.0,
           "share_of_autograder_wrong": null
         },
         "both_wrong": {
@@ -5319,6 +5769,12 @@
           "share_of_total": 0.1933,
           "share_of_autograder_wrong": null
         },
+        "both_correct": {
+          "count": 0,
+          "share_of_revisions": 0.0,
+          "share_of_total": 0.0,
+          "share_of_autograder_wrong": null
+        },
         "both_wrong": {
           "count": 26,
           "share_of_revisions": 0.0844,
@@ -5368,6 +5824,12 @@
           "count": 122,
           "share_of_revisions": 0.3849,
           "share_of_total": 0.1627,
+          "share_of_autograder_wrong": null
+        },
+        "both_correct": {
+          "count": 0,
+          "share_of_revisions": 0.0,
+          "share_of_total": 0.0,
           "share_of_autograder_wrong": null
         },
         "both_wrong": {
@@ -5827,6 +6289,12 @@
           "share_of_total": 0.1773,
           "share_of_autograder_wrong": null
         },
+        "both_correct": {
+          "count": 0,
+          "share_of_revisions": 0.0,
+          "share_of_total": 0.0,
+          "share_of_autograder_wrong": null
+        },
         "both_wrong": {
           "count": 123,
           "share_of_revisions": 0.1011,
@@ -5873,6 +6341,12 @@
                 "count": 145,
                 "share_of_revisions": 0.516,
                 "share_of_total": 0.1933,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -5926,6 +6400,12 @@
                 "share_of_total": 0.16,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 34,
                 "share_of_revisions": 0.1093,
@@ -5977,6 +6457,12 @@
                 "share_of_total": 0.1933,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 26,
                 "share_of_revisions": 0.0844,
@@ -6026,6 +6512,12 @@
                 "count": 122,
                 "share_of_revisions": 0.3849,
                 "share_of_total": 0.1627,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -6081,6 +6573,12 @@
                 "share_of_total": 0.1764,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 41,
                 "share_of_revisions": 0.1206,
@@ -6130,6 +6628,12 @@
                 "count": 120,
                 "share_of_revisions": 0.4181,
                 "share_of_total": 0.1633,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -6183,6 +6687,12 @@
                 "share_of_total": 0.1965,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 26,
                 "share_of_revisions": 0.0864,
@@ -6232,6 +6742,12 @@
                 "count": 122,
                 "share_of_revisions": 0.4221,
                 "share_of_total": 0.173,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -6287,6 +6803,12 @@
                 "share_of_total": 0.1597,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 29,
                 "share_of_revisions": 0.1103,
@@ -6336,6 +6858,12 @@
                 "count": 143,
                 "share_of_revisions": 0.4256,
                 "share_of_total": 0.1824,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -6389,6 +6917,12 @@
                 "share_of_total": 0.1628,
                 "share_of_autograder_wrong": null
               },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
+                "share_of_autograder_wrong": null
+              },
               "both_wrong": {
                 "count": 33,
                 "share_of_revisions": 0.1146,
@@ -6438,6 +6972,12 @@
                 "count": 152,
                 "share_of_revisions": 0.4606,
                 "share_of_total": 0.2038,
+                "share_of_autograder_wrong": null
+              },
+              "both_correct": {
+                "count": 0,
+                "share_of_revisions": 0.0,
+                "share_of_total": 0.0,
                 "share_of_autograder_wrong": null
               },
               "both_wrong": {
@@ -6494,6 +7034,12 @@
               "share_of_total": 0.1933,
               "share_of_autograder_wrong": null
             },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
+              "share_of_autograder_wrong": null
+            },
             "both_wrong": {
               "count": 21,
               "share_of_revisions": 0.0747,
@@ -6543,6 +7089,12 @@
               "count": 120,
               "share_of_revisions": 0.3859,
               "share_of_total": 0.16,
+              "share_of_autograder_wrong": null
+            },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
               "share_of_autograder_wrong": null
             },
             "both_wrong": {
@@ -6596,6 +7148,12 @@
               "share_of_total": 0.1933,
               "share_of_autograder_wrong": null
             },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
+              "share_of_autograder_wrong": null
+            },
             "both_wrong": {
               "count": 26,
               "share_of_revisions": 0.0844,
@@ -6645,6 +7203,12 @@
               "count": 122,
               "share_of_revisions": 0.3849,
               "share_of_total": 0.1627,
+              "share_of_autograder_wrong": null
+            },
+            "both_correct": {
+              "count": 0,
+              "share_of_revisions": 0.0,
+              "share_of_total": 0.0,
               "share_of_autograder_wrong": null
             },
             "both_wrong": {
@@ -7080,5 +7644,5 @@
       ]
     }
   },
-  "generated_at": "2025-09-22T19:10:22+00:00"
+  "generated_at": "2025-09-22T19:57:25+00:00"
 }

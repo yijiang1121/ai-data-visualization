@@ -70,6 +70,7 @@ LABEL_COLUMNS = {
 CASE_CONFIGS: Tuple[Tuple[str, bool], ...] = (
     ("autograder_wrong_human_correct", True),
     ("autograder_correct_human_wrong", False),
+    ("both_correct", False),
     ("both_wrong", True),
 )
 
@@ -380,6 +381,7 @@ def _build_case_masks(
     return {
         "autograder_wrong_human_correct": autograder_wrong & human_matches & revisions,
         "autograder_correct_human_wrong": autograder_matches & human_wrong & revisions,
+        "both_correct": autograder_matches & human_matches & revisions,
         "both_wrong": autograder_wrong & human_wrong & revisions,
     }
 
