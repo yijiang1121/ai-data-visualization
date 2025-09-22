@@ -1969,6 +1969,80 @@
         return totals;
       }
 
+      function renderPrecisionTable() {
+        if (!precisionTableBody) {
+          return;
+        }
+
+        precisionTableBody.innerHTML = "";
+
+        const scaleKey = getSelectedScaleKey();
+        const breakdownKey = getSelectedBreakdown(precisionBreakdownSelect);
+        const sliceKey = getPrecisionSliceKey();
+        const sliceConfig = getPrecisionSliceConfig(sliceKey);
+        const breakdownHeading = getBreakdownHeading(breakdownKey, scaleKey);
+
+        updatePrecisionHeaders(sliceConfig, breakdownHeading);
+
+        const entries = getBreakdownEntries(
+          revisionDataCache,
+          breakdownKey,
+          scaleKey,
+          sliceKey
+        );
+
+        if (!entries || entries.length === 0) {
+          if (precisionEmpty) {
+            precisionEmpty.hidden = false;
+            precisionEmpty.textContent =
+              sliceConfig.datasetEmptyMessage ||
+              "No revision data available for this dataset.";
+          }
+
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.colSpan = 3 + PRECISION_MAX_CASE_COLUMNS;
+          cell.className = "muted";
+          cell.textContent =
+            sliceConfig.emptyMessage || "No revision data available.";
+          row.appendChild(cell);
+          precisionTableBody.appendChild(row);
+          return;
+        }
+
+        if (precisionEmpty) {
+          precisionEmpty.hidden = true;
+        }
+
+        const sortField =
+          sliceConfig.sortField ||
+          sliceConfig.countField ||
+          sliceConfig.rateField ||
+          null;
+
+        const sortedEntries = entries.slice();
+        if (sortField) {
+          sortedEntries.sort((a, b) => {
+            const aValue = Number.isFinite(a?.[sortField]) ? a[sortField] : 0;
+            const bValue = Number.isFinite(b?.[sortField]) ? b[sortField] : 0;
+            return bValue - aValue;
+          });
+        }
+
+        sortedEntries.forEach((entry) => {
+          precisionTableBody.appendChild(
+            buildPrecisionRow(entry, sliceConfig)
+          );
+        });
+
+        const totalsEntry = computePrecisionTotals(entries, sliceConfig);
+        if (totalsEntry) {
+          precisionTableBody.appendChild(
+            buildPrecisionRow(totalsEntry, sliceConfig)
+          );
+        }
+      }
+
       function buildPrecisionRow(entry, sliceConfig) {
         if (!entry) {
           return document.createElement("tr");
