@@ -633,8 +633,7 @@
               <thead>
                 <tr>
                   <th scope="col" id="recall-label-heading">Ground truth</th>
-                  <th scope="col" id="recall-rate-heading">Autograder mistake recall</th>
-                  <th scope="col" id="recall-count-heading">Mistake evaluations</th>
+                  <th scope="col" id="recall-count-heading">Auto wrong</th>
                   <th scope="col" class="recall-case-heading" data-case-index="0">
                     Auto wrong, human correct
                   </th>
@@ -645,7 +644,10 @@
                     Both correct
                   </th>
                   <th scope="col" class="recall-case-heading" data-case-index="3">
-                    Both wrong
+                    Both wrong, human revised
+                  </th>
+                  <th scope="col" class="recall-case-heading" data-case-index="4">
+                    Both wrong, no revision
                   </th>
                 </tr>
               </thead>
@@ -748,7 +750,6 @@
       const recallTableBody = document.getElementById("recall-table-body");
       const recallEmpty = document.getElementById("recall-empty");
       const recallLabelHeading = document.getElementById("recall-label-heading");
-      const recallRateHeading = document.getElementById("recall-rate-heading");
       const recallCountHeading = document.getElementById("recall-count-heading");
       const recallCaseHeadings = document.querySelectorAll(".recall-case-heading");
       const recallSliceSelect = document.getElementById("recall-slice-select");
@@ -760,11 +761,15 @@
         AUTOGRADER_CORRECT_HUMAN_WRONG: "autograder_correct_human_wrong",
         BOTH_CORRECT: "both_correct",
         BOTH_WRONG: "both_wrong",
+        BOTH_WRONG_REVISED: "both_wrong_revised",
+        BOTH_WRONG_NOT_REVISED: "both_wrong_not_revised",
       });
 
       const AUTOGRADER_MISTAKE_CASE_KEYS = new Set([
         CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT,
         CASE_KEYS.BOTH_WRONG,
+        CASE_KEYS.BOTH_WRONG_REVISED,
+        CASE_KEYS.BOTH_WRONG_NOT_REVISED,
       ]);
 
       const CASE_LABELS = {
@@ -890,8 +895,8 @@
           sliceKey: "disagreement",
           label: "Autograder wrong",
           rateLabel: "Autograder mistake recall",
-          countLabel: "Mistake evaluations",
-          countUnit: ["mistake evaluation", "mistake evaluations"],
+          countLabel: "Auto wrong",
+          countUnit: ["autograder mistake", "autograder mistakes"],
           correctUnit: [
             "corrected mistake evaluation",
             "corrected mistake evaluations",
@@ -909,37 +914,24 @@
               : 0;
             return mistakes > 0 ? corrected / mistakes : null;
           },
-          rateDetailFormatter: (entry, factor) => {
+          rateDetailFormatter: (entry) => {
             const corrected = Number.isFinite(entry?.corrected_autograder_wrong)
               ? entry.corrected_autograder_wrong
               : 0;
             const totalMistakes = Number.isFinite(entry?.autograder_wrong_total)
               ? entry.autograder_wrong_total
               : 0;
-            const correctedDisplay = corrected * factor;
-            const totalDisplay = totalMistakes * factor;
-            if (totalDisplay) {
-              return `${formatCount(correctedDisplay)} of ${formatCount(
-                totalDisplay
-              )} mistake evaluations`;
+            if (totalMistakes) {
+              return `${formatCount(corrected)} of ${formatCount(
+                totalMistakes
+              )} autograder mistakes corrected`;
             }
-            const noun = corrected === 1
-              ? "mistake evaluation"
-              : "mistake evaluations";
-            return `${formatCount(correctedDisplay)} ${noun}`;
-          },
-          countDetailFormatter: (entry, factor) => {
-            const totalMistakes = Number.isFinite(entry?.autograder_wrong_total)
-              ? entry.autograder_wrong_total
-              : 0;
-            if (factor > 1 && totalMistakes) {
-              const noun = totalMistakes === 1 ? "mistake" : "mistakes";
-              return `${factor}× ${formatCount(totalMistakes)} ${noun}`;
+            if (corrected) {
+              const noun = corrected === 1 ? "autograder mistake" : "autograder mistakes";
+              return `${formatCount(corrected)} ${noun} corrected`;
             }
-            const noun = totalMistakes === 1 ? "mistake" : "mistakes";
-            return `${formatCount(totalMistakes)} ${noun}`;
+            return "";
           },
-          countValueTransform: (value, factor) => value * factor,
           caseShareField: "share_of_total",
           caseBaseField: "total_evaluations",
           shareLabel: "of evaluations",
@@ -967,10 +959,20 @@
               shareField: "share_of_total",
             },
             {
-              key: CASE_KEYS.BOTH_WRONG,
-              label: CASE_LABELS[CASE_KEYS.BOTH_WRONG],
+              key: CASE_KEYS.BOTH_WRONG_REVISED,
+              label: "Both wrong, human revised",
               variant: "warning",
               shareField: "share_of_total",
+              getCaseData: (entry) =>
+                entry?.autograder_wrong_breakdown?.revised_but_wrong || {},
+            },
+            {
+              key: CASE_KEYS.BOTH_WRONG_NOT_REVISED,
+              label: "Both wrong, no revision",
+              variant: "warning",
+              shareField: "share_of_total",
+              getCaseData: (entry) =>
+                entry?.autograder_wrong_breakdown?.not_revised || {},
             },
           ],
         },
@@ -978,8 +980,8 @@
           sliceKey: "agreement",
           label: "Autograder correct",
           rateLabel: "Agreement rate",
-          countLabel: "Agreements",
-          countUnit: ["agreement", "agreements"],
+          countLabel: "Auto correct",
+          countUnit: ["auto correct evaluation", "auto correct evaluations"],
           correctUnit: ["correct agreement", "correct agreements"],
           rateField: "agreement_rate",
           countField: "agreement_count",
@@ -1041,10 +1043,24 @@
               shareField: "share_of_agreements",
             },
             {
-              key: CASE_KEYS.BOTH_WRONG,
-              label: CASE_LABELS[CASE_KEYS.BOTH_WRONG],
+              key: CASE_KEYS.BOTH_WRONG_REVISED,
+              label: "Both wrong, human revised",
               variant: "warning",
               shareField: "share_of_agreements",
+              getCaseData: () => ({
+                count: 0,
+                share_of_agreements: 0,
+              }),
+            },
+            {
+              key: CASE_KEYS.BOTH_WRONG_NOT_REVISED,
+              label: "Both wrong, no revision",
+              variant: "warning",
+              shareField: "share_of_agreements",
+              getCaseData: () => ({
+                count: 0,
+                share_of_agreements: 0,
+              }),
             },
           ],
         },
@@ -1426,9 +1442,6 @@
       function updateRecallHeaders(sliceConfig, breakdownHeading) {
         if (recallLabelHeading) {
           recallLabelHeading.textContent = breakdownHeading;
-        }
-        if (recallRateHeading) {
-          recallRateHeading.textContent = sliceConfig.rateLabel;
         }
         if (recallCountHeading) {
           recallCountHeading.textContent = sliceConfig.countLabel;
@@ -1851,13 +1864,16 @@
         );
       }
 
-      function shouldIncludeCase(sliceConfig, caseKey, entry) {
-        if (!sliceConfig || !caseKey) {
+      function shouldIncludeCase(sliceConfig, caseKey, entry, caseMeta) {
+        if (!sliceConfig) {
+          return true;
+        }
+        if (!caseKey && !caseMeta?.getCaseData) {
           return true;
         }
         const { caseFilter } = sliceConfig;
         if (typeof caseFilter === "function") {
-          return Boolean(caseFilter(caseKey, entry));
+          return Boolean(caseFilter(caseKey, entry, caseMeta));
         }
         return true;
       }
@@ -1870,8 +1886,20 @@
           return cell;
         }
 
-        const includeCase = shouldIncludeCase(sliceConfig, caseMeta.key, entry);
-        const caseData = entry?.cases?.[caseMeta.key] || {};
+        const includeCase = shouldIncludeCase(
+          sliceConfig,
+          caseMeta.key,
+          entry,
+          caseMeta
+        );
+        let caseData = entry?.cases?.[caseMeta.key];
+        if (
+          caseData === undefined &&
+          typeof caseMeta.getCaseData === "function"
+        ) {
+          caseData = caseMeta.getCaseData(entry, sliceConfig, options) || {};
+        }
+        caseData = caseData || {};
         const rawCount =
           includeCase && Number.isFinite(caseData.count) ? caseData.count : 0;
         const factor =
@@ -2144,22 +2172,6 @@
         labelCell.textContent = resolveBreakdownLabel(entry);
         row.appendChild(labelCell);
 
-        const rateCell = document.createElement("td");
-        const rateValue = document.createElement("div");
-        rateValue.className = "table-strong";
-        rateValue.textContent = formatPercent(entry?.[sliceConfig.rateField]);
-        rateCell.appendChild(rateValue);
-        if (sliceConfig.rateDetailFormatter) {
-          const detailText = sliceConfig.rateDetailFormatter(entry, factor);
-          if (detailText) {
-            const detailEl = document.createElement("div");
-            detailEl.className = "muted";
-            detailEl.textContent = detailText;
-            rateCell.appendChild(detailEl);
-          }
-        }
-        row.appendChild(rateCell);
-
         const countCell = document.createElement("td");
         const rawCount = Number.isFinite(entry?.[sliceConfig.countField])
           ? entry[sliceConfig.countField]
@@ -2248,11 +2260,20 @@
             const includeCase = shouldIncludeCase(
               sliceConfig,
               caseKey,
-              entry
+              entry,
+              caseMeta
             );
+            let caseData = entry?.cases?.[caseKey];
+            if (
+              caseData === undefined &&
+              typeof caseMeta.getCaseData === "function"
+            ) {
+              caseData = caseMeta.getCaseData(entry, sliceConfig) || {};
+            }
+            caseData = caseData || {};
             const caseCount =
-              includeCase && Number.isFinite(entry?.cases?.[caseKey]?.count)
-                ? entry.cases[caseKey].count
+              includeCase && Number.isFinite(caseData?.count)
+                ? caseData.count
                 : 0;
             totals.cases[caseKey] =
               (totals.cases[caseKey] || 0) + caseCount;
@@ -2337,7 +2358,7 @@
           }
           const row = document.createElement("tr");
           const cell = document.createElement("td");
-          cell.colSpan = 3 + RECALL_MAX_CASE_COLUMNS;
+          cell.colSpan = 2 + RECALL_MAX_CASE_COLUMNS;
           cell.className = "muted";
           cell.textContent =
             sliceConfig.emptyMessage || "No autograder insight data available.";
