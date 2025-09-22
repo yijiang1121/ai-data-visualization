@@ -564,7 +564,6 @@
                   <th scope="col" id="precision-label-heading">Ground truth</th>
                   <th scope="col" id="precision-rate-heading">Revision rate</th>
                   <th scope="col" id="precision-count-heading">Revisions</th>
-                  <th scope="col" id="precision-accuracy-heading">Revision precision</th>
                   <th scope="col" class="precision-case-heading" data-case-index="0">
                     Auto wrong, human correct
                   </th>
@@ -581,7 +580,7 @@
               </thead>
               <tbody id="precision-table-body">
                 <tr>
-                  <td colspan="8" class="muted">Loading revision insights…</td>
+                  <td colspan="7" class="muted">Loading revision insights…</td>
                 </tr>
               </tbody>
             </table>
@@ -617,6 +616,11 @@
 
         <div class="table-card">
           <div class="table-controls">
+            <label for="recall-slice-select">Focus on</label>
+            <select id="recall-slice-select">
+              <option value="autograder_wrong">Autograder wrong</option>
+              <option value="autograder_correct">Autograder correct</option>
+            </select>
             <label for="recall-breakdown-select">Break down by</label>
             <select id="recall-breakdown-select">
               <option value="ground_truth">Ground truth</option>
@@ -629,16 +633,25 @@
               <thead>
                 <tr>
                   <th scope="col" id="recall-label-heading">Ground truth</th>
-                  <th scope="col">Autograder mistake recall</th>
-                  <th scope="col">Mistake evaluations</th>
-                  <th scope="col">Corrected by human revision</th>
-                  <th scope="col">No revision applied</th>
-                  <th scope="col">Revised but still wrong</th>
+                  <th scope="col" id="recall-rate-heading">Autograder mistake recall</th>
+                  <th scope="col" id="recall-count-heading">Mistake evaluations</th>
+                  <th scope="col" class="recall-case-heading" data-case-index="0">
+                    Auto wrong, human correct
+                  </th>
+                  <th scope="col" class="recall-case-heading" data-case-index="1">
+                    Auto correct, human wrong
+                  </th>
+                  <th scope="col" class="recall-case-heading" data-case-index="2">
+                    Both correct
+                  </th>
+                  <th scope="col" class="recall-case-heading" data-case-index="3">
+                    Both wrong
+                  </th>
                 </tr>
               </thead>
               <tbody id="recall-table-body">
                 <tr>
-                  <td colspan="6" class="muted">Loading recall insights…</td>
+                  <td colspan="7" class="muted">Loading recall insights…</td>
                 </tr>
               </tbody>
             </table>
@@ -723,9 +736,6 @@
       const precisionLabelHeading = document.getElementById("precision-label-heading");
       const precisionRateHeading = document.getElementById("precision-rate-heading");
       const precisionCountHeading = document.getElementById("precision-count-heading");
-      const precisionAccuracyHeading = document.getElementById(
-        "precision-accuracy-heading"
-      );
       const precisionCaseHeadings = document.querySelectorAll(
         ".precision-case-heading"
       );
@@ -738,6 +748,10 @@
       const recallTableBody = document.getElementById("recall-table-body");
       const recallEmpty = document.getElementById("recall-empty");
       const recallLabelHeading = document.getElementById("recall-label-heading");
+      const recallRateHeading = document.getElementById("recall-rate-heading");
+      const recallCountHeading = document.getElementById("recall-count-heading");
+      const recallCaseHeadings = document.querySelectorAll(".recall-case-heading");
+      const recallSliceSelect = document.getElementById("recall-slice-select");
       const recallBreakdownSelect = document.getElementById("recall-breakdown-select");
       const breakdownScaleSelect = document.getElementById("breakdown-scale-select");
 
@@ -764,6 +778,8 @@
 
       const PRECISION_MAX_CASE_COLUMNS =
         (precisionCaseHeadings && precisionCaseHeadings.length) || 3;
+      const RECALL_MAX_CASE_COLUMNS =
+        (recallCaseHeadings && recallCaseHeadings.length) || 3;
       const PRECISION_DEFAULT_SLICE = "disagreement";
       const PRECISION_SLICE_CONFIGS = {
         disagreement: {
@@ -856,6 +872,171 @@
         },
       };
 
+      const RECALL_DEFAULT_SLICE = "autograder_wrong";
+      const RECALL_SLICE_CONFIGS = {
+        autograder_wrong: {
+          sliceKey: "disagreement",
+          label: "Autograder wrong",
+          rateLabel: "Autograder mistake recall",
+          countLabel: "Mistake evaluations",
+          countUnit: ["mistake evaluation", "mistake evaluations"],
+          correctUnit: [
+            "corrected mistake evaluation",
+            "corrected mistake evaluations",
+          ],
+          rateField: "autograder_wrong_recall",
+          countField: "autograder_wrong_total",
+          correctCountField: "corrected_autograder_wrong",
+          sortField: "autograder_wrong_total",
+          computeRate: (totals) => {
+            const mistakes = Number.isFinite(totals.autograder_wrong_total)
+              ? totals.autograder_wrong_total
+              : 0;
+            const corrected = Number.isFinite(totals.corrected_autograder_wrong)
+              ? totals.corrected_autograder_wrong
+              : 0;
+            return mistakes > 0 ? corrected / mistakes : null;
+          },
+          rateDetailFormatter: (entry, factor) => {
+            const corrected = Number.isFinite(entry?.corrected_autograder_wrong)
+              ? entry.corrected_autograder_wrong
+              : 0;
+            const totalMistakes = Number.isFinite(entry?.autograder_wrong_total)
+              ? entry.autograder_wrong_total
+              : 0;
+            const correctedDisplay = corrected * factor;
+            const totalDisplay = totalMistakes * factor;
+            if (totalDisplay) {
+              return `${formatCount(correctedDisplay)} of ${formatCount(
+                totalDisplay
+              )} mistake evaluations`;
+            }
+            const noun = corrected === 1
+              ? "mistake evaluation"
+              : "mistake evaluations";
+            return `${formatCount(correctedDisplay)} ${noun}`;
+          },
+          countDetailFormatter: (entry, factor) => {
+            const totalMistakes = Number.isFinite(entry?.autograder_wrong_total)
+              ? entry.autograder_wrong_total
+              : 0;
+            if (factor > 1 && totalMistakes) {
+              const noun = totalMistakes === 1 ? "mistake" : "mistakes";
+              return `${factor}× ${formatCount(totalMistakes)} ${noun}`;
+            }
+            const noun = totalMistakes === 1 ? "mistake" : "mistakes";
+            return `${formatCount(totalMistakes)} ${noun}`;
+          },
+          countValueTransform: (value, factor) => value * factor,
+          caseShareField: "share_of_total",
+          caseBaseField: "total_evaluations",
+          shareLabel: "of evaluations",
+          emptyMessage: "No autograder mistake data available.",
+          datasetEmptyMessage:
+            "No autograder mistake data available for this dataset.",
+          cases: [
+            {
+              key: "autograder_wrong_human_correct",
+              label: CASE_LABELS.autograder_wrong_human_correct,
+              variant: "success",
+              shareField: "share_of_total",
+            },
+            {
+              key: "autograder_correct_human_wrong",
+              label: CASE_LABELS.autograder_correct_human_wrong,
+              variant: "info",
+              shareField: "share_of_total",
+            },
+            {
+              key: "both_correct",
+              label: CASE_LABELS.both_correct,
+              variant: "success",
+              shareField: "share_of_total",
+            },
+            {
+              key: "both_wrong",
+              label: CASE_LABELS.both_wrong,
+              variant: "warning",
+              shareField: "share_of_total",
+            },
+          ],
+        },
+        autograder_correct: {
+          sliceKey: "agreement",
+          label: "Autograder correct",
+          rateLabel: "Agreement rate",
+          countLabel: "Agreements",
+          countUnit: ["agreement", "agreements"],
+          correctUnit: ["correct agreement", "correct agreements"],
+          rateField: "agreement_rate",
+          countField: "agreement_count",
+          correctCountField: "correct_agreement_count",
+          sortField: "agreement_count",
+          computeRate: (totals) => {
+            const totalEvaluations = Number.isFinite(totals.total_evaluations)
+              ? totals.total_evaluations
+              : 0;
+            const agreements = Number.isFinite(totals.agreement_count)
+              ? totals.agreement_count
+              : 0;
+            return totalEvaluations > 0 ? agreements / totalEvaluations : null;
+          },
+          rateDetailFormatter: (entry) => {
+            const agreements = Number.isFinite(entry?.agreement_count)
+              ? entry.agreement_count
+              : 0;
+            const totalEvaluations = Number.isFinite(entry?.total_evaluations)
+              ? entry.total_evaluations
+              : 0;
+            if (totalEvaluations) {
+              return `${formatCount(agreements)} of ${formatCount(
+                totalEvaluations
+              )} evaluations`;
+            }
+            const noun = agreements === 1 ? "agreement" : "agreements";
+            return `${formatCount(agreements)} ${noun}`;
+          },
+          countDetailFormatter: (entry) => {
+            const totalEvaluations = Number.isFinite(entry?.total_evaluations)
+              ? entry.total_evaluations
+              : 0;
+            const noun = totalEvaluations === 1 ? "evaluation" : "evaluations";
+            return `${formatCount(totalEvaluations)} ${noun}`;
+          },
+          caseShareField: "share_of_agreements",
+          caseBaseField: "agreement_count",
+          shareLabel: "of agreements",
+          emptyMessage: "No agreement data available.",
+          datasetEmptyMessage: "No agreement data available for this dataset.",
+          cases: [
+            {
+              key: "autograder_wrong_human_correct",
+              label: CASE_LABELS.autograder_wrong_human_correct,
+              variant: "success",
+              shareField: "share_of_agreements",
+            },
+            {
+              key: "autograder_correct_human_wrong",
+              label: CASE_LABELS.autograder_correct_human_wrong,
+              variant: "info",
+              shareField: "share_of_agreements",
+            },
+            {
+              key: "both_correct",
+              label: CASE_LABELS.both_correct,
+              variant: "success",
+              shareField: "share_of_agreements",
+            },
+            {
+              key: "both_wrong",
+              label: CASE_LABELS.both_wrong,
+              variant: "warning",
+              shareField: "share_of_agreements",
+            },
+          ],
+        },
+      };
+
       const AUTOGRADER_BREAKDOWN_META = {
         corrected: {
           label: "Corrected by human revision",
@@ -934,6 +1115,12 @@
 
       if (recallBreakdownSelect) {
         recallBreakdownSelect.addEventListener("change", () => {
+          renderRecallTable();
+        });
+      }
+
+      if (recallSliceSelect) {
+        recallSliceSelect.addEventListener("change", () => {
           renderRecallTable();
         });
       }
@@ -1180,6 +1367,30 @@
         return PRECISION_SLICE_CONFIGS[PRECISION_DEFAULT_SLICE];
       }
 
+      function getRecallSliceKey() {
+        const requested = recallSliceSelect?.value;
+        if (
+          requested &&
+          Object.prototype.hasOwnProperty.call(RECALL_SLICE_CONFIGS, requested)
+        ) {
+          return requested;
+        }
+        if (recallSliceSelect) {
+          recallSliceSelect.value = RECALL_DEFAULT_SLICE;
+        }
+        return RECALL_DEFAULT_SLICE;
+      }
+
+      function getRecallSliceConfig(sliceKey) {
+        if (
+          sliceKey &&
+          Object.prototype.hasOwnProperty.call(RECALL_SLICE_CONFIGS, sliceKey)
+        ) {
+          return RECALL_SLICE_CONFIGS[sliceKey];
+        }
+        return RECALL_SLICE_CONFIGS[RECALL_DEFAULT_SLICE];
+      }
+
       function updatePrecisionHeaders(sliceConfig, breakdownHeading) {
         if (precisionLabelHeading) {
           precisionLabelHeading.textContent = breakdownHeading;
@@ -1190,10 +1401,26 @@
         if (precisionCountHeading) {
           precisionCountHeading.textContent = sliceConfig.countLabel;
         }
-        if (precisionAccuracyHeading) {
-          precisionAccuracyHeading.textContent = sliceConfig.precisionLabel;
-        }
         precisionCaseHeadings.forEach((heading, index) => {
+          if (!heading) {
+            return;
+          }
+          const caseMeta = sliceConfig.cases[index];
+          heading.textContent = caseMeta ? caseMeta.label : "—";
+        });
+      }
+
+      function updateRecallHeaders(sliceConfig, breakdownHeading) {
+        if (recallLabelHeading) {
+          recallLabelHeading.textContent = breakdownHeading;
+        }
+        if (recallRateHeading) {
+          recallRateHeading.textContent = sliceConfig.rateLabel;
+        }
+        if (recallCountHeading) {
+          recallCountHeading.textContent = sliceConfig.countLabel;
+        }
+        recallCaseHeadings.forEach((heading, index) => {
           if (!heading) {
             return;
           }
@@ -1615,8 +1842,9 @@
         const cell = document.createElement("td");
         const caseData = entry?.cases?.[caseMeta.key] || {};
         const count = Number.isFinite(caseData.count) ? caseData.count : 0;
-        const baseCount = Number.isFinite(entry?.[sliceConfig.countField])
-          ? entry[sliceConfig.countField]
+        const baseField = sliceConfig.caseBaseField || sliceConfig.countField;
+        const baseCount = Number.isFinite(entry?.[baseField])
+          ? entry[baseField]
           : 0;
         const shareField = caseMeta.shareField || sliceConfig.caseShareField;
         let shareValue = Number.isFinite(caseData[shareField])
@@ -1773,40 +2001,6 @@
         revisionsCell.appendChild(subtitle);
         row.appendChild(revisionsCell);
 
-        const precisionCell = document.createElement("td");
-        const precisionValue = document.createElement("div");
-        precisionValue.className = "table-strong";
-        precisionValue.textContent = formatPercent(
-          entry?.[sliceConfig.precisionField]
-        );
-        precisionCell.appendChild(precisionValue);
-        const precisionDetail = document.createElement("div");
-        precisionDetail.className = "muted";
-        const correctCount = Number.isFinite(
-          entry?.[sliceConfig.correctCountField]
-        )
-          ? entry[sliceConfig.correctCountField]
-          : 0;
-        const countUnits = Array.isArray(sliceConfig.countUnit)
-          ? sliceConfig.countUnit
-          : ["item", "items"];
-        const [countSingular, countPlural] = countUnits;
-        const correctUnits = Array.isArray(sliceConfig.correctUnit)
-          ? sliceConfig.correctUnit
-          : [`correct ${countSingular}`, `correct ${countPlural}`];
-
-        if (sliceCount) {
-          const noun = sliceCount === 1 ? countSingular : countPlural;
-          precisionDetail.textContent = `${formatCount(
-            correctCount
-          )} of ${formatCount(sliceCount)} ${noun}`;
-        } else {
-          const noun = correctCount === 1 ? correctUnits[0] : correctUnits[1];
-          precisionDetail.textContent = `${formatCount(correctCount)} ${noun}`;
-        }
-        precisionCell.appendChild(precisionDetail);
-        row.appendChild(precisionCell);
-
         for (let index = 0; index < PRECISION_MAX_CASE_COLUMNS; index += 1) {
           const caseMeta = sliceConfig.cases[index];
           if (caseMeta) {
@@ -1819,98 +2013,7 @@
         return row;
       }
 
-      function createRecallBreakdownCell(entry, breakdownKey, factor) {
-        const cell = document.createElement("td");
-        const breakdown = entry?.autograder_wrong_breakdown?.[breakdownKey] || {};
-        const baseCount = Number.isFinite(breakdown.count) ? breakdown.count : 0;
-        const displayCount = baseCount * factor;
-        const shareOfMistakes = Number.isFinite(breakdown.share_of_autograder_wrong)
-          ? breakdown.share_of_autograder_wrong
-          : null;
-
-        const countEl = document.createElement("div");
-        countEl.className = "table-strong";
-        countEl.textContent = formatCount(displayCount);
-        cell.appendChild(countEl);
-
-        const pillWrapper = document.createElement("div");
-        pillWrapper.className = "case-pill-wrapper";
-
-        if (shareOfMistakes !== null) {
-          const variantClass =
-            AUTOGRADER_BREAKDOWN_META[breakdownKey]?.variant || "";
-          const sharePill = document.createElement("span");
-          sharePill.className = `case-pill ${variantClass}`.trim();
-          sharePill.textContent = `${(shareOfMistakes * 100).toFixed(1)}% of mistakes`;
-          pillWrapper.appendChild(sharePill);
-        }
-
-        if (pillWrapper.childElementCount) {
-          cell.appendChild(pillWrapper);
-        }
-
-        return cell;
-      }
-
-      function computeRecallTotals(entries = []) {
-        if (!entries?.length) {
-          return null;
-        }
-
-        const totals = {
-          label_display: "Total",
-          corrected_autograder_wrong: 0,
-          autograder_wrong_total: 0,
-          autograder_wrong_breakdown: {},
-        };
-
-        entries.forEach((entry) => {
-          if (!entry) {
-            return;
-          }
-
-          const corrected = Number.isFinite(entry.corrected_autograder_wrong)
-            ? entry.corrected_autograder_wrong
-            : 0;
-          const totalMistakes = Number.isFinite(entry.autograder_wrong_total)
-            ? entry.autograder_wrong_total
-            : 0;
-
-          totals.corrected_autograder_wrong += corrected;
-          totals.autograder_wrong_total += totalMistakes;
-
-          AUTOGRADER_BREAKDOWN_ORDER.forEach((key) => {
-            const breakdown = entry?.autograder_wrong_breakdown?.[key] || {};
-            const count = Number.isFinite(breakdown.count) ? breakdown.count : 0;
-            totals.autograder_wrong_breakdown[key] =
-              (totals.autograder_wrong_breakdown[key] || 0) + count;
-          });
-        });
-
-        const totalMistakes = totals.autograder_wrong_total;
-        totals.autograder_wrong_recall =
-          totalMistakes > 0
-            ? totals.corrected_autograder_wrong / totalMistakes
-            : null;
-
-        totals.autograder_wrong_breakdown = Object.fromEntries(
-          AUTOGRADER_BREAKDOWN_ORDER.map((key) => {
-            const count = totals.autograder_wrong_breakdown[key] || 0;
-            return [
-              key,
-              {
-                count,
-                share_of_autograder_wrong:
-                  totalMistakes > 0 ? count / totalMistakes : 0,
-              },
-            ];
-          })
-        );
-
-        return totals;
-      }
-
-      function buildRecallRow(entry, factor) {
+      function buildRecallRow(entry, sliceConfig, factor) {
         if (!entry) {
           return document.createElement("tr");
         }
@@ -1921,114 +2024,136 @@
         labelCell.textContent = resolveBreakdownLabel(entry);
         row.appendChild(labelCell);
 
-        const recallCell = document.createElement("td");
-        const recallValue = document.createElement("div");
-        recallValue.className = "table-strong";
-        recallValue.textContent = formatPercent(entry.autograder_wrong_recall);
-        recallCell.appendChild(recallValue);
-        const recallDetail = document.createElement("div");
-        recallDetail.className = "muted";
-        const corrected = Number.isFinite(entry.corrected_autograder_wrong)
-          ? entry.corrected_autograder_wrong
-          : 0;
-        const totalMistakes = Number.isFinite(entry.autograder_wrong_total)
-          ? entry.autograder_wrong_total
-          : 0;
-        const correctedDisplay = corrected * factor;
-        const totalDisplay = totalMistakes * factor;
-        if (totalDisplay) {
-          recallDetail.textContent = `${formatCount(
-            correctedDisplay
-          )} of ${formatCount(totalDisplay)} mistake evaluations`;
-        } else {
-          recallDetail.textContent = `${formatCount(
-            correctedDisplay
-          )} mistake evaluations`;
+        const rateCell = document.createElement("td");
+        const rateValue = document.createElement("div");
+        rateValue.className = "table-strong";
+        rateValue.textContent = formatPercent(entry?.[sliceConfig.rateField]);
+        rateCell.appendChild(rateValue);
+        if (sliceConfig.rateDetailFormatter) {
+          const detailText = sliceConfig.rateDetailFormatter(entry, factor);
+          if (detailText) {
+            const detailEl = document.createElement("div");
+            detailEl.className = "muted";
+            detailEl.textContent = detailText;
+            rateCell.appendChild(detailEl);
+          }
         }
-        recallCell.appendChild(recallDetail);
-        row.appendChild(recallCell);
+        row.appendChild(rateCell);
 
-        const totalCell = document.createElement("td");
-        const totalValue = document.createElement("div");
-        totalValue.className = "table-strong";
-        totalValue.textContent = formatCount(totalDisplay);
-        totalCell.appendChild(totalValue);
-        const totalDetail = document.createElement("div");
-        totalDetail.className = "muted";
-        if (factor > 1 && totalMistakes) {
-          totalDetail.textContent = `${factor}× ${formatCount(totalMistakes)} mistakes`;
-        } else {
-          totalDetail.textContent = `${formatCount(totalMistakes)} mistakes`;
+        const countCell = document.createElement("td");
+        const rawCount = Number.isFinite(entry?.[sliceConfig.countField])
+          ? entry[sliceConfig.countField]
+          : 0;
+        const displayCount = sliceConfig.countValueTransform
+          ? sliceConfig.countValueTransform(rawCount, factor, entry)
+          : rawCount;
+        const countValueEl = document.createElement("div");
+        countValueEl.className = "table-strong";
+        countValueEl.textContent = formatCount(displayCount);
+        countCell.appendChild(countValueEl);
+        if (sliceConfig.countDetailFormatter) {
+          const detailText = sliceConfig.countDetailFormatter(entry, factor);
+          if (detailText) {
+            const detailEl = document.createElement("div");
+            detailEl.className = "muted";
+            detailEl.textContent = detailText;
+            countCell.appendChild(detailEl);
+          }
         }
-        totalCell.appendChild(totalDetail);
-        row.appendChild(totalCell);
+        row.appendChild(countCell);
 
-        AUTOGRADER_BREAKDOWN_ORDER.forEach((key) => {
-          row.appendChild(createRecallBreakdownCell(entry, key, factor));
-        });
+        for (let index = 0; index < RECALL_MAX_CASE_COLUMNS; index += 1) {
+          const caseMeta = sliceConfig.cases[index];
+          if (caseMeta) {
+            row.appendChild(createCaseCell(entry, caseMeta, sliceConfig));
+          } else {
+            row.appendChild(createPrecisionPlaceholderCell());
+          }
+        }
 
         return row;
       }
 
-      function renderPrecisionTable() {
-        if (!precisionTableBody) {
-          return;
+      function computeRecallTotals(entries = [], sliceConfig) {
+        if (!entries?.length) {
+          return null;
         }
 
-        precisionTableBody.innerHTML = "";
+        const totals = {
+          label_display: "Total",
+          total_evaluations: 0,
+          cases: {},
+        };
 
-        const scaleKey = getSelectedScaleKey();
-        const breakdownKey = getSelectedBreakdown(precisionBreakdownSelect);
-        const sliceKey = getPrecisionSliceKey();
-        const sliceConfig = getPrecisionSliceConfig(sliceKey);
-        const breakdownHeading = getBreakdownHeading(breakdownKey, scaleKey);
-        updatePrecisionHeaders(sliceConfig, breakdownHeading);
+        const countField = sliceConfig.countField;
+        const correctField = sliceConfig.correctCountField;
 
-        const entries = getBreakdownEntries(
-          revisionDataCache,
-          breakdownKey,
-          scaleKey,
-          sliceKey
-        );
+        if (countField) {
+          totals[countField] = 0;
+        }
+        if (correctField) {
+          totals[correctField] = 0;
+        }
 
-        if (!entries || entries.length === 0) {
-          if (precisionEmpty) {
-            precisionEmpty.hidden = false;
-            precisionEmpty.textContent =
-              sliceConfig.datasetEmptyMessage ||
-              "No data available for this dataset.";
+        entries.forEach((entry) => {
+          if (!entry) {
+            return;
           }
-          const row = document.createElement("tr");
-          const cell = document.createElement("td");
-          cell.colSpan = 4 + PRECISION_MAX_CASE_COLUMNS;
-          cell.className = "muted";
-          cell.textContent = sliceConfig.emptyMessage || "No data available.";
-          row.appendChild(cell);
-          precisionTableBody.appendChild(row);
-          return;
-        }
 
-        if (precisionEmpty) {
-          precisionEmpty.hidden = true;
-        }
+          totals.total_evaluations += Number.isFinite(entry.total_evaluations)
+            ? entry.total_evaluations
+            : 0;
 
-        const rateField = sliceConfig.rateField;
-        const sortedEntries = entries
-          .slice()
-          .sort((a, b) => (b?.[rateField] ?? 0) - (a?.[rateField] ?? 0));
+          if (countField) {
+            const value = Number.isFinite(entry[countField])
+              ? entry[countField]
+              : 0;
+            totals[countField] += value;
+          }
 
-        sortedEntries.forEach((entry) => {
-          precisionTableBody.appendChild(
-            buildPrecisionRow(entry, sliceConfig)
-          );
+          if (correctField) {
+            const correctValue = Number.isFinite(entry[correctField])
+              ? entry[correctField]
+              : 0;
+            totals[correctField] += correctValue;
+          }
+
+          sliceConfig.cases.forEach((caseMeta) => {
+            const caseKey = caseMeta.key;
+            const caseCount = Number.isFinite(entry?.cases?.[caseKey]?.count)
+              ? entry.cases[caseKey].count
+              : 0;
+            totals.cases[caseKey] =
+              (totals.cases[caseKey] || 0) + caseCount;
+          });
         });
 
-        const totalsEntry = computePrecisionTotals(entries, sliceConfig);
-        if (totalsEntry) {
-          precisionTableBody.appendChild(
-            buildPrecisionRow(totalsEntry, sliceConfig)
-          );
+        if (sliceConfig.computeRate && sliceConfig.rateField) {
+          totals[sliceConfig.rateField] = sliceConfig.computeRate(totals);
         }
+
+        totals.cases = Object.fromEntries(
+          sliceConfig.cases.map((caseMeta) => {
+            const caseKey = caseMeta.key;
+            const caseCount = totals.cases[caseKey] || 0;
+            const shareField = caseMeta.shareField || sliceConfig.caseShareField;
+            const shareData = {};
+            if (shareField) {
+              let base = 0;
+              if (shareField === "share_of_total") {
+                base = totals.total_evaluations;
+              } else if (shareField === "share_of_agreements") {
+                base = totals[countField] || 0;
+              } else if (shareField === "share_of_revisions") {
+                base = totals[countField] || 0;
+              }
+              shareData[shareField] = base > 0 ? caseCount / base : 0;
+            }
+            return [caseKey, { count: caseCount, ...shareData }];
+          })
+        );
+
+        return totals;
       }
 
       function renderRecallTable() {
@@ -2041,29 +2166,40 @@
         const scaleKey = getSelectedScaleKey();
         const scaleData = getRevisionScaleData(revisionDataCache, scaleKey);
         const breakdownKey = getSelectedBreakdown(recallBreakdownSelect);
-        if (recallLabelHeading) {
-          recallLabelHeading.textContent = getBreakdownHeading(
-            breakdownKey,
-            scaleKey
-          );
-        }
+        const sliceKey = getRecallSliceKey();
+        const sliceConfig = getRecallSliceConfig(sliceKey);
+        const breakdownHeading = getBreakdownHeading(breakdownKey, scaleKey);
+        updateRecallHeaders(sliceConfig, breakdownHeading);
 
         const entries = getBreakdownEntries(
           revisionDataCache,
           breakdownKey,
-          scaleKey
+          scaleKey,
+          sliceConfig.sliceKey
         );
-        const factor = computeMistakeRepetitionFactor(scaleData);
+
+        const sliceSource =
+          sliceConfig.sliceKey && scaleData?.slices?.[sliceConfig.sliceKey]
+            ? scaleData.slices[sliceConfig.sliceKey]
+            : scaleData;
+        const factor =
+          sliceConfig.sliceKey === "disagreement"
+            ? computeMistakeRepetitionFactor(sliceSource)
+            : 1;
 
         if (!entries || entries.length === 0) {
           if (recallEmpty) {
             recallEmpty.hidden = false;
+            recallEmpty.textContent =
+              sliceConfig.datasetEmptyMessage ||
+              "No autograder insight data available for this dataset.";
           }
           const row = document.createElement("tr");
           const cell = document.createElement("td");
-          cell.colSpan = 6;
+          cell.colSpan = 3 + RECALL_MAX_CASE_COLUMNS;
           cell.className = "muted";
-          cell.textContent = "No autograder mistake data available.";
+          cell.textContent =
+            sliceConfig.emptyMessage || "No autograder insight data available.";
           row.appendChild(cell);
           recallTableBody.appendChild(row);
           return;
@@ -2073,23 +2209,24 @@
           recallEmpty.hidden = true;
         }
 
+        const sortField = sliceConfig.sortField || sliceConfig.countField;
         const sortedEntries = entries
           .slice()
-          .sort(
-            (a, b) =>
-              (b.autograder_wrong_total ?? 0) - (a.autograder_wrong_total ?? 0)
-          );
+          .sort((a, b) => (b?.[sortField] ?? 0) - (a?.[sortField] ?? 0));
 
         sortedEntries.forEach((entry) => {
-          recallTableBody.appendChild(buildRecallRow(entry, factor));
+          recallTableBody.appendChild(
+            buildRecallRow(entry, sliceConfig, factor)
+          );
         });
 
-        const totalsEntry = computeRecallTotals(entries);
+        const totalsEntry = computeRecallTotals(entries, sliceConfig);
         if (totalsEntry) {
-          recallTableBody.appendChild(buildRecallRow(totalsEntry, factor));
+          recallTableBody.appendChild(
+            buildRecallRow(totalsEntry, sliceConfig, factor)
+          );
         }
       }
-
       function updateRevisionInsights(revision) {
         if (!revisionSection) {
           return;
