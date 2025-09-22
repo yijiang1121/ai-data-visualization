@@ -546,6 +546,11 @@
 
         <div class="table-card">
           <div class="table-controls">
+            <label for="precision-slice-select">Focus on</label>
+            <select id="precision-slice-select">
+              <option value="disagreement">Human disagrees with autograder</option>
+              <option value="agreement">Human agrees with autograder</option>
+            </select>
             <label for="precision-breakdown-select">Break down by</label>
             <select id="precision-breakdown-select">
               <option value="ground_truth">Ground truth</option>
@@ -558,12 +563,18 @@
               <thead>
                 <tr>
                   <th scope="col" id="precision-label-heading">Ground truth</th>
-                  <th scope="col">Revision rate</th>
-                  <th scope="col">Revisions</th>
-                  <th scope="col">Revision precision</th>
-                  <th scope="col">Auto wrong → Human correct</th>
-                  <th scope="col">Auto correct → Human wrong</th>
-                  <th scope="col">Both wrong</th>
+                  <th scope="col" id="precision-rate-heading">Revision rate</th>
+                  <th scope="col" id="precision-count-heading">Revisions</th>
+                  <th scope="col" id="precision-accuracy-heading">Revision precision</th>
+                  <th scope="col" class="precision-case-heading" data-case-index="0">
+                    Auto wrong → Human correct
+                  </th>
+                  <th scope="col" class="precision-case-heading" data-case-index="1">
+                    Auto correct → Human wrong
+                  </th>
+                  <th scope="col" class="precision-case-heading" data-case-index="2">
+                    Both wrong
+                  </th>
                 </tr>
               </thead>
               <tbody id="precision-table-body">
@@ -708,6 +719,17 @@
       const precisionTableBody = document.getElementById("precision-table-body");
       const precisionEmpty = document.getElementById("precision-empty");
       const precisionLabelHeading = document.getElementById("precision-label-heading");
+      const precisionRateHeading = document.getElementById("precision-rate-heading");
+      const precisionCountHeading = document.getElementById("precision-count-heading");
+      const precisionAccuracyHeading = document.getElementById(
+        "precision-accuracy-heading"
+      );
+      const precisionCaseHeadings = document.querySelectorAll(
+        ".precision-case-heading"
+      );
+      const precisionSliceSelect = document.getElementById(
+        "precision-slice-select"
+      );
       const precisionBreakdownSelect = document.getElementById(
         "precision-breakdown-select"
       );
@@ -734,6 +756,82 @@
         ["autograder_correct_human_wrong", "info"],
         ["both_wrong", "warning"],
       ];
+
+      const PRECISION_MAX_CASE_COLUMNS =
+        (precisionCaseHeadings && precisionCaseHeadings.length) || 3;
+      const PRECISION_DEFAULT_SLICE = "disagreement";
+      const PRECISION_SLICE_CONFIGS = {
+        disagreement: {
+          label: "Human disagrees with autograder",
+          rateLabel: "Revision rate",
+          countLabel: "Revisions",
+          countUnit: ["revision", "revisions"],
+          correctUnit: ["correct revision", "correct revisions"],
+          precisionLabel: "Revision precision",
+          precisionDetailLabel: "revisions",
+          rateField: "revision_rate",
+          countField: "revision_count",
+          precisionField: "correct_revision_precision",
+          correctCountField: "correct_revision_count",
+          caseShareField: "share_of_revisions",
+          shareLabel: "of revisions",
+          emptyMessage: "No revision data available.",
+          datasetEmptyMessage:
+            "No revision data available for this dataset.",
+          cases: [
+            {
+              key: "autograder_wrong_human_correct",
+              label: "Auto wrong → Human correct",
+              variant: "success",
+              shareField: "share_of_revisions",
+            },
+            {
+              key: "autograder_correct_human_wrong",
+              label: "Auto correct → Human wrong",
+              variant: "info",
+              shareField: "share_of_revisions",
+            },
+            {
+              key: "both_wrong",
+              label: "Both wrong",
+              variant: "warning",
+              shareField: "share_of_revisions",
+            },
+          ],
+        },
+        agreement: {
+          label: "Human agrees with autograder",
+          rateLabel: "Agreement rate",
+          countLabel: "Agreements",
+          countUnit: ["agreement", "agreements"],
+          correctUnit: ["correct agreement", "correct agreements"],
+          precisionLabel: "Agreement accuracy",
+          precisionDetailLabel: "agreements",
+          rateField: "agreement_rate",
+          countField: "agreement_count",
+          precisionField: "agreement_accuracy",
+          correctCountField: "correct_agreement_count",
+          caseShareField: "share_of_agreements",
+          shareLabel: "of agreements",
+          emptyMessage: "No agreement data available.",
+          datasetEmptyMessage:
+            "No agreement data available for this dataset.",
+          cases: [
+            {
+              key: "both_correct",
+              label: "Both correct vs. ground truth",
+              variant: "success",
+              shareField: "share_of_agreements",
+            },
+            {
+              key: "both_wrong",
+              label: "Both wrong vs. ground truth",
+              variant: "warning",
+              shareField: "share_of_agreements",
+            },
+          ],
+        },
+      };
 
       const AUTOGRADER_BREAKDOWN_META = {
         corrected: {
@@ -767,6 +865,12 @@
 
       if (precisionBreakdownSelect) {
         precisionBreakdownSelect.addEventListener("change", () => {
+          renderPrecisionTable();
+        });
+      }
+
+      if (precisionSliceSelect) {
+        precisionSliceSelect.addEventListener("change", () => {
           renderPrecisionTable();
         });
       }
@@ -882,6 +986,8 @@
           cases: revision.cases || {},
           autograder_wrong_breakdown: revision.autograder_wrong_breakdown || {},
           breakdowns: revision.breakdowns || {},
+          agreement: revision.agreement || {},
+          slices: revision.slices || {},
         };
       }
 
@@ -947,9 +1053,73 @@
         return scaleLabel ? `${base} (${scaleLabel})` : base;
       }
 
-      function getBreakdownEntries(revision, key, scaleKey) {
+      function getPrecisionSliceKey() {
+        const requested = precisionSliceSelect?.value;
+        if (
+          requested &&
+          Object.prototype.hasOwnProperty.call(
+            PRECISION_SLICE_CONFIGS,
+            requested
+          )
+        ) {
+          return requested;
+        }
+        if (precisionSliceSelect) {
+          precisionSliceSelect.value = PRECISION_DEFAULT_SLICE;
+        }
+        return PRECISION_DEFAULT_SLICE;
+      }
+
+      function getPrecisionSliceConfig(sliceKey) {
+        if (
+          sliceKey &&
+          Object.prototype.hasOwnProperty.call(
+            PRECISION_SLICE_CONFIGS,
+            sliceKey
+          )
+        ) {
+          return PRECISION_SLICE_CONFIGS[sliceKey];
+        }
+        return PRECISION_SLICE_CONFIGS[PRECISION_DEFAULT_SLICE];
+      }
+
+      function updatePrecisionHeaders(sliceConfig, breakdownHeading) {
+        if (precisionLabelHeading) {
+          precisionLabelHeading.textContent = breakdownHeading;
+        }
+        if (precisionRateHeading) {
+          precisionRateHeading.textContent = sliceConfig.rateLabel;
+        }
+        if (precisionCountHeading) {
+          precisionCountHeading.textContent = sliceConfig.countLabel;
+        }
+        if (precisionAccuracyHeading) {
+          precisionAccuracyHeading.textContent = sliceConfig.precisionLabel;
+        }
+        precisionCaseHeadings.forEach((heading, index) => {
+          if (!heading) {
+            return;
+          }
+          const caseMeta = sliceConfig.cases[index];
+          heading.textContent = caseMeta ? caseMeta.label : "—";
+        });
+      }
+
+      function getBreakdownEntries(
+        revision,
+        key,
+        scaleKey,
+        sliceKey = PRECISION_DEFAULT_SLICE
+      ) {
         const scaleData = getRevisionScaleData(revision, scaleKey);
-        return scaleData?.breakdowns?.[key] || [];
+        const sliceData = scaleData?.slices?.[sliceKey];
+        if (sliceData?.breakdowns?.[key]) {
+          return sliceData.breakdowns[key];
+        }
+        if (sliceKey === "disagreement") {
+          return scaleData?.breakdowns?.[key] || [];
+        }
+        return [];
       }
 
       function resolveBreakdownLabel(entry) {
@@ -1203,18 +1373,25 @@
         });
       }
 
-      function createCaseCell(entry, caseKey, variant) {
+      function createCaseCell(entry, caseMeta, sliceConfig) {
         const cell = document.createElement("td");
-        const caseData = entry?.cases?.[caseKey] || {};
+        const caseData = entry?.cases?.[caseMeta.key] || {};
         const count = Number.isFinite(caseData.count) ? caseData.count : 0;
-        const revisionCount = Number.isFinite(entry.revision_count)
-          ? entry.revision_count
+        const baseCount = Number.isFinite(entry?.[sliceConfig.countField])
+          ? entry[sliceConfig.countField]
           : 0;
-        const shareValue = Number.isFinite(caseData.share_of_revisions)
-          ? caseData.share_of_revisions
-          : revisionCount
-          ? count / revisionCount
-          : 0;
+        const shareField = caseMeta.shareField || sliceConfig.caseShareField;
+        let shareValue = Number.isFinite(caseData[shareField])
+          ? caseData[shareField]
+          : null;
+        if (shareValue === null && baseCount > 0) {
+          shareValue = count / baseCount;
+        }
+        if (!Number.isFinite(shareValue)) {
+          shareValue = 0;
+        }
+        const clampedShare = Math.max(0, Math.min(shareValue, 1));
+
         const countEl = document.createElement("div");
         countEl.className = "table-strong";
         countEl.textContent = formatCount(count);
@@ -1224,8 +1401,12 @@
         pillWrapper.className = "case-pill-wrapper";
 
         const shareEl = document.createElement("span");
-        shareEl.className = `case-pill ${variant}`.trim();
-        shareEl.textContent = `${(shareValue * 100).toFixed(1)}% of revisions`;
+        const variantClass = caseMeta.variant ? ` ${caseMeta.variant}` : "";
+        shareEl.className = `case-pill${variantClass}`;
+        const shareLabel = caseMeta.shareLabel || sliceConfig.shareLabel || "";
+        const shareSuffix = shareLabel ? ` ${shareLabel}` : "";
+        const shareText = `${(clampedShare * 100).toFixed(1)}%${shareSuffix}`.trim();
+        shareEl.textContent = shareText;
         pillWrapper.appendChild(shareEl);
 
         cell.appendChild(pillWrapper);
@@ -1233,41 +1414,53 @@
         return cell;
       }
 
-      function computePrecisionTotals(entries = []) {
+      function createPrecisionPlaceholderCell() {
+        const cell = document.createElement("td");
+        cell.className = "muted";
+        cell.textContent = "—";
+        return cell;
+      }
+
+      function computePrecisionTotals(entries = [], sliceConfig) {
         if (!entries?.length) {
           return null;
         }
 
         const totals = {
           label_display: "Total",
-          revision_count: 0,
           total_evaluations: 0,
-          correct_revision_count: 0,
           cases: {},
         };
+
+        const countField = sliceConfig.countField;
+        const correctField = sliceConfig.correctCountField;
+        const rateField = sliceConfig.rateField;
+        const precisionField = sliceConfig.precisionField;
+
+        totals[countField] = 0;
+        totals[correctField] = 0;
 
         entries.forEach((entry) => {
           if (!entry) {
             return;
           }
 
-          const revisionCount = Number.isFinite(entry.revision_count)
-            ? entry.revision_count
+          const sliceCount = Number.isFinite(entry[countField])
+            ? entry[countField]
             : 0;
           const totalEvaluations = Number.isFinite(entry.total_evaluations)
             ? entry.total_evaluations
             : 0;
-          const correctRevisionCount = Number.isFinite(
-            entry.correct_revision_count
-          )
-            ? entry.correct_revision_count
+          const correctCount = Number.isFinite(entry[correctField])
+            ? entry[correctField]
             : 0;
 
-          totals.revision_count += revisionCount;
+          totals[countField] += sliceCount;
           totals.total_evaluations += totalEvaluations;
-          totals.correct_revision_count += correctRevisionCount;
+          totals[correctField] += correctCount;
 
-          CASE_ORDER.forEach(([caseKey]) => {
+          sliceConfig.cases.forEach((caseMeta) => {
+            const caseKey = caseMeta.key;
             const caseData = entry?.cases?.[caseKey] || {};
             const caseCount = Number.isFinite(caseData.count)
               ? caseData.count
@@ -1276,26 +1469,32 @@
           });
         });
 
-        const totalRevisionCount = totals.revision_count;
+        const totalSliceCount = totals[countField];
         const totalEvaluations = totals.total_evaluations;
 
-        totals.revision_rate =
-          totalEvaluations > 0 ? totalRevisionCount / totalEvaluations : null;
+        totals[rateField] =
+          totalEvaluations > 0 ? totalSliceCount / totalEvaluations : null;
 
-        totals.correct_revision_precision =
-          totalRevisionCount > 0
-            ? totals.correct_revision_count / totalRevisionCount
-            : null;
+        totals[precisionField] =
+          totalSliceCount > 0 ? totals[correctField] / totalSliceCount : null;
 
         totals.cases = Object.fromEntries(
-          CASE_ORDER.map(([caseKey]) => {
+          sliceConfig.cases.map((caseMeta) => {
+            const caseKey = caseMeta.key;
             const caseCount = totals.cases[caseKey] || 0;
+            const shareField = caseMeta.shareField || sliceConfig.caseShareField;
             return [
               caseKey,
               {
                 count: caseCount,
-                share_of_revisions:
-                  totalRevisionCount > 0 ? caseCount / totalRevisionCount : 0,
+                ...(shareField
+                  ? {
+                      [shareField]:
+                        totalSliceCount > 0
+                          ? caseCount / totalSliceCount
+                          : null,
+                    }
+                  : {}),
               },
             ];
           })
@@ -1304,7 +1503,7 @@
         return totals;
       }
 
-      function buildPrecisionRow(entry) {
+      function buildPrecisionRow(entry, sliceConfig) {
         if (!entry) {
           return document.createElement("tr");
         }
@@ -1316,19 +1515,19 @@
         row.appendChild(labelCell);
 
         const rateCell = document.createElement("td");
-        rateCell.textContent = formatPercent(entry.revision_rate);
+        rateCell.textContent = formatPercent(entry?.[sliceConfig.rateField]);
         row.appendChild(rateCell);
 
         const revisionsCell = document.createElement("td");
-        const revisionCount = Number.isFinite(entry.revision_count)
-          ? entry.revision_count
+        const sliceCount = Number.isFinite(entry?.[sliceConfig.countField])
+          ? entry[sliceConfig.countField]
           : 0;
         const totalEvaluations = Number.isFinite(entry.total_evaluations)
           ? entry.total_evaluations
           : 0;
         const countEl = document.createElement("div");
         countEl.className = "table-strong";
-        countEl.textContent = formatCount(revisionCount);
+        countEl.textContent = formatCount(sliceCount);
         revisionsCell.appendChild(countEl);
         const subtitle = document.createElement("div");
         subtitle.className = "muted";
@@ -1340,31 +1539,44 @@
         const precisionValue = document.createElement("div");
         precisionValue.className = "table-strong";
         precisionValue.textContent = formatPercent(
-          entry.correct_revision_precision
+          entry?.[sliceConfig.precisionField]
         );
         precisionCell.appendChild(precisionValue);
         const precisionDetail = document.createElement("div");
         precisionDetail.className = "muted";
-        const correctRevisionCount = Number.isFinite(
-          entry.correct_revision_count
+        const correctCount = Number.isFinite(
+          entry?.[sliceConfig.correctCountField]
         )
-          ? entry.correct_revision_count
+          ? entry[sliceConfig.correctCountField]
           : 0;
-        if (revisionCount) {
+        const countUnits = Array.isArray(sliceConfig.countUnit)
+          ? sliceConfig.countUnit
+          : ["item", "items"];
+        const [countSingular, countPlural] = countUnits;
+        const correctUnits = Array.isArray(sliceConfig.correctUnit)
+          ? sliceConfig.correctUnit
+          : [`correct ${countSingular}`, `correct ${countPlural}`];
+
+        if (sliceCount) {
+          const noun = sliceCount === 1 ? countSingular : countPlural;
           precisionDetail.textContent = `${formatCount(
-            correctRevisionCount
-          )} of ${formatCount(revisionCount)} revisions`;
+            correctCount
+          )} of ${formatCount(sliceCount)} ${noun}`;
         } else {
-          precisionDetail.textContent = `${formatCount(
-            correctRevisionCount
-          )} correct revisions`;
+          const noun = correctCount === 1 ? correctUnits[0] : correctUnits[1];
+          precisionDetail.textContent = `${formatCount(correctCount)} ${noun}`;
         }
         precisionCell.appendChild(precisionDetail);
         row.appendChild(precisionCell);
 
-        CASE_ORDER.forEach(([caseKey, variant]) => {
-          row.appendChild(createCaseCell(entry, caseKey, variant));
-        });
+        for (let index = 0; index < PRECISION_MAX_CASE_COLUMNS; index += 1) {
+          const caseMeta = sliceConfig.cases[index];
+          if (caseMeta) {
+            row.appendChild(createCaseCell(entry, caseMeta, sliceConfig));
+          } else {
+            row.appendChild(createPrecisionPlaceholderCell());
+          }
+        }
 
         return row;
       }
@@ -1529,28 +1741,30 @@
 
         const scaleKey = getSelectedScaleKey();
         const breakdownKey = getSelectedBreakdown(precisionBreakdownSelect);
-        if (precisionLabelHeading) {
-          precisionLabelHeading.textContent = getBreakdownHeading(
-            breakdownKey,
-            scaleKey
-          );
-        }
+        const sliceKey = getPrecisionSliceKey();
+        const sliceConfig = getPrecisionSliceConfig(sliceKey);
+        const breakdownHeading = getBreakdownHeading(breakdownKey, scaleKey);
+        updatePrecisionHeaders(sliceConfig, breakdownHeading);
 
         const entries = getBreakdownEntries(
           revisionDataCache,
           breakdownKey,
-          scaleKey
+          scaleKey,
+          sliceKey
         );
 
         if (!entries || entries.length === 0) {
           if (precisionEmpty) {
             precisionEmpty.hidden = false;
+            precisionEmpty.textContent =
+              sliceConfig.datasetEmptyMessage ||
+              "No data available for this dataset.";
           }
           const row = document.createElement("tr");
           const cell = document.createElement("td");
-          cell.colSpan = 7;
+          cell.colSpan = 4 + PRECISION_MAX_CASE_COLUMNS;
           cell.className = "muted";
-          cell.textContent = "No revision data available.";
+          cell.textContent = sliceConfig.emptyMessage || "No data available.";
           row.appendChild(cell);
           precisionTableBody.appendChild(row);
           return;
@@ -1560,17 +1774,22 @@
           precisionEmpty.hidden = true;
         }
 
+        const rateField = sliceConfig.rateField;
         const sortedEntries = entries
           .slice()
-          .sort((a, b) => (b.revision_rate ?? 0) - (a.revision_rate ?? 0));
+          .sort((a, b) => (b?.[rateField] ?? 0) - (a?.[rateField] ?? 0));
 
         sortedEntries.forEach((entry) => {
-          precisionTableBody.appendChild(buildPrecisionRow(entry));
+          precisionTableBody.appendChild(
+            buildPrecisionRow(entry, sliceConfig)
+          );
         });
 
-        const totalsEntry = computePrecisionTotals(entries);
+        const totalsEntry = computePrecisionTotals(entries, sliceConfig);
         if (totalsEntry) {
-          precisionTableBody.appendChild(buildPrecisionRow(totalsEntry));
+          precisionTableBody.appendChild(
+            buildPrecisionRow(totalsEntry, sliceConfig)
+          );
         }
       }
 
