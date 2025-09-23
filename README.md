@@ -44,7 +44,7 @@ The script validates the required columns (`Prompt_ID`, `Human_Grade`,
 G/N/P-derived columns if they are missing. It then computes metrics for each
 supported grading scale—the detailed four-point scale and the aggregated
 G/N/P view. The resulting `accuracy.json` surfaces the default scale at the top
-level while also keeping the per-scale metrics:
+level while all metrics live under the `scales` key:
 
 ```json
 {
@@ -53,22 +53,6 @@ level while also keeping the per-scale metrics:
     "four_level": "4-Point Detail",
     "gnp": "G / N / P"
   },
-  "summary": {
-    "total_evaluations": 3000,
-    "unique_prompts": 1000,
-    "autograder_accuracy": 0.75,
-    "autograder_evaluations": 1000,
-    "human_accuracy": 0.76,
-    "human_evaluations": 3000
-  },
-  "per_prompt": [
-    {
-      "prompt_id": "PROMPT_0001",
-      "count": 3,
-      "autograder_accuracy": 0.0,
-      "human_accuracy": 0.6667
-    }
-  ],
   "scales": {
     "four_level": { "summary": { ... }, "per_prompt": [ ... ] },
     "gnp": { "summary": { ... }, "per_prompt": [ ... ] }

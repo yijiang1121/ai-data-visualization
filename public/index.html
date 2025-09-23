@@ -1601,10 +1601,8 @@
         const scaleKey = getSelectedScaleKey();
         const scaleData =
           getAccuracyScaleData(accuracyDataCache, scaleKey) || {};
-        const summary =
-          scaleData?.summary || accuracyDataCache.summary || {};
-        const promptEntries =
-          scaleData?.per_prompt || accuracyDataCache.per_prompt || [];
+        const summary = scaleData?.summary || {};
+        const promptEntries = scaleData?.per_prompt || [];
 
         updateCards(summary);
         updatePromptTable(promptEntries);
