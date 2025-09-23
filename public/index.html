@@ -544,6 +544,29 @@
         </article>
 
         <div class="table-card">
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Focus on</th>
+                  <th scope="col">Revision rate</th>
+                  <th scope="col">Revisions</th>
+                  <th scope="col">Auto wrong, human correct</th>
+                  <th scope="col">Auto correct, human wrong</th>
+                  <th scope="col">Both correct</th>
+                  <th scope="col">Both wrong</th>
+                </tr>
+              </thead>
+              <tbody id="precision-summary-body">
+                <tr>
+                  <td colspan="7" class="muted">Loading revision totals…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-card">
           <div class="table-controls">
             <label for="precision-slice-select">Focus on</label>
             <select id="precision-slice-select">
@@ -733,6 +756,9 @@
         "autograder-recall-chart"
       );
       const revisionCaseChartEl = document.getElementById("revision-case-chart");
+      const precisionSummaryTableBody = document.getElementById(
+        "precision-summary-body"
+      );
       const precisionTableBody = document.getElementById("precision-table-body");
       const precisionEmpty = document.getElementById("precision-empty");
       const precisionLabelHeading = document.getElementById("precision-label-heading");
@@ -933,8 +959,8 @@
             return "";
           },
           caseShareField: "share_of_total",
-          caseBaseField: "total_evaluations",
-          shareLabel: "of evaluations",
+          caseBaseField: "autograder_wrong_total",
+          shareLabel: "of auto wrong",
           emptyMessage: "No autograder mistake data available.",
           datasetEmptyMessage:
             "No autograder mistake data available for this dataset.",
@@ -1011,13 +1037,6 @@
             const noun = autoCorrect === 1 ? "auto correct evaluation" : "auto correct evaluations";
             return `${formatCount(autoCorrect)} ${noun}`;
           },
-          countDetailFormatter: (entry) => {
-            const totalEvaluations = Number.isFinite(entry?.total_evaluations)
-              ? entry.total_evaluations
-              : 0;
-            const noun = totalEvaluations === 1 ? "evaluation" : "evaluations";
-            return `${formatCount(totalEvaluations)} ${noun}`;
-          },
           caseShareField: "share_of_autograder_correct",
           caseBaseField: "autograder_correct_total",
           shareLabel: "of auto correct",
@@ -1025,6 +1044,12 @@
           datasetEmptyMessage:
             "No autograder correctness data available for this dataset.",
           cases: [
+            {
+              key: CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT,
+              label: CASE_LABELS[CASE_KEYS.AUTOGRADER_WRONG_HUMAN_CORRECT],
+              variant: "success",
+              shareField: "share_of_autograder_correct",
+            },
             {
               key: CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG,
               label: CASE_LABELS[CASE_KEYS.AUTOGRADER_CORRECT_HUMAN_WRONG],
@@ -1035,6 +1060,18 @@
               key: CASE_KEYS.BOTH_CORRECT,
               label: CASE_LABELS[CASE_KEYS.BOTH_CORRECT],
               variant: "success",
+              shareField: "share_of_autograder_correct",
+            },
+            {
+              key: CASE_KEYS.BOTH_WRONG_REVISED,
+              label: "Both wrong, human revised",
+              variant: "warning",
+              shareField: "share_of_autograder_correct",
+            },
+            {
+              key: CASE_KEYS.BOTH_WRONG_NOT_REVISED,
+              label: "Both wrong, no revision",
+              variant: "warning",
               shareField: "share_of_autograder_correct",
             },
           ],
@@ -1107,12 +1144,14 @@
 
       if (precisionBreakdownSelect) {
         precisionBreakdownSelect.addEventListener("change", () => {
+          renderPrecisionSummaryTable();
           renderPrecisionTable();
         });
       }
 
       if (precisionSliceSelect) {
         precisionSliceSelect.addEventListener("change", () => {
+          renderPrecisionSummaryTable();
           renderPrecisionTable();
         });
       }
@@ -1133,6 +1172,7 @@
         breakdownScaleSelect.addEventListener("change", () => {
           renderSummaryCards();
           renderRevisionOverview();
+          renderPrecisionSummaryTable();
           renderPrecisionTable();
           renderRecallTable();
         });
@@ -1902,6 +1942,14 @@
           includeCase && Number.isFinite(caseData[shareField])
             ? caseData[shareField]
             : null;
+
+        const shouldUseRowBase =
+          sliceConfig?.caseBaseField &&
+          shareField === sliceConfig.caseShareField &&
+          shareField === "share_of_total";
+        if (shouldUseRowBase) {
+          shareValue = null;
+        }
         if (shareValue === null && includeCase && baseCount > 0) {
           shareValue = count / baseCount;
         }
@@ -2019,6 +2067,84 @@
         );
 
         return totals;
+      }
+
+      function renderPrecisionSummaryTable() {
+        if (!precisionSummaryTableBody) {
+          return;
+        }
+
+        precisionSummaryTableBody.innerHTML = "";
+
+        const scaleKey = getSelectedScaleKey();
+        const breakdownKey = getSelectedBreakdown(precisionBreakdownSelect);
+        const sliceKeys = ["disagreement", "agreement"];
+        let hasRows = false;
+
+        sliceKeys.forEach((sliceKey) => {
+          const sliceConfig = getPrecisionSliceConfig(sliceKey);
+          if (!sliceConfig) {
+            return;
+          }
+
+          const entries =
+            getBreakdownEntries(
+              revisionDataCache,
+              breakdownKey,
+              scaleKey,
+              sliceKey
+            ) || [];
+
+          let summaryEntry = null;
+          if (entries.length) {
+            const totals = computePrecisionTotals(entries, sliceConfig);
+            if (totals) {
+              summaryEntry = {
+                ...totals,
+                label_display: sliceConfig.label,
+              };
+            }
+          }
+
+          if (!summaryEntry) {
+            const zeroCases = Object.fromEntries(
+              sliceConfig.cases.map((caseMeta) => {
+                const shareField =
+                  caseMeta.shareField || sliceConfig.caseShareField;
+                const data = { count: 0 };
+                if (shareField) {
+                  data[shareField] = 0;
+                }
+                return [caseMeta.key, data];
+              })
+            );
+
+            summaryEntry = {
+              label_display: sliceConfig.label,
+              total_evaluations: 0,
+              cases: zeroCases,
+              [sliceConfig.countField]: 0,
+              [sliceConfig.correctCountField]: 0,
+              [sliceConfig.rateField]: null,
+              [sliceConfig.precisionField]: null,
+            };
+          }
+
+          precisionSummaryTableBody.appendChild(
+            buildPrecisionRow(summaryEntry, sliceConfig)
+          );
+          hasRows = true;
+        });
+
+        if (!hasRows) {
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.colSpan = 3 + PRECISION_MAX_CASE_COLUMNS;
+          cell.className = "muted";
+          cell.textContent = "No revision data available.";
+          row.appendChild(cell);
+          precisionSummaryTableBody.appendChild(row);
+        }
       }
 
       function renderPrecisionTable() {
@@ -2423,6 +2549,7 @@
             message.textContent = "No autograder mistakes recorded.";
             autograderRecallChartEl.appendChild(message);
           }
+          renderPrecisionSummaryTable();
           renderPrecisionTable();
           renderRecallTable();
           return;
@@ -2434,6 +2561,7 @@
         }
 
         renderRevisionOverview();
+        renderPrecisionSummaryTable();
         renderPrecisionTable();
         renderRecallTable();
       }
