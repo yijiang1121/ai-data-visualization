@@ -347,8 +347,6 @@ def compute_metrics(df: pd.DataFrame) -> Tuple[Dict[str, object], Dict[str, obje
         "default_scale": DEFAULT_SCALE_KEY,
         "scale_labels": scale_labels,
         "scales": accuracy_scales,
-        "summary": default_accuracy.get("summary", {}),
-        "per_prompt": default_accuracy.get("per_prompt", []),
     }
 
     revision_metrics = {
