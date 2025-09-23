@@ -1673,7 +1673,7 @@
             ? data.share_of_autograder_wrong
             : count / totalMistakes;
           const share = Math.max(0, Math.min(shareValue, 1));
-          const displayCount = count * factor;
+          const displayCount = count;
 
           const row = document.createElement("div");
           row.className = "bar-row";
@@ -1755,9 +1755,12 @@
           : 0;
 
         const repetitionFactor = computeMistakeRepetitionFactor(scaleData);
-        const displayTotalMistakes = autograderMistakeTotal * repetitionFactor;
-        const displayCorrectedMistakes =
-          correctedMistakes * repetitionFactor;
+        const uniqueMistakes =
+          repetitionFactor > 0
+            ? Math.round(autograderMistakeTotal / repetitionFactor)
+            : autograderMistakeTotal;
+        const displayTotalMistakes = autograderMistakeTotal;
+        const displayCorrectedMistakes = correctedMistakes;
 
         if (revisionRateEl) {
           revisionRateEl.textContent = formatPercent(overall.revision_rate);
@@ -1808,7 +1811,7 @@
         if (autograderRecallDetailEl) {
           autograderRecallDetailEl.textContent = `${formatCount(
             displayCorrectedMistakes
-          )} mistake evaluations corrected`;
+          )} autograder mistake evaluations corrected`;
         }
         if (autograderRecallFootnoteEl) {
           if (autograderMistakeTotal) {
@@ -1818,7 +1821,7 @@
               autograderRecallFootnoteEl.textContent = `Out of ${formatCount(
                 displayTotalMistakes
               )} autograder mistake evaluations (${repetitionFactor}× ${formatCount(
-                autograderMistakeTotal
+                uniqueMistakes
               )} ${noun}).`;
             } else {
               autograderRecallFootnoteEl.textContent = `Out of ${formatCount(
