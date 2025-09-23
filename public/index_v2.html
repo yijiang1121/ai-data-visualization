@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grading Accuracy Dashboard · Refactored</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f1f5f9;
+        --card-bg: #ffffff;
+        --card-shadow: rgba(15, 23, 42, 0.18);
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --accent: #6366f1;
+        --accent-soft: rgba(99, 102, 241, 0.16);
+        --success: #059669;
+        --info: #2563eb;
+        --warning: #d97706;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(160deg, var(--bg) 0%, #e2e8f0 100%);
+        color: var(--text-primary);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      header {
+        padding: 3rem 1.5rem 2rem;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0 0 0.5rem;
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        letter-spacing: -0.02em;
+      }
+
+      header p {
+        margin: 0 auto;
+        max-width: 48rem;
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      main {
+        flex: 1;
+        padding: 0 1.5rem 3rem;
+        max-width: 1050px;
+        width: 100%;
+        margin: 0 auto 3rem;
+      }
+
+      .scale-toggle {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0 0 2rem;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+      }
+
+      .scale-toggle label {
+        font-weight: 600;
+      }
+
+      .scale-toggle select {
+        appearance: none;
+        border: none;
+        border-radius: 999px;
+        padding: 0.4rem 1.1rem;
+        background: rgba(148, 163, 184, 0.2);
+        color: var(--text-primary);
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .metric-card {
+        background: var(--card-bg);
+        border-radius: 1.25rem;
+        box-shadow: 0 24px 48px -32px var(--card-shadow);
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .metric-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, var(--accent-soft), transparent 55%);
+        pointer-events: none;
+      }
+
+      .metric-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        letter-spacing: 0.08em;
+        margin-bottom: 0.75rem;
+      }
+
+      .metric-value {
+        font-size: clamp(2.5rem, 5vw, 3.2rem);
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .metric-subtitle {
+        margin-top: 1.2rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .metric-footnote {
+        font-size: 0.85rem;
+      }
+
+      section {
+        margin-bottom: 2.5rem;
+      }
+
+      .section-heading {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .section-subtitle {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .insight-grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .bar-chart {
+        background: var(--card-bg);
+        border-radius: 1rem;
+        box-shadow: 0 18px 36px -28px var(--card-shadow);
+        padding: 1.75rem 2rem;
+      }
+
+      .bar-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        margin-bottom: 1rem;
+      }
+
+      .bar-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .bar-row-header {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      .bar-label {
+        color: var(--text-primary);
+      }
+
+      .bar-track {
+        height: 12px;
+        width: 100%;
+        background: rgba(148, 163, 184, 0.25);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        height: 100%;
+        border-radius: inherit;
+        transition: width 0.3s ease;
+      }
+
+      .bar-fill.success {
+        background: rgba(5, 150, 105, 0.75);
+      }
+
+      .bar-fill.info {
+        background: rgba(37, 99, 235, 0.75);
+      }
+
+      .bar-fill.warning {
+        background: rgba(217, 119, 6, 0.75);
+      }
+
+      .table-card {
+        background: var(--card-bg);
+        border-radius: 1rem;
+        box-shadow: 0 18px 36px -28px var(--card-shadow);
+        overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 700px;
+      }
+
+      th,
+      td {
+        padding: 1rem 1.5rem;
+        text-align: left;
+        font-size: 0.95rem;
+      }
+
+      thead {
+        background: rgba(148, 163, 184, 0.15);
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+      }
+
+      tbody tr:nth-child(odd) {
+        background: rgba(148, 163, 184, 0.06);
+      }
+
+      tbody tr:nth-child(even) {
+        background: var(--card-bg);
+      }
+
+      .table-strong {
+        display: block;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .muted {
+        color: var(--text-secondary);
+      }
+
+      .case-pill {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .case-pill.success {
+        background: rgba(5, 150, 105, 0.12);
+        color: var(--success);
+      }
+
+      .case-pill.info {
+        background: rgba(37, 99, 235, 0.12);
+        color: var(--info);
+      }
+
+      .case-pill.warning {
+        background: rgba(217, 119, 6, 0.12);
+        color: var(--warning);
+      }
+
+      .case-pill:not(.success):not(.info):not(.warning) {
+        background: rgba(148, 163, 184, 0.16);
+        color: var(--text-secondary);
+      }
+
+      footer {
+        margin-top: auto;
+        padding: 2rem;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        th,
+        td {
+          padding: 0.85rem 1rem;
+        }
+
+        .table-card {
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Grading Accuracy Dashboard · Refactored</h1>
+      <p>
+        A pared-down version of the grading analytics focused on top-level
+        accuracy and revision outcomes. Use the scale selector to switch between
+        the detailed four-point view and the coarser G/N/P buckets.
+      </p>
+      <p class="muted" style="margin-top: 1rem;">
+        Looking for the full experience? Return to the
+        <a href="index.html">comprehensive dashboard</a>.
+      </p>
+    </header>
+
+    <main>
+      <div class="scale-toggle">
+        <label for="scale-select">Focus on scale</label>
+        <select id="scale-select"></select>
+      </div>
+
+      <section class="summary-grid" aria-live="polite">
+        <article class="metric-card" id="card-autograder">
+          <div class="metric-title">Autograder Accuracy</div>
+          <p class="metric-value" id="autograder-accuracy">--</p>
+          <div class="metric-subtitle">
+            <span>Exact-match accuracy vs. ground truth</span>
+            <span class="metric-footnote" id="autograder-footnote">--</span>
+          </div>
+        </article>
+        <article class="metric-card" id="card-human">
+          <div class="metric-title">Human Accuracy</div>
+          <p class="metric-value" id="human-accuracy">--</p>
+          <div class="metric-subtitle">
+            <span>Exact-match accuracy vs. ground truth</span>
+            <span class="metric-footnote" id="human-footnote">--</span>
+          </div>
+        </article>
+        <article class="metric-card" id="card-coverage">
+          <div class="metric-title">Evaluation Coverage</div>
+          <p class="metric-value" id="evaluation-coverage">--</p>
+          <div class="metric-subtitle">
+            <span id="coverage-detail">--</span>
+            <span class="metric-footnote" id="coverage-footnote">--</span>
+          </div>
+        </article>
+      </section>
+
+      <section aria-live="polite">
+        <h2 class="section-heading">Revision insights</h2>
+        <p class="section-subtitle">
+          How often human reviewers revise the autograder and how those
+          disagreements resolve against the ground truth.
+        </p>
+
+        <div class="insight-grid">
+          <div class="summary-grid">
+            <article class="metric-card">
+              <div class="metric-title">Revision rate</div>
+              <p class="metric-value" id="revision-rate">--</p>
+              <div class="metric-subtitle">
+                <span id="revision-count">--</span>
+                <span class="metric-footnote" id="revision-total">--</span>
+              </div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-title">Revision precision</div>
+              <p class="metric-value" id="revision-precision">--</p>
+              <div class="metric-subtitle">
+                <span id="precision-count">--</span>
+                <span class="metric-footnote" id="precision-total">--</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="bar-chart">
+            <h3 class="section-subtitle" style="margin-top:0;">Revision outcomes</h3>
+            <div id="outcome-chart"></div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-live="polite">
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Focus on</th>
+                <th scope="col">Revision rate</th>
+                <th scope="col">Revisions</th>
+                <th scope="col">Auto wrong, human correct</th>
+                <th scope="col">Auto correct, human wrong</th>
+                <th scope="col">Both correct</th>
+                <th scope="col">Both wrong</th>
+              </tr>
+            </thead>
+            <tbody id="focus-table-body">
+              <tr>
+                <td colspan="7" class="muted">Loading revision focus data…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Dashboard v2 preview · Data generated from toy grading dataset.
+    </footer>
+
+    <script>
+      const CASE_VARIANTS = {
+        autograder_wrong_human_correct: "success",
+        autograder_correct_human_wrong: "info",
+        both_correct: "success",
+        both_wrong: "warning",
+      };
+
+      let dashboardData = null;
+
+      const scaleSelect = document.getElementById("scale-select");
+      const autograderAccuracyEl = document.getElementById("autograder-accuracy");
+      const humanAccuracyEl = document.getElementById("human-accuracy");
+      const evaluationCoverageEl = document.getElementById("evaluation-coverage");
+      const coverageDetailEl = document.getElementById("coverage-detail");
+      const coverageFootnoteEl = document.getElementById("coverage-footnote");
+      const autograderFootnoteEl = document.getElementById("autograder-footnote");
+      const humanFootnoteEl = document.getElementById("human-footnote");
+
+      const revisionRateEl = document.getElementById("revision-rate");
+      const revisionCountEl = document.getElementById("revision-count");
+      const revisionTotalEl = document.getElementById("revision-total");
+      const revisionPrecisionEl = document.getElementById("revision-precision");
+      const precisionCountEl = document.getElementById("precision-count");
+      const precisionTotalEl = document.getElementById("precision-total");
+      const outcomeChart = document.getElementById("outcome-chart");
+      const focusTableBody = document.getElementById("focus-table-body");
+
+      function formatPercent(value) {
+        if (value === null || value === undefined) {
+          return "--";
+        }
+        return `${(value * 100).toFixed(1)}%`;
+      }
+
+      function formatCount(value) {
+        if (!Number.isFinite(value)) {
+          return "--";
+        }
+        return value.toLocaleString();
+      }
+
+      function setText(el, text) {
+        if (el) {
+          el.textContent = text;
+        }
+      }
+
+      function renderScaleOptions(labels, defaultKey) {
+        if (!scaleSelect) {
+          return;
+        }
+        scaleSelect.innerHTML = "";
+        Object.entries(labels || {}).forEach(([key, label]) => {
+          const option = document.createElement("option");
+          option.value = key;
+          option.textContent = label;
+          scaleSelect.appendChild(option);
+        });
+        if (defaultKey && labels?.[defaultKey]) {
+          scaleSelect.value = defaultKey;
+        }
+      }
+
+      function renderAccuracy(accuracy = {}) {
+        setText(autograderAccuracyEl, formatPercent(accuracy.autograder_accuracy));
+        setText(humanAccuracyEl, formatPercent(accuracy.human_accuracy));
+        setText(evaluationCoverageEl, formatCount(accuracy.total_evaluations));
+
+        if (autograderFootnoteEl) {
+          const noun = accuracy.autograder_evaluations === 1 ? "automated prompt evaluation" : "automated prompt evaluations";
+          autograderFootnoteEl.textContent = `Based on ${formatCount(accuracy.autograder_evaluations)} ${noun}.`;
+        }
+
+        if (humanFootnoteEl) {
+          const noun = accuracy.human_evaluations === 1 ? "human review" : "human reviews";
+          humanFootnoteEl.textContent = `Based on ${formatCount(accuracy.human_evaluations)} ${noun}.`;
+        }
+
+        if (coverageDetailEl) {
+          const noun = accuracy.unique_prompts === 1 ? "unique prompt" : "unique prompts";
+          coverageDetailEl.textContent = `Total human evaluations included in this refresh`;
+          coverageFootnoteEl.textContent = `Across ${formatCount(accuracy.unique_prompts)} ${noun}.`;
+        }
+      }
+
+      function renderOutcomes(outcomes = []) {
+        if (!outcomeChart) {
+          return;
+        }
+        outcomeChart.innerHTML = "";
+        outcomes.forEach((entry) => {
+          const row = document.createElement("div");
+          row.className = "bar-row";
+
+          const header = document.createElement("div");
+          header.className = "bar-row-header";
+
+          const label = document.createElement("span");
+          label.className = "bar-label";
+          label.textContent = entry.label;
+          header.appendChild(label);
+
+          const value = document.createElement("span");
+          value.textContent = `${formatCount(entry.count)} · ${formatPercent(entry.share)}`;
+          header.appendChild(value);
+
+          const track = document.createElement("div");
+          track.className = "bar-track";
+
+          const fill = document.createElement("div");
+          const variant = CASE_VARIANTS[entry.key] || "";
+          fill.className = `bar-fill ${variant}`.trim();
+          fill.style.width = `${Math.max(0, Math.min(100, (entry.share || 0) * 100)).toFixed(1)}%`;
+          track.appendChild(fill);
+
+          row.appendChild(header);
+          row.appendChild(track);
+          outcomeChart.appendChild(row);
+        });
+      }
+
+      function renderRevision(revision = {}) {
+        setText(revisionRateEl, formatPercent(revision.rate?.value));
+        setText(revisionCountEl, `${formatCount(revision.rate?.revisions)} revisions`);
+        const totalReviews = revision.rate?.total_reviews;
+        if (revisionTotalEl) {
+          if (Number.isFinite(totalReviews)) {
+            const noun = totalReviews === 1 ? "human review" : "human reviews";
+            revisionTotalEl.textContent = `Out of ${formatCount(totalReviews)} ${noun}`;
+          } else {
+            revisionTotalEl.textContent = "Total human reviews unavailable.";
+          }
+        }
+
+        setText(revisionPrecisionEl, formatPercent(revision.precision?.value));
+        setText(precisionCountEl, `${formatCount(revision.precision?.correct_revisions)} correct revisions`);
+        if (precisionTotalEl) {
+          const totalRevisions = revision.precision?.total_revisions;
+          if (Number.isFinite(totalRevisions)) {
+            precisionTotalEl.textContent = `Out of ${formatCount(totalRevisions)} total revisions.`;
+          } else {
+            precisionTotalEl.textContent = "Total revisions unavailable.";
+          }
+        }
+
+        renderOutcomes(revision.outcomes);
+        renderFocusTable(revision.focus_rows || []);
+      }
+
+      function renderFocusTable(rows) {
+        if (!focusTableBody) {
+          return;
+        }
+        focusTableBody.innerHTML = "";
+        if (!rows.length) {
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.colSpan = 7;
+          cell.className = "muted";
+          cell.textContent = "No revision data available.";
+          row.appendChild(cell);
+          focusTableBody.appendChild(row);
+          return;
+        }
+
+        rows.forEach((entry) => {
+          const row = document.createElement("tr");
+
+          const labelCell = document.createElement("td");
+          labelCell.textContent = entry.label;
+          row.appendChild(labelCell);
+
+          const rateCell = document.createElement("td");
+          rateCell.textContent = formatPercent(entry.rate);
+          row.appendChild(rateCell);
+
+          const revisionCell = document.createElement("td");
+          const countEl = document.createElement("span");
+          countEl.className = "table-strong";
+          countEl.textContent = formatCount(entry.revisions?.count);
+          revisionCell.appendChild(countEl);
+          const detailEl = document.createElement("span");
+          detailEl.className = "muted";
+          const noun = entry.revisions?.total === 1 ? "evaluation" : "evaluations";
+          detailEl.textContent = `${formatCount(entry.revisions?.total)} ${noun}`;
+          revisionCell.appendChild(detailEl);
+          row.appendChild(revisionCell);
+
+          (entry.cases || []).forEach((caseEntry) => {
+            const cell = document.createElement("td");
+            const strong = document.createElement("span");
+            strong.className = "table-strong";
+            strong.textContent = formatCount(caseEntry.count);
+            cell.appendChild(strong);
+
+            const pill = document.createElement("span");
+            const variant = CASE_VARIANTS[caseEntry.key] || "";
+            pill.className = `case-pill ${variant}`.trim();
+            const suffix = caseEntry.share_label ? ` ${caseEntry.share_label}` : "";
+            pill.textContent = `${formatPercent(caseEntry.share)}${suffix}`.trim();
+            cell.appendChild(pill);
+            row.appendChild(cell);
+          });
+
+          focusTableBody.appendChild(row);
+        });
+      }
+
+      function renderScale(scaleKey) {
+        if (!dashboardData?.scales?.[scaleKey]) {
+          return;
+        }
+        const scaleData = dashboardData.scales[scaleKey];
+        renderAccuracy(scaleData.accuracy);
+        renderRevision(scaleData.revision);
+      }
+
+      async function loadDashboard() {
+        try {
+          const response = await fetch("dashboard_v2.json", { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error(`Failed to load dashboard data: ${response.status}`);
+          }
+          dashboardData = await response.json();
+          renderScaleOptions(dashboardData.scale_labels, dashboardData.default_scale);
+          renderScale(scaleSelect.value || dashboardData.default_scale);
+        } catch (error) {
+          console.error(error);
+          if (focusTableBody) {
+            focusTableBody.innerHTML = "";
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+            cell.colSpan = 7;
+            cell.className = "muted";
+            cell.textContent = "Unable to load dashboard data.";
+            row.appendChild(cell);
+            focusTableBody.appendChild(row);
+          }
+        }
+      }
+
+      if (scaleSelect) {
+        scaleSelect.addEventListener("change", (event) => {
+          renderScale(event.target.value);
+        });
+      }
+
+      loadDashboard();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+{
+  "default_scale": "four_level",
+  "scale_labels": {
+    "four_level": "4-Point Detail",
+    "gnp": "G / N / P"
+  },
+  "scales": {
+    "four_level": {
+      "accuracy": {
+        "total_evaluations": 3000,
+        "unique_prompts": 1000,
+        "autograder_accuracy": 0.75,
+        "autograder_evaluations": 1000,
+        "human_accuracy": 0.76,
+        "human_evaluations": 3000
+      },
+      "revision": {
+        "rate": {
+          "value": 0.4057,
+          "revisions": 1217,
+          "total_reviews": 3000
+        },
+        "precision": {
+          "value": 0.4618,
+          "correct_revisions": 562,
+          "total_revisions": 1217
+        },
+        "outcomes": [
+          {
+            "key": "autograder_wrong_human_correct",
+            "label": "Auto wrong, human correct",
+            "count": 562,
+            "share": 0.4618
+          },
+          {
+            "key": "autograder_correct_human_wrong",
+            "label": "Auto correct, human wrong",
+            "count": 532,
+            "share": 0.4371
+          },
+          {
+            "key": "both_correct",
+            "label": "Both correct",
+            "count": 0,
+            "share": 0.0
+          },
+          {
+            "key": "both_wrong",
+            "label": "Both wrong",
+            "count": 123,
+            "share": 0.1011
+          }
+        ],
+        "focus_rows": [
+          {
+            "key": "disagreement",
+            "label": "Human disagrees with autograder",
+            "rate": 0.4057,
+            "revisions": {
+              "count": 1217,
+              "total": 3000
+            },
+            "cases": [
+              {
+                "key": "autograder_wrong_human_correct",
+                "label": "Auto wrong, human correct",
+                "count": 562,
+                "share": 0.4618,
+                "share_label": "of revisions"
+              },
+              {
+                "key": "autograder_correct_human_wrong",
+                "label": "Auto correct, human wrong",
+                "count": 532,
+                "share": 0.4371,
+                "share_label": "of revisions"
+              },
+              {
+                "key": "both_correct",
+                "label": "Both correct",
+                "count": 0,
+                "share": 0.0,
+                "share_label": "of revisions"
+              },
+              {
+                "key": "both_wrong",
+                "label": "Both wrong",
+                "count": 123,
+                "share": 0.1011,
+                "share_label": "of revisions"
+              }
+            ]
+          },
+          {
+            "key": "agreement",
+            "label": "Human agrees with autograder",
+            "rate": 0.5943,
+            "revisions": {
+              "count": 1783,
+              "total": 3000
+            },
+            "cases": [
+              {
+                "key": "autograder_wrong_human_correct",
+                "label": "Auto wrong, human correct",
+                "count": 0,
+                "share": 0.0,
+                "share_label": "of agreements"
+              },
+              {
+                "key": "autograder_correct_human_wrong",
+                "label": "Auto correct, human wrong",
+                "count": 0,
+                "share": 0.0,
+                "share_label": "of agreements"
+              },
+              {
+                "key": "both_correct",
+                "label": "Both correct",
+                "count": 1718,
+                "share": 0.9635,
+                "share_label": "of agreements"
+              },
+              {
+                "key": "both_wrong",
+                "label": "Both wrong",
+                "count": 65,
+                "share": 0.0365,
+                "share_label": "of agreements"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "gnp": {
+      "accuracy": {
+        "total_evaluations": 3000,
+        "unique_prompts": 1000,
+        "autograder_accuracy": 0.789,
+        "autograder_evaluations": 1000,
+        "human_accuracy": 0.7983,
+        "human_evaluations": 3000
+      },
+      "revision": {
+        "rate": {
+          "value": 0.3387,
+          "revisions": 1016,
+          "total_reviews": 3000
+        },
+        "precision": {
+          "value": 0.4793,
+          "correct_revisions": 487,
+          "total_revisions": 1016
+        },
+        "outcomes": [
+          {
+            "key": "autograder_wrong_human_correct",
+            "label": "Auto wrong, human correct",
+            "count": 487,
+            "share": 0.4793
+          },
+          {
+            "key": "autograder_correct_human_wrong",
+            "label": "Auto correct, human wrong",
+            "count": 459,
+            "share": 0.4518
+          },
+          {
+            "key": "both_correct",
+            "label": "Both correct",
+            "count": 0,
+            "share": 0.0
+          },
+          {
+            "key": "both_wrong",
+            "label": "Both wrong",
+            "count": 70,
+            "share": 0.0689
+          }
+        ],
+        "focus_rows": [
+          {
+            "key": "disagreement",
+            "label": "Human disagrees with autograder",
+            "rate": 0.3387,
+            "revisions": {
+              "count": 1016,
+              "total": 3000
+            },
+            "cases": [
+              {
+                "key": "autograder_wrong_human_correct",
+                "label": "Auto wrong, human correct",
+                "count": 487,
+                "share": 0.4793,
+                "share_label": "of revisions"
+              },
+              {
+                "key": "autograder_correct_human_wrong",
+                "label": "Auto correct, human wrong",
+                "count": 459,
+                "share": 0.4518,
+                "share_label": "of revisions"
+              },
+              {
+                "key": "both_correct",
+                "label": "Both correct",
+                "count": 0,
+                "share": 0.0,
+                "share_label": "of revisions"
+              },
+              {
+                "key": "both_wrong",
+                "label": "Both wrong",
+                "count": 70,
+                "share": 0.0689,
+                "share_label": "of revisions"
+              }
+            ]
+          },
+          {
+            "key": "agreement",
+            "label": "Human agrees with autograder",
+            "rate": 0.6613,
+            "revisions": {
+              "count": 1984,
+              "total": 3000
+            },
+            "cases": [
+              {
+                "key": "autograder_wrong_human_correct",
+                "label": "Auto wrong, human correct",
+                "count": 0,
+                "share": 0.0,
+                "share_label": "of agreements"
+              },
+              {
+                "key": "autograder_correct_human_wrong",
+                "label": "Auto correct, human wrong",
+                "count": 0,
+                "share": 0.0,
+                "share_label": "of agreements"
+              },
+              {
+                "key": "both_correct",
+                "label": "Both correct",
+                "count": 1908,
+                "share": 0.9617,
+                "share_label": "of agreements"
+              },
+              {
+                "key": "both_wrong",
+                "label": "Both wrong",
+                "count": 76,
+                "share": 0.0383,
+                "share_label": "of agreements"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "generated_at": "2025-09-23T06:22:39+00:00",
+  "source": "dashboard_v2"
+}
